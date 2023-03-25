@@ -1,0 +1,53 @@
+<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
+{% extends 'hodindex.html' %}
+{% block body %}
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Untitled Document</title>
+</head>
+<body>
+<form id="form1" name="form1" method="post" action="addfees1">
+  <table width="232" border="1" class="table">
+    <tr>
+      <td>title</td>
+      <td><label>
+        <input type="text" name="textfield22" />
+      </label></td>
+    </tr>
+    <tr>
+      <td>semester</td>
+      <td><label>
+        <select name="select">
+          <option value="1">s1</option><option value="2">s2</option>
+          <option value="3">s3</option><option value="4">s4</option>
+        </select>
+      </label></td>
+    </tr>
+    <tr>
+      <td>amount</td>
+      <td><label>
+        <input type="text" name="textfield" />
+      </label></td>
+    </tr>
+    <tr>
+      <td>last date </td>
+      <td><input type="date" name="textfield2" /></td>
+    </tr>
+    <tr>
+      <td>description</td>
+      <td><input type="text" name="textfield3" /></td>
+    </tr>
+    <tr>
+      <td colspan="2"><label>
+        <div align="center">
+          <input type="submit" name="Submit" value="add" />
+          </div>
+      </label></td>
+    </tr>
+  </table>
+</form>
+</body>
+<!--</html>-->
+{% endblock %}

@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<form id="form1" name="form1" method="post" action="addst">
+  <table width="513" border="1">
+    <tr>
+      <td width="40">name</td>
+      <td width="33">add no </td>
+      <td width="53">semester</td>
+      <td width="20">sex</td>
+      <td width="25">dob</td>
+      <td width="47">address</td>
+      <td width="37">phone</td>
+      <td width="54">photo</td>
+      <td width="99">date of jonited </td>
+      <td width="41">&nbsp;</td>
+    </tr>
+    {% for i in val %}
+    <tr>
+      <td>{{i['name']}}</td>
+      <td>{{i['addmission no']}}</td>
+      <td>{{i['smester']}}</td>
+      <td>{{i['sex']}}</td>
+      <td>{{i['dob']}}</td>
+      <td>{{i['address']}}</td>
+      <td>{{i['phone']}}</td>
+      <td><img src="static/photos/{{i['photo']}}" width="100" height="100"/></td>
+      <td>{{i['jointdate']}}</td>
+      <td><p><a href="#">edit</a></p>
+      <p><a href="#">delete</a></p></td>
+    </tr>
+    {% endfor %}
+    <tr>
+      <td colspan="10"><label>
+        <div align="center">
+          <input type="submit" name="Submit" value="add" />
+          </div>
+      </label></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

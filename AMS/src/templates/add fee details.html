@@ -1,0 +1,61 @@
+<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
+{% extends 'hodindex.html' %}
+{% block body %}
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<form id="form1" name="form1" method="post" action="addfeedettails1">
+  <table width="271" border="1" class="table">
+    <tr>
+      <td>Fee title</td>
+      <td><label>
+        <select name="select2">
+          {% for i in val %}
+          <option value="{{i['f_id']}}">{{i['title']}}</option>
+          {% endfor %}
+        </select>
+      </label></td>
+    </tr>
+    <tr>
+      <td width="102">Student name </td>
+           <td><label>
+        <select name="select3">
+          {% for i in v %}
+          <option value="{{i['login_id']}}">{{i['name']}}</option>
+          {% endfor %}
+        </select>
+      </label></td>
+    </tr>
+    <tr>
+      <td>Amount paid </td>
+      <td><input type="text" name="textfield2" /></td>
+    </tr>
+    <tr>
+      <td>Amount Due </td>
+      <td><input type="text" name="textfield3" /></td>
+    </tr>
+    <tr>
+      <td>date paid </td>
+      <td><input type="date" name="textfield4" /></td>
+    </tr>
+    <tr>
+      <td>Status</td>
+      <td><input type="text" name="textfield5" /></td>
+    </tr>
+    <tr>
+      <td colspan="2"><label>
+        <div align="center">
+          <input type="submit" name="Submit" value="add" />
+          </div>
+      </label></td>
+    </tr>
+  </table>
+</form>
+</body>
+<!--</html>-->
+{% endblock %}
