@@ -2,6 +2,7 @@
 <!--<html xmlns="http://www.w3.org/1999/xhtml">-->
 {% extends 'hodindex.html' %}
 {% block body %}
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Untitled Document</title>
@@ -41,29 +42,41 @@ th {
 </style>
 <center>
 <body>
-<form id="form1" name="form1" method="post" action="addfees#about">
-  <table width="403" border="1">
+<!--<form id="form1" name="form1" method="post" action="addfees1#about">-->
+  <!--<table width="232" border="1" class="table">-->
+<form method="post" name="form1" id="form1" action="updatefee#about">
+  <table width="301" border="1">
     <tr>
-      <th width="66">Title</th>
-      <th width="66">Semester</th>
-      <th width="57">Amount</th>
-      <th width="66">Last date </th>
-      <th width="91">Description</th>
-      <th width="89">&nbsp;</th>
+      <th>Title</th>
+      <td>
+        <input type="text" name="textfield22" value="{{val['title']}}" />
+      </td>
     </tr>
-    {% for i in val %}
     <tr>
-      <td>{{i['title']}}</td>
-      <td>{{i['semester']}}</td>
-      <td>{{i['amount']}}</td>
-      <td>{{i['lastdate']}}</td>
-      <td>{{i['description']}}</td>
-      <td><p><a href="editfee?id={{i['f_id']}}#about">edit </a></p>
-      <p><a href="deletefee?id={{i['f_id']}}#about">delete</a></p></td>
+      <th>semester</th>
+      <td>
+        <select name="select">
+          <option value="1">s1</option><option value="2">s2</option>
+          <option value="3">s3</option><option value="4">s4</option>
+        </select>
+      </td>
     </tr>
-    {% endfor %}
     <tr>
-      <td colspan="6"align="center"><label>
+      <th>Amount</th>
+      <td>
+        <input type="text" name="textfield" value="{{val['amount']}}"/>
+      </td>
+    </tr>
+    <tr>
+      <th>last date </th>
+      <td><input type="date" name="textfield2" value="{{val['lastdate']}}" /></td>
+    </tr>
+    <tr>
+      <th>description</th>
+      <td><input type="text" name="textfield3" value="{{val['description']}}"/></td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center"><label>
         <div >
           <input type="submit" name="Submit" value="add" />
           </div>

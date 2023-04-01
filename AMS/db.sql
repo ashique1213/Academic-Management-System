@@ -68,15 +68,18 @@ CREATE TABLE `assignsub` (
   `t_id` int(5) DEFAULT NULL,
   `sub_id` int(5) DEFAULT NULL,
   PRIMARY KEY (`assign_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 /*Data for the table `assignsub` */
 
 insert  into `assignsub`(`assign_id`,`t_id`,`sub_id`) values 
 (1,6,6),
 (2,2,6),
-(3,3,2),
-(4,6,2);
+(4,6,2),
+(5,2,1),
+(6,3,1),
+(7,3,3),
+(8,2,2);
 
 /*Table structure for table `attendence` */
 
@@ -135,13 +138,13 @@ CREATE TABLE `fee` (
   `description` varchar(50) DEFAULT NULL,
   `title` varchar(25) DEFAULT NULL,
   PRIMARY KEY (`f_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `fee` */
 
 insert  into `fee`(`f_id`,`semester`,`amount`,`lastdate`,`description`,`title`) values 
-(1,'1','4000','2023-03-31','urgent','mess fee'),
-(2,'2','100000','2023-03-22','urgent','tution fee');
+(2,'1','100','2023-03-22','urgent','tution '),
+(3,'2','200','2023-03-30','hi','fee');
 
 /*Table structure for table `fee details` */
 
@@ -156,13 +159,14 @@ CREATE TABLE `fee details` (
   `date paid` date DEFAULT NULL,
   `status` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`fd_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `fee details` */
 
 insert  into `fee details`(`fd_id`,`f_id`,`stud_id`,`amount paid`,`amount due`,`date paid`,`status`) values 
 (1,1,4,100,900,'2023-03-16','not completed'),
-(2,2,5,10000,0,'2023-03-15','complted');
+(2,2,4,10000,100,'2023-03-29','complted'),
+(3,2,5,10000,200,'2023-03-29','ok');
 
 /*Table structure for table `feed_response` */
 
@@ -217,7 +221,7 @@ CREATE TABLE `login` (
   `password` varchar(15) DEFAULT NULL,
   `type` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`login id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 /*Data for the table `login` */
 
@@ -227,7 +231,9 @@ insert  into `login`(`login id`,`username`,`password`,`type`) values
 (3,'gcz','gcz','teacher'),
 (4,'ash','ash','student'),
 (5,'rbh','rbh','student'),
-(6,'qwerty','qwerty','teacher');
+(6,'qwerty','qwerty','teacher'),
+(7,'123456','123456','student'),
+(8,'qwert','qqqqq','teacher');
 
 /*Table structure for table `materials` */
 
@@ -272,7 +278,7 @@ CREATE TABLE `student` (
   `name` varchar(25) DEFAULT NULL,
   `addmission no` bigint(25) DEFAULT NULL,
   `smester` bigint(25) DEFAULT NULL,
-  `sex` varchar(25) DEFAULT NULL,
+  `gender` varchar(25) DEFAULT NULL,
   `age` bigint(25) DEFAULT NULL,
   `dob` date DEFAULT NULL,
   `address` varchar(25) DEFAULT NULL,
@@ -284,7 +290,7 @@ CREATE TABLE `student` (
 
 /*Data for the table `student` */
 
-insert  into `student`(`stud_id`,`login_id`,`name`,`addmission no`,`smester`,`sex`,`age`,`dob`,`address`,`phone`,`jointdate`,`photo`) values 
+insert  into `student`(`stud_id`,`login_id`,`name`,`addmission no`,`smester`,`gender`,`age`,`dob`,`address`,`phone`,`jointdate`,`photo`) values 
 (1,4,'Ashique',123456,1,'male',22,'2000-07-06','Wayanad',9876543211,'2023-03-01','Screenshot_1.png'),
 (2,5,'Rabeeh',13654,2,'male',22,'2000-07-23','Vengara',789456133,'2023-03-01','Screenshot_1.png');
 
@@ -298,14 +304,12 @@ CREATE TABLE `subject` (
   `semester` bigint(25) DEFAULT NULL,
   `credit` bigint(25) DEFAULT NULL,
   PRIMARY KEY (`subj_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `subject` */
 
 insert  into `subject`(`subj_id`,`subject name`,`semester`,`credit`) values 
-(1,'OS',2,4),
-(2,'DBMS',2,4),
-(3,'network',1,5);
+(2,'DBMS',2,4);
 
 /*Table structure for table `survey` */
 
@@ -344,19 +348,18 @@ CREATE TABLE `teacher` (
   `name` varchar(25) DEFAULT NULL,
   `qualification` varchar(25) DEFAULT NULL,
   `designation` varchar(25) DEFAULT NULL,
-  `sex` varchar(25) DEFAULT NULL,
+  `gender` varchar(25) DEFAULT NULL,
   `age` bigint(25) DEFAULT NULL,
   `phone` bigint(25) DEFAULT NULL,
   `photo` text,
   PRIMARY KEY (`t_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `teacher` */
 
-insert  into `teacher`(`t_id`,`login_id`,`name`,`qualification`,`designation`,`sex`,`age`,`phone`,`photo`) values 
+insert  into `teacher`(`t_id`,`login_id`,`name`,`qualification`,`designation`,`gender`,`age`,`phone`,`photo`) values 
 (1,'2','Vasudevan','MCA','Assistant professor','male',45,7894561233,'Screenshot_1.png'),
-(2,'3','Geevar','MCA','Assistant Professor','male',46,4567891233,'Screenshot_1.png'),
-(3,'6','Ashique','MCA','qwerty','male',23,789456123,'Screenshot_1.png');
+(2,'3','Geevar','MCA','Assistant Professor','male',46,456789123334,'Screenshot_1.png');
 
 /*Table structure for table `time_table` */
 
@@ -364,14 +367,46 @@ DROP TABLE IF EXISTS `time_table`;
 
 CREATE TABLE `time_table` (
   `time_id` int(5) NOT NULL AUTO_INCREMENT,
-  `course_id` int(5) DEFAULT NULL,
+  `sub_id` int(5) DEFAULT NULL,
   `semester` bigint(10) DEFAULT NULL,
-  `day` date DEFAULT NULL,
+  `day` varchar(20) DEFAULT NULL,
   `hours` bigint(10) DEFAULT NULL,
   PRIMARY KEY (`time_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
 
 /*Data for the table `time_table` */
+
+insert  into `time_table`(`time_id`,`sub_id`,`semester`,`day`,`hours`) values 
+(1,2,2,'Monday',1),
+(2,2,2,'Monday',2),
+(3,2,2,'Monday',3),
+(4,2,2,'Monday',4),
+(5,2,2,'Monday',5),
+(6,2,2,'Monday',6),
+(7,2,2,'Tuesday',1),
+(8,2,2,'Tuesday',2),
+(9,2,2,'Tuesday',3),
+(10,2,2,'Tuesday',4),
+(11,2,2,'Tuesday',5),
+(12,2,2,'Tuesday',6),
+(13,2,2,'Wednesday',1),
+(14,2,2,'Wednesday',2),
+(15,2,2,'Wednesday',3),
+(16,2,2,'Wednesday',4),
+(17,2,2,'Wednesday',5),
+(18,2,2,'Wednesday',6),
+(19,2,2,'Thursday',1),
+(20,2,2,'Thursday',2),
+(21,2,2,'Thursday',3),
+(22,2,2,'Thursday',4),
+(23,2,2,'Thursday',5),
+(24,2,2,'Thursday',6),
+(25,2,2,'Friday',1),
+(26,2,2,'Friday',2),
+(27,2,2,'Friday',3),
+(28,2,2,'Friday',4),
+(29,2,2,'Friday',5),
+(30,2,2,'Friday',6);
 
 /*Table structure for table `up_assignment` */
 

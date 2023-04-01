@@ -1,43 +1,78 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
+{% extends 'hodindex.html' %}
+{% block body %}
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Untitled Document</title>
 </head>
-
+<style>
+ td {
+  border: 1px solid;
+}
+input {
+  width: 100%;
+}
+table {
+  width: 90%;
+}
+     th{
+    background-color:#252B34;
+    }
+input[type=submit] {
+  width: 100px;
+  background-color: #ef6445;
+  color: white;
+  padding: 8px 20px;
+  margin: 6px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+   border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  background-color: #ef6445;
+  color: white;
+}
+</style>
+<center>
 <body>
-<form id="form1" name="form1" method="post" action="addst">
+<form id="form1" name="form1" method="post" action="addst#about">
   <table width="513" border="1">
     <tr>
-      <td width="40">name</td>
-      <td width="33">add no </td>
-      <td width="53">semester</td>
-      <td width="20">sex</td>
-      <td width="25">dob</td>
-      <td width="47">address</td>
-      <td width="37">phone</td>
-      <td width="54">photo</td>
-      <td width="99">date of jonited </td>
-      <td width="41">&nbsp;</td>
+      <th width="40">name</th>
+      <th width="33">add no </th>
+      <th width="53">semester</th>
+      <th width="20">Gender</th>
+      <th width="25">dob</th>
+      <th width="47">address</th>
+      <th width="37">phone</th>
+      <th width="54">photo</th>
+      <th width="99">date of jonited </th>
+      <th width="41">&nbsp;</th>
     </tr>
     {% for i in val %}
     <tr>
       <td>{{i['name']}}</td>
       <td>{{i['addmission no']}}</td>
       <td>{{i['smester']}}</td>
-      <td>{{i['sex']}}</td>
+      <td>{{i['gender']}}</td>
       <td>{{i['dob']}}</td>
       <td>{{i['address']}}</td>
       <td>{{i['phone']}}</td>
       <td><img src="static/photos/{{i['photo']}}" width="100" height="100"/></td>
       <td>{{i['jointdate']}}</td>
-      <td><p><a href="#">edit</a></p>
-      <p><a href="#">delete</a></p></td>
+      <td><p><a href="editstudent?id={{i['login_id']}}#about">edit</a></p>
+      <p><a href="deletestudent?id={{i['login_id']}}">delete</a></p></td>
     </tr>
     {% endfor %}
     <tr>
-      <td colspan="10"><label>
-        <div align="center">
+      <td colspan="10" align="center"><label>
+        <div >
           <input type="submit" name="Submit" value="add" />
           </div>
       </label></td>
@@ -45,4 +80,6 @@
   </table>
 </form>
 </body>
-</html>
+  </center>
+<!--</html>-->
+{% endblock %}

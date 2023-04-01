@@ -33,26 +33,24 @@ input[type=submit] {
 </style>
 <center>
 <body>
-<!--<form id="form1" name="form1" method="post" action="addstudent#about" enctype="multipart/form-data">-->
-  <!--<table width="324" border="1" class="table">-->
-<form method="post" enctype="multipart/form-data" name="form1" id="form1" action="addstudent#about">
-  <table width="301" border="1">
+<form id="form1" name="form1" method="post" action="/updatestudent#about" enctype="multipart/form-data">
+  <table width="324" border="1" class="table">
     <tr>
-      <td >Name</td>
-      <td >
-        <input type="text" size="" name="textfield" required/>
-      </td>
+      <td width="107">Name</td>
+      <td width="178"><label>
+        <input type="text" size="" name="textfield" value="{{val['name']}}" />
+      </label></td>
     </tr>
     <tr>
-      <td>addmission no </td>
-      <td>
-        <input type="text" name="textfield2" required/>
-      </td>
+      <td>Addmission no </td>
+      <td><label>
+        <input type="text" name="textfield2" value="{{val['addmission no']}}" />
+      </label></td>
     </tr>
     <tr>
       <td>semester</td>
       <td><label>
-        <select name="select" required>
+        <select name="select">
           <option value="1">s1</option><option value="2">s2</option>
           <option value="3">s3</option><option value="4">s4</option>
         </select>
@@ -61,56 +59,48 @@ input[type=submit] {
     <tr>
       <td>Gender</td>
       <td><label>
-        <input name="radiobutton" type="radio" value="male" />
+        <input name="radiobutton" type="radio" value="male" {% if val['gender']=="male" %} checked {% endif %}/>
         </label>
         male
         <label>
-          <input name="radiobutton" type="radio" value="female" />
+          <input name="radiobutton" type="radio" value="female" {% if val['gender']=="female" %} checked {% endif %}/>
         </label>
         female
         <label>
-          <input name="radiobutton" type="radio" value="others" />
+          <input name="radiobutton" type="radio" value="others" {% if val['gender']=="others" %} checked {% endif %}/>
         </label>
         others </td>
     </tr>
     <tr>
       <td>Age</td>
-      <td><input type="text" name="textfield32" required /></td>
+      <td><input type="text" name="textfield32" value="{{val['age']}}"/></td>
     </tr>
     <tr>
       <td>Dob</td>
-      <td><input type="date" name="textfield33"required /></td>
+      <td><input type="date" name="textfield33" value="{{val['dob']}}" /></td>
     </tr>
     <tr>
       <td>Address</td>
-      <td><input type="text" name="textfield34" required/></td>
+      <td><input type="text" name="textfield34" value="{{val['address']}}"/></td>
     </tr>
     <tr>
       <td>Phone</td>
-      <td><input type="text" name="textfield35" required/></td>
+      <td><input type="text" name="textfield35" value="{{val['phone']}}"/></td>
     </tr>
     <tr>
       <td>Photo</td>
-      <td><input type="file" name="file" required /></td>
+      <td><input type="file" name="file" ><img src="../static/photos/{{val['photo']}}" height="50px" width="50px"></td>
     </tr>
     <tr>
       <td>Date of jointed </td>
       <td><label>
-        <input type="date" name="textfield36" required/>
+        <input type="date" name="textfield36" value="{{val['jointdate']}}"/>
       </label></td>
     </tr>
     <tr>
-      <td>username</td>
-      <td><input type="text" name="textfield4" required/></td>
-    </tr>
     <tr>
-      <td>password</td>
-      <td><input type="text" name="textfield5" required/></td>
-    </tr>
-    <tr>
-    <tr>
-      <td colspan="2" align="center"><label>
-          <div>
+      <td colspan="2"align="center"><label>
+          <div >
             <input type="submit" name="Submit" value="add" />
           </div>
         </label></td>

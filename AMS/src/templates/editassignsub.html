@@ -32,12 +32,12 @@ input[type=submit] {
 </style>
 <center>
 <body>
-<form id="form1" name="form1" method="post" action="assignsub1#about">
+<form id="form1" name="form1" method="post" action="updateassignsub#about">
   <table width="200" border="1">
     <tr>
       <td>Teacher name </td>
       <td><label>
-        <select name="select" >
+        <select name="select">
           {% for i in val %}
           <option value="{{i['login_id']}}">{{i['name']}}</option>
           {% endfor %}
@@ -57,7 +57,7 @@ input[type=submit] {
     <tr>
       <td colspan="2" align="center"><label>
         
-        <div>
+        <div >
           <input type="submit" name="Submit" value="Assign" />
         </div>
       </label></td>

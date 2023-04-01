@@ -7,41 +7,77 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Untitled Document</title>
 </head>
+<style>
+ td {
+  border: 1px solid;
+}
+input {
+  width: 100%;
+}
+table {
+  width: 90%;
+}
+     th{
+    background-color:#252B34;
+    }
+input[type=submit] {
+  width: 100px;
+  background-color: #ef6445;
+  color: white;
+  padding: 8px 20px;
+  margin: 6px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+   border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  background-color: #ef6445;
+  color: white;
+}
+</style>
+<center>
 <body>
-<form id="form1" name="form1" method="post" action="addfees1">
-  <table width="232" border="1" class="table">
+<!--<form id="form1" name="form1" method="post" action="addfees1#about">-->
+  <!--<table width="232" border="1" class="table">-->
+<form method="post" name="form1" id="form1" action="addfees1#about">
+  <table width="301" border="1">
     <tr>
-      <td>title</td>
-      <td><label>
+      <th>Title</th>
+      <td>
         <input type="text" name="textfield22" />
-      </label></td>
+      </td>
     </tr>
     <tr>
-      <td>semester</td>
-      <td><label>
+      <th>semester</th>
+      <td>
         <select name="select">
           <option value="1">s1</option><option value="2">s2</option>
           <option value="3">s3</option><option value="4">s4</option>
         </select>
-      </label></td>
+      </td>
     </tr>
     <tr>
-      <td>amount</td>
-      <td><label>
+      <th>Amount</th>
+      <td>
         <input type="text" name="textfield" />
-      </label></td>
+      </td>
     </tr>
     <tr>
-      <td>last date </td>
-      <td><input type="date" name="textfield2" /></td>
+      <th>last date </th>
+      <td><input type="date" name="textfield2" required /></td>
     </tr>
     <tr>
-      <td>description</td>
-      <td><input type="text" name="textfield3" /></td>
+      <th>description</th>
+      <td><input type="text" name="textfield3" required/></td>
     </tr>
     <tr>
-      <td colspan="2"><label>
-        <div align="center">
+      <td colspan="2" align="center"><label>
+        <div >
           <input type="submit" name="Submit" value="add" />
           </div>
       </label></td>
@@ -49,5 +85,6 @@
   </table>
 </form>
 </body>
+  </center>
 <!--</html>-->
 {% endblock %}

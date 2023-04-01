@@ -1,10 +1,10 @@
 <!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
 <!--<html xmlns="http://www.w3.org/1999/xhtml">-->
+<!--<head>-->
+<!--<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />-->
+<!--<title>Untitled Document</title>-->
 {% extends 'hodindex.html' %}
 {% block body %}
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>Untitled Document</title>
 </head>
 <style>
  td {
@@ -39,33 +39,32 @@ th {
   color: white;
 }
 </style>
-<center>
 <body>
-<form id="form1" name="form1" method="post" action="assignsub#about">
-  <table width="376" border="1">
+<form id="form1" name="form1" method="post" action="/addanoucement#about">
+  <table width="345" border="1">
     <tr>
-      <th width="142"><div align="center">Teacher Name </div></th>
-      <th width="115">Subject Name </th>
-      <th width="97">&nbsp;</th>
+      <th width="122">Anouncement </th>
+      <th width="47">Date </th>
+      <th width="154">&nbsp;</th>
     </tr>
     {% for i in val %}
-     <tr>
-      <td>{{i['name']}}</td>
-      <td>{{i['subject name']}}</td>
-      <td><p><a href="editassignsub?id={{i['assign_id']}}#about">edit</a></p>
-      <p><a href="deleteassignsub?id={{i['assign_id']}}#about3">delete</a></p></td>
-     </tr>
-    {% endfor %}
     <tr>
-      <td colspan="3"align="center"><label>
-        <div >
-          <input type="submit" name="Submit" value="add" />
-          </div>
-      </label></td>
+      <td>{{i['anouncement']}}&nbsp;</td>
+      <td>{{i['date']}}&nbsp;</td>
+      <td><p><a href="editanoucement?id={{i['an_id']}}#about">edit</a></p>
+      <p><a href="deleteanoucement?id={{i['an_id']}}#about">delete</a></p></td>
+    </tr>
+     {% endfor %}
+    <tr>
+      <td colspan="3"><div align="center">
+        <input type="submit" name="Submit" value="Add" />
+      </div></td>
     </tr>
   </table>
+  <label>
+  <div align="center"></div>
+  </label>
 </form>
 </body>
-    </center>
 <!--</html>-->
 {% endblock %}

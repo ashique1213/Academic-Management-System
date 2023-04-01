@@ -35,13 +35,13 @@ input[type=submit] {
 <body>
 <!--<form id="form1" name="form1" method="post" action="addfeedettails1#about">-->
   <!--<table width="271" border="1" class="table">-->
-<form method="post" name="form1" id="form1" action="addfeedettails1#about">
+<form method="post" name="form1" id="form1" action="updatefeedetails">
   <table width="301" border="1">
     <tr>
       <td>Fee title</td>
       <td><label>
-        <select name="select2" required>
-          {% for i in val %}
+        <select name="select2">
+          {% for i in val1 %}
           <option value="{{i['f_id']}}">{{i['title']}}</option>
           {% endfor %}
         </select>
@@ -50,7 +50,7 @@ input[type=submit] {
     <tr>
       <td >Student name </td>
            <td><label>
-        <select name="select3" required>
+        <select name="select3">
           {% for i in v %}
           <option value="{{i['login_id']}}">{{i['name']}}</option>
           {% endfor %}
@@ -59,19 +59,19 @@ input[type=submit] {
     </tr>
     <tr>
       <td>Amount paid </td>
-      <td><input type="text" name="textfield2" required /></td>
+      <td><input type="text" name="textfield2"  value="{{val['amount paid']}}"/></td>
     </tr>
     <tr>
       <td>Amount Due </td>
-      <td><input type="text" name="textfield3" required/></td>
+      <td><input type="text" name="textfield3" value="{{val['amount due']}}"/></td>
     </tr>
     <tr>
       <td>date paid </td>
-      <td><input type="date" name="textfield4" required/></td>
+      <td><input type="date" name="textfield4" value="{{val['date paid']}}"/></td>
     </tr>
     <tr>
       <td>Status</td>
-      <td><input type="text" name="textfield5" required/></td>
+      <td><input type="text" name="textfield5" value="{{val['status']}}"/></td>
     </tr>
     <tr>
       <td colspan="2" align="center"><label>

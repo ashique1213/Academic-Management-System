@@ -1,22 +1,58 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
+{% extends 'hodindex.html' %}
+{% block body %}
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Untitled Document</title>
 </head>
+<style>
+ td {
+  border: 1px solid;
+}
+input {
+  width: 100%;
+}
+table {
+  width: 90%;
+}
+     th{
+    background-color:#252B34;
+    }
+input[type=submit] {
+  width: 100px;
+  background-color: #ef6445;
+  color: white;
+  padding: 8px 20px;
+  margin: 6px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
 
+th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+   border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  background-color: #ef6445;
+  color: white;
+}
+</style>
+<center>
 <body>
-<form id="form1" name="form1" method="post" action="addfeedettails">
+<form id="form1" name="form1" method="post" action="addfeedettails#about">
   <table width="458" border="1">
-    <tr>
-      <td width="87">title</td>
-      <td width="87">Student name </td>
-      <td width="79">Semester </td>
-      <td width="79">Amount paid </td>
-      <td width="86">Amount Due </td>
-      <td width="66">date paid </td>
-      <td width="55">Status</td>
-      <td width="45">&nbsp;</td>
+    <tr class="success">
+      <th width="87">Title</th>
+      <th width="87">Student name </th>
+      <th width="79">Semester </th>
+      <th width="79">Amount paid </th>
+      <th width="86">Amount Due </th>
+      <th width="66">date paid </th>
+      <th width="55">Status</th>
+      <th width="45">&nbsp;</th>
     </tr>
     {% for i in val %}
     <tr>
@@ -27,13 +63,13 @@
       <td>{{i['amount due']}}</td>
       <td>{{i['date paid']}}</td>
       <td>{{i['status']}}</td>
-      <td><p><a href="#">edit</a></p>
-      <p><a href="#">delete</a></p></td>
+      <td><p><a href="editfeedetails?id={{i['fd_id']}}#about">edit</a></p>
+      <p><a href="deletefeedetails?id={{i['fd_id']}}#about">delete</a></p></td>
     </tr>
     {% endfor %}
     <tr>
-      <td colspan="6"><label>
-        <div align="center">
+      <td colspan="8" align="center"><label>
+        <div >
           <input type="submit" name="Submit" value="add" />
           </div>
       </label></td>
@@ -41,4 +77,6 @@
   </table>
 </form>
 </body>
-</html>
+  </center>
+<!--</html>-->
+{% endblock %}

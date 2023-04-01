@@ -1,12 +1,38 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
+{% extends 'hodindex.html' %}
+{% block body %}
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Untitled Document</title>
 </head>
-
+<style>
+ td {
+  border: 1px solid;
+}
+input {
+  width: 100%;
+}
+table {
+  width: 90%;
+}
+     th{
+    background-color:#252B34;
+    }
+input[type=submit] {
+  width: 100px;
+  background-color: #ef6445;
+  color: white;
+  padding: 8px 20px;
+  margin: 6px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+</style>
+<center>
 <body>
-<form method="post" enctype="multipart/form-data" name="form1" id="form1" action="">
+<form method="post" enctype="multipart/form-data" name="form1" id="form1" action="updateteacher#about">
   <table width="301" border="1">
     <tr>
       <td width="85">Name</td>
@@ -27,17 +53,17 @@
       </label></td>
     </tr>
     <tr>
-      <td>Sex</td>
+      <td>Gender</td>
       <td><label>
-        <input name="radiobutton" type="radio" value="male" />
+        <input name="radiobutton" type="radio" value="male" {% if val['gender']=="male" %} checked {% endif %}/>
       </label>
       male
       <label>
-      <input name="radiobutton" type="radio" value="female" />
+      <input name="radiobutton" type="radio" value="female" {% if val['gender']=="female" %} checked {% endif %}/>
       </label> 
       female 
       <label>
-      <input name="radiobutton" type="radio" value="others" />
+      <input name="radiobutton" type="radio" value="others" {% if val['gender']=="others" %} checked {% endif %}/>
       </label>
       others </td>
     </tr>
@@ -51,16 +77,18 @@
     </tr>
     <tr>
       <td>Photo</td>
-      <td><input type="file" name="file" value="{{val['photo']}}"/></td>
+      <td><input type="file" name="file" ><img src="../static/photos/{{val['photo']}}" height="50px" width="50px"></td>
     </tr>
     <tr>
-      <td colspan="2"><label>
-        <div align="center">
-          <input type="submit" name="Submit" value="add" />
+      <td colspan="2" align="center"><label>
+        <div >
+          <input type="submit" align="center" name="Submit" value="add" />
           </div>
       </label></td>
     </tr>
   </table>
 </form>
 </body>
-</html>
+  </center>
+<!--</html>-->
+{% endblock %}
