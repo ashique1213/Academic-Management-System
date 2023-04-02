@@ -6,39 +6,7 @@
 {% extends 'hodindex.html' %}
 {% block body %}
 </head>
-<style>
- td {
-  border: 1px solid;
-}
-input {
-  width: 100%;
-}
-table {
-  width: 90%;
-}
-     th{
-    background-color:#252B34;
-    }
-input[type=submit] {
-  width: 100px;
-  background-color: #ef6445;
-  color: white;
-  padding: 8px 20px;
-  margin: 6px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-   border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
-  background-color: #ef6445;
-  color: white;
-}
-</style>
+<center>
 <body>
 <form id="form1" name="form1" method="post" action="/addanoucement#about">
   <table width="345" border="1">
@@ -51,8 +19,8 @@ th {
     <tr>
       <td>{{i['anouncement']}}&nbsp;</td>
       <td>{{i['date']}}&nbsp;</td>
-      <td><p><a href="editanoucement?id={{i['an_id']}}#about">edit</a></p>
-      <p><a href="deleteanoucement?id={{i['an_id']}}#about">delete</a></p></td>
+      <td><p><a href="editanoucement?id={{i['an_id']}}#about">Edit</a>&nbsp;&nbsp;
+      <a href="deleteanoucement?id={{i['an_id']}}#about">Delete</a></p></td>
     </tr>
      {% endfor %}
     <tr>
@@ -66,5 +34,6 @@ th {
   </label>
 </form>
 </body>
+  </center>
 <!--</html>-->
 {% endblock %}

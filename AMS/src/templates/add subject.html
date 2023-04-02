@@ -6,42 +6,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Untitled Document</title>
 </head>
-<style>
- td {
-  border: 1px solid;
-}
-input {
-  width: 100%;
-}
-table {
-  width: 90%;
-}
-     th{
-    background-color:#252B34;
-    }
-input[type=submit] {
-  width: 100px;
-  background-color: #ef6445;
-  color: white;
-  padding: 8px 20px;
-  margin: 6px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-</style>
 <center>
 <body>
 <form id="form1" name="form1" method="post" action="addsubject1#about">
   <table width="320" border="1">
     <tr>
-      <td width="96">Subject name </td>
-      <td width="208">
+      <th width="350">Subject name </th>
+      <td >
         <input type="text" name="textfield" required/>
       </td>
     </tr>
     <tr>
-      <td>Sem</td>
+      <th>Sem</th>
      <td>
         <select name="select" required>
           <option value="1">s1</option><option value="2">s2</option>
@@ -50,7 +26,7 @@ input[type=submit] {
     </td>
     </tr>
     <tr>
-      <td>Credit</td>
+      <th>Credit</th>
       <td><input type="text" name="textfield3"required /></td>
     </tr>
     <!--<tr>-->
@@ -63,7 +39,7 @@ input[type=submit] {
     <tr>
       <td colspan="2" align="center"><label>
         <div >
-          <input type="submit" name="Submit" value="add" />
+          <input type="submit" name="Submit" value="Add" />
           </div>
       </label></td>
     </tr>

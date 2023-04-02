@@ -163,7 +163,6 @@ def addstudent():
     addno = request.form['textfield2']
     sem = request.form['select']
     gender = request.form['radiobutton']
-    age = request.form['textfield32']
     dob = request.form['textfield33']
     address = request.form['textfield34']
     phone = request.form['textfield35']
@@ -176,8 +175,8 @@ def addstudent():
     qry = "insert into login values(null,%s,%s,'student')"
     val = (username, password)
     id = iud(qry, val)
-    qr = "INSERT INTO `student` VALUES(NULL,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-    va = (str(id), name, addno, sem, gender, age,dob,address, phone, jointdate,img)
+    qr = "INSERT INTO `student` VALUES(NULL,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+    va = (str(id), name, addno, sem, gender,dob,address, phone, jointdate,img)
     iud(qr, va)
     return '''<script>alert("success");window.location="/viewstudents#about"</script>'''
 
@@ -379,7 +378,6 @@ def updatestudent():
         addno = request.form['textfield2']
         sem = request.form['select']
         gender = request.form['radiobutton']
-        age = request.form['textfield32']
         dob = request.form['textfield33']
         address = request.form['textfield34']
         phone = request.form['textfield35']
@@ -387,8 +385,8 @@ def updatestudent():
         photo = request.files['file']
         img = secure_filename(photo.filename)
         photo.save(os.path.join('static/photos', img))
-        qry = "UPDATE student SET name=%s,`addmission no`=%s,smester=%s,gender=%s,age=%s,dob=%s,address=%s,phone=%s,jointdate=%s,photo=%s where login_id=%s"
-        val=(name,addno,sem,gender,age,dob,address,phone,jointdate,img,session['stid'])
+        qry = "UPDATE student SET name=%s,`addmission no`=%s,smester=%s,gender=%s,dob=%s,address=%s,phone=%s,jointdate=%s,photo=%s where login_id=%s"
+        val=(name,addno,sem,gender,dob,address,phone,jointdate,img,session['stid'])
         iud(qry,val)
         return '''<script>alert("success");window.location="/viewstudents#about"</script>'''
     except Exception as e:
@@ -396,13 +394,12 @@ def updatestudent():
         addno = request.form['textfield2']
         sem = request.form['select']
         gender = request.form['radiobutton']
-        age = request.form['textfield32']
         dob = request.form['textfield33']
         address = request.form['textfield34']
         phone = request.form['textfield35']
         jointdate = request.form['textfield36']
-        qry = "UPDATE student SET name=%s,`addmission no`=%s,smester=%s,gender=%s,age=%s,dob=%s,address=%s,phone=%s,jointdate=%s where login_id=%s"
-        val = (name, addno, sem, gender, age, dob, address, phone, jointdate, session['stid'])
+        qry = "UPDATE student SET name=%s,`addmission no`=%s,smester=%s,gender=%s,dob=%s,address=%s,phone=%s,jointdate=%s where login_id=%s"
+        val = (name, addno, sem, gender, dob, address, phone, jointdate, session['stid'])
         iud(qry, val)
         return '''<script>alert("success");window.location="/viewstudents#about"</script>'''
 

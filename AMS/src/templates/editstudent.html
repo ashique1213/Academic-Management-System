@@ -7,48 +7,26 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Untitled Document</title>
 </head>
-<style>
- td {
-  border: 1px solid;
-}
-input {
-  width: 100%;
-}
-table {
-  width: 90%;
-}
-     th{
-    background-color:#252B34;
-    }
-input[type=submit] {
-  width: 100px;
-  background-color: #ef6445;
-  color: white;
-  padding: 8px 20px;
-  margin: 6px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-</style>
 <center>
 <body>
-<form id="form1" name="form1" method="post" action="/updatestudent#about" enctype="multipart/form-data">
-  <table width="324" border="1" class="table">
+<form method="post" enctype="multipart/form-data" name="form1" id="form1" action="/updatestudent#about">
+  <table width="301" border="1">
+<!--<form id="form1" name="form1" method="post" action="/updatestudent#about" enctype="multipart/form-data">-->
+  <!--<table width="324" border="1" class="table">-->
     <tr>
-      <td width="107">Name</td>
-      <td width="178"><label>
+      <th >Name</th>
+      <td ><label>
         <input type="text" size="" name="textfield" value="{{val['name']}}" />
       </label></td>
     </tr>
     <tr>
-      <td>Addmission no </td>
+      <th>Addmission no </th>
       <td><label>
         <input type="text" name="textfield2" value="{{val['addmission no']}}" />
       </label></td>
     </tr>
     <tr>
-      <td>semester</td>
+      <th>semester</th>
       <td><label>
         <select name="select">
           <option value="1">s1</option><option value="2">s2</option>
@@ -57,7 +35,7 @@ input[type=submit] {
       </label></td>
     </tr>
     <tr>
-      <td>Gender</td>
+      <th>Gender</th>
       <td><label>
         <input name="radiobutton" type="radio" value="male" {% if val['gender']=="male" %} checked {% endif %}/>
         </label>
@@ -72,27 +50,23 @@ input[type=submit] {
         others </td>
     </tr>
     <tr>
-      <td>Age</td>
-      <td><input type="text" name="textfield32" value="{{val['age']}}"/></td>
-    </tr>
-    <tr>
-      <td>Dob</td>
+      <th>Dob</th>
       <td><input type="date" name="textfield33" value="{{val['dob']}}" /></td>
     </tr>
     <tr>
-      <td>Address</td>
+      <th>Address</th>
       <td><input type="text" name="textfield34" value="{{val['address']}}"/></td>
     </tr>
     <tr>
-      <td>Phone</td>
+      <th>Phone</th>
       <td><input type="text" name="textfield35" value="{{val['phone']}}"/></td>
     </tr>
     <tr>
-      <td>Photo</td>
+      <th>Photo</th>
       <td><input type="file" name="file" ><img src="../static/photos/{{val['photo']}}" height="50px" width="50px"></td>
     </tr>
     <tr>
-      <td>Date of jointed </td>
+      <th>Date of jointed </th>
       <td><label>
         <input type="date" name="textfield36" value="{{val['jointdate']}}"/>
       </label></td>
@@ -101,7 +75,7 @@ input[type=submit] {
     <tr>
       <td colspan="2"align="center"><label>
           <div >
-            <input type="submit" name="Submit" value="add" />
+            <input type="submit" name="Submit" value="Add" />
           </div>
         </label></td>
     </tr>

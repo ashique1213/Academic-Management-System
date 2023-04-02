@@ -7,43 +7,19 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<style>
- td {
-  border: 1px solid;
-}
-input {
-  width: 100%;
-}
-table {
-  width: 90%;
-}
-     th{
-    background-color:#252B34;
-    }
-input[type=submit] {
-  width: 100px;
-  background-color: #ef6445;
-  color: white;
-  padding: 8px 20px;
-  margin: 6px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-   border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
-  background-color: #ef6445;
-  color: white;
-}
-</style>
+<center>
 <body>
-<form method="post" action="tt2">
+<form method="post" action="tt2#about">
 <table border="1">
-
+<tr>
+        <th>Day/Hour</th>
+        <th>1</th>
+        <th>2</th>
+        <th>3</th>
+        <th>4</th>
+        <th>5</th>
+        <th>6</th>
+    </tr>
     {% for i in day %}
    <tr>
        <td>{{i}}</td>
@@ -58,11 +34,12 @@ th {
    </tr>
     {% endfor %}
     <tr>
-        <td></td>
-        <td><input type="submit" value="Next"></td>
+        <td colspan="7" align="center">
+        <input type="submit" value="Add">
     </tr>
 </table>
 </form>
 </body>
+    </center>
 <!--</html>-->
 {% endblock %}

@@ -164,105 +164,25 @@ def viewfee():
     res= selectall(qry)
     return jsonify(res)
 
-@app.route('/ssviewchat',methods=['POST'])
-def ssviewchat():
-    qry="SELECT * FROM `chat` "
-    res= selectall(qry)
-    return jsonify(res)
+
+# @app.route('/viewprofile',methods=['POST','GET'])
+# def viewprofile():
+#     lid=request.form['lid']
+#     print(lid)
+#     qry="SELECT `student`.*,`course`.* FROM `student` JOIN `course` ON `student`.`course_id`=`course`.`id` WHERE `student`.`login_id`=%s"
+#     res= selectall(qry,lid)
+#     print(res)
+#     return jsonify(res)
 
 
-@app.route('/addasignment',methods=['POST'])
-def addasignment():
-    qry="SELECT * FROM `assignment` "
-    res= selectall(qry)
-    return jsonify(res)
-
-@app.route('/postasignment',methods=['POST'])
-def postasignment():
-    qry="SELECT * FROM `assignment` "
-    res= selectall(qry)
-    return jsonify(res)
-
-@app.route('/addinternal',methods=['POST'])
-def addinternal():
-    qry="SELECT * FROM `internal marks` "
-    res= selectall(qry)
-    return jsonify(res)
-
-@app.route('/addexam',methods=['POST'])
-def addexam():
-    qry="SELECT * FROM `exam` "
-    res= selectall(qry)
-    return jsonify(res)
-
-@app.route('/postexam',methods=['POST'])
-def postexam():
-    qry="SELECT * FROM `exam` "
-    res= selectall(qry)
-    return jsonify(res)
-
-@app.route('/addmaterials',methods=['POST'])
-def addmaterials():
-    qry="SELECT * FROM `materials` "
-    res= selectall(qry)
-    return jsonify(res)
-
-@app.route('/addattendence',methods=['POST'])
-def addattendence():
-    qry="SELECT * FROM `attendence` "
-    res= selectall(qry)
-    return jsonify(res)
-
-@app.route('/ttupdateprofile',methods=['POST'])
-def ttupdateprofile():
-    qry="SELECT * FROM `teacher` "
-    res= selectall(qry)
-    return jsonify(res)
-
-@app.route('/ssupdateprofile',methods=['POST'])
-def ssupdateprofile():
-    qry="SELECT * FROM `student` "
-    res= selectall(qry)
-    return jsonify(res)
-
-@app.route('/ssupdateprofile',methods=['POST'])
-def ssupdateprofile():
-    qry="SELECT * FROM `student` "
-    res= selectall(qry)
-    return jsonify(res)
-
-@app.route('/ttsendchat',methods=['POST'])
-def ttsendchat():
-    qry="SELECT * FROM `chat` "
-    res= selectall(qry)
-    return jsonify(res)
-
-@app.route('/sssendchat',methods=['POST'])
-def sssendchat():
-    qry="SELECT * FROM `chat` "
-    res= selectall(qry)
-    return jsonify(res)
-
-
-@app.route('/postfeedback',methods=['POST'])
-def postfeedback():
-    qry="SELECT * FROM `feedback` "
-    res= selectall(qry)
-    return jsonify(res)
-
-@app.route('/postsurvey',methods=['POST'])
-def postsurvey():
-    qry="SELECT * FROM `survey` "
-    res= selectall(qry)
-    return jsonify(res)
-
-@app.route('/postsurvey',methods=['POST'])
-def postsurvey():
-    qry="SELECT * FROM `survey` "
-    res= selectall(qry)
-    return jsonify(res)
-
-
-
-
+# @app.route('/update',methods=['POST'])
+# def update():
+#     lid=request.form['lid']
+#     fname = request.form['fname']
+#     lname = request.form['lname']
+#     qry="UPDATE `student` SET `First Name`=%s,`Last Name`=%s WHERE `login_id`=%s"
+#     val=(fname,lname,lid)
+#     iud(qry,val)
+#
+#     return jsonify({'task':'success'})
 

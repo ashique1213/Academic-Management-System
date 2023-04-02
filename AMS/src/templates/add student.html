@@ -7,30 +7,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Untitled Document</title>
 </head>
-<style>
- td {
-  border: 1px solid;
-}
-input {
-  width: 100%;
-}
-table {
-  width: 90%;
-}
-     th{
-    background-color:#252B34;
-    }
-input[type=submit] {
-  width: 100px;
-  background-color: #ef6445;
-  color: white;
-  padding: 8px 20px;
-  margin: 6px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-</style>
 <center>
 <body>
 <!--<form id="form1" name="form1" method="post" action="addstudent#about" enctype="multipart/form-data">-->
@@ -38,19 +14,19 @@ input[type=submit] {
 <form method="post" enctype="multipart/form-data" name="form1" id="form1" action="addstudent#about">
   <table width="301" border="1">
     <tr>
-      <td >Name</td>
+      <th width="350">Name</th>
       <td >
         <input type="text" size="" name="textfield" required/>
       </td>
     </tr>
     <tr>
-      <td>addmission no </td>
+      <th>addmission no </th>
       <td>
         <input type="text" name="textfield2" required/>
       </td>
     </tr>
     <tr>
-      <td>semester</td>
+      <th>semester</th>
       <td><label>
         <select name="select" required>
           <option value="1">s1</option><option value="2">s2</option>
@@ -59,7 +35,7 @@ input[type=submit] {
       </label></td>
     </tr>
     <tr>
-      <td>Gender</td>
+      <th>Gender</th>
       <td><label>
         <input name="radiobutton" type="radio" value="male" />
         </label>
@@ -74,44 +50,40 @@ input[type=submit] {
         others </td>
     </tr>
     <tr>
-      <td>Age</td>
-      <td><input type="text" name="textfield32" required /></td>
-    </tr>
-    <tr>
-      <td>Dob</td>
+      <th>Dob</th>
       <td><input type="date" name="textfield33"required /></td>
     </tr>
     <tr>
-      <td>Address</td>
+      <th>Address</th>
       <td><input type="text" name="textfield34" required/></td>
     </tr>
     <tr>
-      <td>Phone</td>
+      <th>Phone</th>
       <td><input type="text" name="textfield35" required/></td>
     </tr>
     <tr>
-      <td>Photo</td>
+      <th>Photo</th>
       <td><input type="file" name="file" required /></td>
     </tr>
     <tr>
-      <td>Date of jointed </td>
+      <th>Date of jointed </th>
       <td><label>
         <input type="date" name="textfield36" required/>
       </label></td>
     </tr>
     <tr>
-      <td>username</td>
+      <th>username</th>
       <td><input type="text" name="textfield4" required/></td>
     </tr>
     <tr>
-      <td>password</td>
+      <th>password</th>
       <td><input type="text" name="textfield5" required/></td>
     </tr>
     <tr>
     <tr>
       <td colspan="2" align="center"><label>
           <div>
-            <input type="submit" name="Submit" value="add" />
+            <input type="submit" name="Submit" value="Add" />
           </div>
         </label></td>
     </tr>

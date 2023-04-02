@@ -7,30 +7,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Untitled Document</title>
 </head>
-<style>
- td {
-  border: 1px solid;
-}
-input {
-  width: 100%;
-}
-table {
-  width: 90%;
-}
-     th{
-    background-color:#252B34;
-    }
-input[type=submit] {
-  width: 100px;
-  background-color: #ef6445;
-  color: white;
-  padding: 8px 20px;
-  margin: 6px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-</style>
 <center>
 <body>
 <!--<form id="form1" name="form1" method="post" action="addfeedettails1#about">-->
@@ -38,7 +14,7 @@ input[type=submit] {
 <form method="post" name="form1" id="form1" action="addfeedettails1#about">
   <table width="301" border="1">
     <tr>
-      <td>Fee title</td>
+      <th width="350">Fee title</th>
       <td><label>
         <select name="select2" required>
           {% for i in val %}
@@ -48,7 +24,7 @@ input[type=submit] {
       </label></td>
     </tr>
     <tr>
-      <td >Student name </td>
+      <th >Student name </th>
            <td><label>
         <select name="select3" required>
           {% for i in v %}
@@ -58,25 +34,25 @@ input[type=submit] {
       </label></td>
     </tr>
     <tr>
-      <td>Amount paid </td>
+      <th>Amount paid </th>
       <td><input type="text" name="textfield2" required /></td>
     </tr>
     <tr>
-      <td>Amount Due </td>
+      <th>Amount Due </th>
       <td><input type="text" name="textfield3" required/></td>
     </tr>
     <tr>
-      <td>date paid </td>
+      <th>date paid </th>
       <td><input type="date" name="textfield4" required/></td>
     </tr>
     <tr>
-      <td>Status</td>
+      <th>Status</th>
       <td><input type="text" name="textfield5" required/></td>
     </tr>
     <tr>
       <td colspan="2" align="center"><label>
         <div >
-          <input type="submit" name="Submit" value="add" />
+          <input type="submit" name="Submit" value="Add" />
           </div>
       </label></td>
     </tr>
