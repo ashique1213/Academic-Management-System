@@ -41,25 +41,27 @@ th {
 }
 </style>
 <body>
-<form method="post" action="tt2">
+<form method="post" action="tt_update">
 <table border="1">
 
-    {% for i in day %}
+    {% for i in range(0,rr|length) %}
    <tr>
-       <td>{{i}}</td>
-       {% for j in range(0,6) %}
+       {% if i!=0 %}
+       <td>{{rr[i][0]}}</td>
+       {% for j in range(1,7) %}
        <td>
-            <select name="{{i}}{{j}}">
-           {% for ii in val%}
-         <option value="{{ii['subj_id']}}">{{ii['subject name']}}</option>
+            <select name="{{rr[i][0]}}{{j-1}}">
+           {% for ii in r %}
+         <option value="{{ii['subj_id']}}" {% if rr[i][j]==ii['subj_id'] %} selected {% endif %}>{{ii['subject name']}} </option>
            {% endfor %}  </select>
        </td>
        {% endfor %}
+       {% endif %}
    </tr>
     {% endfor %}
     <tr>
         <td></td>
-        <td><input type="submit" value="Next"></td>
+        <td><input type="submit" value="Update"></td>
     </tr>
 </table>
 </form>

@@ -47,6 +47,7 @@ def tt1():
     sem=request.form['s']
     qry="SELECT `time_table`.*,`subject`.`subject name`  FROM `subject` JOIN `time_table` ON `time_table`.`sub_id`=`subject`.`subj_id` WHERE `time_table`.`semester`=%s"
     res=selectall2(qry,sem)
+    session['sem']=sem
     if len(res)==0:
         qry="SELECT * FROM `subject` WHERE `semester`=%s"
         r=selectall2(qry,sem)
@@ -67,12 +68,32 @@ def tt1():
         return render_template("/viewtimetable.html",rr=result)
 
 
+@app.route('/ttedit',methods=['post'])
+def ttedit():
+    sem=session['sem']
+    qry="SELECT `time_table`.*,`subject`.`subject name`  FROM `subject` JOIN `time_table` ON `time_table`.`sub_id`=`subject`.`subj_id` WHERE `time_table`.`semester`=%s"
+    res=selectall2(qry,sem)
+    session['sem']=sem
+
+    day = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+    result=[["Day/Hour",1,2,3,4,5,6]]
+    for i in day:
+        row=[i]
+        qry="SELECT `subject`.subj_id,`subject`.`subject name`,`time_table`.* FROM `time_table` JOIN `subject` ON `subject`.`subj_id`=`time_table`.`sub_id`  WHERE `time_table`.`day`=%s AND `time_table`.`semester`=%s  ORDER by `hours`"
+        rr=selectall2(qry,(i,sem))
+        for iii in rr:
+            row.append(iii['subj_id'])
+        result.append(row)
+        print(result)
+    qry = "SELECT *  FROM `subject` where `semester`=%s"
+    res = selectall2(qry, sem)
+    return render_template("/updatetimetable.html",rr=result,r=res)
+
+
 
 @app.route('/tt2',methods=['post'])
 def tt2():
-
         day=['Monday','Tuesday','Wednesday','Thursday','Friday']
-
         for i in day:
             for j in range(0,6):
                 sub=request.form[i+str(j)]
@@ -80,6 +101,19 @@ def tt2():
                 val=(sub,session['sem'],i,j+1)
                 iud(qry,val)
         return '''<script>alert("added")</script>'''
+
+
+
+@app.route('/tt_update',methods=['post'])
+def tt_update():
+        day=['Monday','Tuesday','Wednesday','Thursday','Friday']
+        for i in day:
+            for j in range(0,6):
+                sub=request.form[i+str(j)]
+                qry="UPDATE `time_table` SET `sub_id`=%s WHERE `semester`=%s AND `day`=%s AND `hours`=%s"
+                val=(sub,session['sem'],i,j+1)
+                iud(qry,val)
+        return '''<script>alert("Updated");window.location='timetable'</script>'''
 
 
 @app.route('/addfees',methods=['post'])
@@ -263,7 +297,7 @@ def viewassignsub():
 def assignsub():
     qry = "SELECT * FROM `teacher`"
     res = selectall(qry)
-    qry = "SELECT * FROM `subject`"
+    qry = "SELECT * FROM `subject` WHERE `subj_id` NOT IN(SELECT `sub_id` FROM `assignsub`)"
     res1 = selectall(qry)
     return render_template("assignsub.html",data=res1,val=res)
 
