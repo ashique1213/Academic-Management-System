@@ -16,6 +16,22 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`ams` /*!40100 DEFAULT CHARACTER SET lat
 
 USE `ams`;
 
+/*Table structure for table `actualplan` */
+
+DROP TABLE IF EXISTS `actualplan`;
+
+CREATE TABLE `actualplan` (
+  `a_id` int(50) NOT NULL AUTO_INCREMENT,
+  `p_id` int(50) DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `hour` bigint(50) DEFAULT NULL,
+  `module` bigint(50) DEFAULT NULL,
+  `status` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`a_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `actualplan` */
+
 /*Table structure for table `anoucement` */
 
 DROP TABLE IF EXISTS `anoucement`;
@@ -53,7 +69,7 @@ DROP TABLE IF EXISTS `assignment`;
 
 CREATE TABLE `assignment` (
   `ass_id` int(5) NOT NULL AUTO_INCREMENT,
-  `stud_id` int(5) DEFAULT NULL,
+  `staf_id` int(11) DEFAULT NULL,
   `topic` varchar(25) DEFAULT NULL,
   `description` varchar(25) DEFAULT NULL,
   `last date` date DEFAULT NULL,
@@ -71,7 +87,7 @@ CREATE TABLE `assignsub` (
   `t_id` int(5) DEFAULT NULL,
   `sub_id` int(5) DEFAULT NULL,
   PRIMARY KEY (`assign_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 /*Data for the table `assignsub` */
 
@@ -82,8 +98,7 @@ insert  into `assignsub`(`assign_id`,`t_id`,`sub_id`) values
 (5,2,1),
 (6,3,1),
 (7,3,3),
-(8,2,2),
-(10,2,3);
+(8,2,2);
 
 /*Table structure for table `attendence` */
 
@@ -122,7 +137,7 @@ DROP TABLE IF EXISTS `exam`;
 
 CREATE TABLE `exam` (
   `exam_id` int(5) NOT NULL AUTO_INCREMENT,
-  `stud_id` int(5) DEFAULT NULL,
+  `sub_id` int(5) DEFAULT NULL,
   `date` date DEFAULT NULL,
   `topic` varchar(25) DEFAULT NULL,
   PRIMARY KEY (`exam_id`)
@@ -180,7 +195,6 @@ CREATE TABLE `feed_response` (
   `res_id` int(5) NOT NULL AUTO_INCREMENT,
   `feed_id` int(5) DEFAULT NULL,
   `stud_id` int(5) DEFAULT NULL,
-  `sub_id` int(5) DEFAULT NULL,
   `response` varchar(25) DEFAULT NULL,
   PRIMARY KEY (`res_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -194,6 +208,7 @@ DROP TABLE IF EXISTS `feedback`;
 CREATE TABLE `feedback` (
   `feed_id` int(5) NOT NULL AUTO_INCREMENT,
   `feed_questions` varchar(50) DEFAULT NULL,
+  `staff_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`feed_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -225,7 +240,7 @@ CREATE TABLE `login` (
   `password` varchar(15) DEFAULT NULL,
   `type` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`login id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 /*Data for the table `login` */
 
@@ -237,7 +252,8 @@ insert  into `login`(`login id`,`username`,`password`,`type`) values
 (5,'rbh','rbh','student'),
 (6,'qwerty','qwerty','teacher'),
 (7,'123456','123456','student'),
-(8,'qwert','qqqqq','teacher');
+(8,'qwert','qqqqq','teacher'),
+(9,'123456','123456','student');
 
 /*Table structure for table `materials` */
 
@@ -253,6 +269,23 @@ CREATE TABLE `materials` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `materials` */
+
+/*Table structure for table `proposedplan` */
+
+DROP TABLE IF EXISTS `proposedplan`;
+
+CREATE TABLE `proposedplan` (
+  `p_id` int(5) NOT NULL AUTO_INCREMENT,
+  `no` bigint(50) DEFAULT NULL,
+  `topic` varchar(50) DEFAULT NULL,
+  `description` varchar(50) DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `hour` bigint(50) DEFAULT NULL,
+  `module` bigint(50) DEFAULT NULL,
+  PRIMARY KEY (`p_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `proposedplan` */
 
 /*Table structure for table `questions` */
 
@@ -283,19 +316,19 @@ CREATE TABLE `student` (
   `addmission no` bigint(25) DEFAULT NULL,
   `smester` bigint(25) DEFAULT NULL,
   `gender` varchar(25) DEFAULT NULL,
-  `age` bigint(25) DEFAULT NULL,
   `dob` date DEFAULT NULL,
   `address` varchar(25) DEFAULT NULL,
   `phone` bigint(25) DEFAULT NULL,
   `jointdate` date DEFAULT NULL,
   `photo` text,
   PRIMARY KEY (`stud_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `student` */
 
-insert  into `student`(`stud_id`,`login_id`,`name`,`addmission no`,`smester`,`gender`,`age`,`dob`,`address`,`phone`,`jointdate`,`photo`) values 
-(1,4,'Ashique',123456,1,'male',22,'2000-07-06','Wayanad',9876543211,'2023-03-01','Screenshot_1.png');
+insert  into `student`(`stud_id`,`login_id`,`name`,`addmission no`,`smester`,`gender`,`dob`,`address`,`phone`,`jointdate`,`photo`) values 
+(1,4,'Ashique',123456,1,'male','2000-07-06','Wayanad',9876543211,'2023-03-01','Screenshot_1.png'),
+(3,9,'Nihad',16665,2,'male','2023-04-07','korome',9874563211,'2023-04-26','Screenshot_1.png');
 
 /*Table structure for table `subject` */
 
@@ -307,7 +340,7 @@ CREATE TABLE `subject` (
   `semester` bigint(25) DEFAULT NULL,
   `credit` bigint(25) DEFAULT NULL,
   PRIMARY KEY (`subj_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 /*Data for the table `subject` */
 
@@ -315,9 +348,7 @@ insert  into `subject`(`subj_id`,`subject name`,`semester`,`credit`) values
 (2,'DBMS',2,4),
 (3,'Network',2,4),
 (4,'os',1,4),
-(5,'OR',1,2),
-(6,'maths',3,3),
-(7,'oops',3,11);
+(5,'OR',1,2);
 
 /*Table structure for table `survey` */
 

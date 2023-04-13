@@ -6,8 +6,6 @@ app=Flask(__name__)
 app.secret_key='111'
 from src.dbconnectionnew import *
 
-
-
 @app.route('/login_code', methods = ['get','post'] )
 def login_code():
     username =request.form['uname']
