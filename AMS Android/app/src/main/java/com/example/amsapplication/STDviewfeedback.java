@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 
@@ -23,7 +25,19 @@ public class STDviewfeedback extends AppCompatActivity {
         r4=findViewById(R.id.radioButton8);
         b1=findViewById(R.id.button21);
         b2=findViewById(R.id.button22);
+        sh= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+            }
+        });
+        b2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
     }
 }

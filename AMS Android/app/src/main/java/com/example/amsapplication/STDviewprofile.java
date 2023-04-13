@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -26,6 +28,13 @@ public class STDviewprofile extends AppCompatActivity {
         e8=findViewById(R.id.editTextTextPersonName37);
         e9=findViewById(R.id.editTextTextPersonName38);
         b1=findViewById(R.id.button26);
+        sh= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
     }
 }

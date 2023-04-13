@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.widget.ListView;
 import android.widget.Spinner;
 
@@ -18,5 +19,6 @@ public class viewstudents extends AppCompatActivity {
         setContentView(R.layout.activity_viewstudents);
         s1=findViewById(R.id.spinner2);
         l1=findViewById(R.id.list20);
+        sh= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
     }
 }

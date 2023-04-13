@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.widget.ListView;
 
 public class STDviewtimetable extends AppCompatActivity {
@@ -14,5 +15,6 @@ public class STDviewtimetable extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stdviewtimetable);
         l1=findViewById(R.id.list10);
+        sh= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
     }
 }

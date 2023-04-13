@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.widget.ListView;
 
 public class viewchat extends AppCompatActivity {
@@ -15,5 +16,6 @@ public class viewchat extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viewchat);
         l1=findViewById(R.id.list14);
+        sh= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
     }
 }

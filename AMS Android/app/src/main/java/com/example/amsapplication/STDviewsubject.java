@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.widget.ListView;
 
 public class STDviewsubject extends AppCompatActivity {
@@ -15,6 +16,7 @@ public class STDviewsubject extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stdviewsubject);
         l1=findViewById(R.id.list9);
+        sh= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
     }
 }
