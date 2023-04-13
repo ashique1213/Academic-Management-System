@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.amsapplication">
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AMSApplication"
+        tools:targetApi="31">
+        <activity
+            android:name=".STDfeedetails"
+            android:exported="false" />
+        <activity
+            android:name=".STDaddchat"
+            android:exported="false" />
+        <activity
+            android:name=".STDviewprofile"
+            android:exported="false" />
+        <activity
+            android:name=".STDviewsurvey"
+            android:exported="false" />
+        <activity
+            android:name=".STDviewfeedback"
+            android:exported="false" />
+        <activity
+            android:name=".STDstudymaterials"
+            android:exported="false" />
+        <activity
+            android:name=".STDviewannoucement"
+            android:exported="false" />
+        <activity
+            android:name=".STDviewattendance"
+            android:exported="false" />
+        <activity
+            android:name=".STDviewexam"
+            android:exported="false" />
+        <activity
+            android:name=".STDpostexam"
+            android:exported="false" />
+        <activity
+            android:name=".STDviewinternalmark"
+            android:exported="false" />
+        <activity
+            android:name=".STDviewassignment"
+            android:exported="false" />
+        <activity
+            android:name=".STDviewtimetable"
+            android:exported="false" />
+        <activity
+            android:name=".Attendancemark"
+            android:exported="false" />
+        <activity
+            android:name=".viewprofile"
+            android:exported="false" />
+        <activity
+            android:name=".viewchat"
+            android:exported="false" />
+        <activity
+            android:name=".addchat"
+            android:exported="false" />
+        <activity
+            android:name=".viewsurvey"
+            android:exported="false" />
+        <activity
+            android:name=".addfeedback"
+            android:exported="false" />
+        <activity
+            android:name=".viewfeedback"
+            android:exported="false" />
+        <activity
+            android:name=".viewannoucement"
+            android:exported="false" />
+        <activity
+            android:name=".addstudymat"
+            android:exported="false" />
+        <activity
+            android:name=".viewstudymat"
+            android:exported="false" />
+        <activity
+            android:name=".addquestion"
+            android:exported="false" />
+        <activity
+            android:name=".viewquestion"
+            android:exported="false" />
+        <activity
+            android:name=".viewexam"
+            android:exported="false" />
+        <activity
+            android:name=".addexam"
+            android:exported="false" />
+        <activity
+            android:name=".viewinternalmarks"
+            android:exported="false" />
+        <activity
+            android:name=".addassignment"
+            android:exported="false" />
+        <activity
+            android:name=".viewassignment"
+            android:exported="false" />
+        <activity
+            android:name=".viewtimetable"
+            android:exported="false" />
+        <activity
+            android:name=".Login"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

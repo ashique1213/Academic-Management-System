@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/AMS Android/app/src/main/res/layout/activity_addassignment.xml" value="0.17074275362318841" />
+        <entry key="..\:/AMS Android/app/src/main/res/layout/activity_addchat.xml" value="0.1671195652173913" />
+        <entry key="..\:/AMS Android/app/src/main/res/layout/activity_addexam.xml" value="0.15" />
+        <entry key="..\:/AMS Android/app/src/main/res/layout/activity_addfeedback.xml" value="0.17074275362318841" />
+        <entry key="..\:/AMS Android/app/src/main/res/layout/activity_addinternalmarks.xml" value="0.20416666666666666" />
+        <entry key="..\:/AMS Android/app/src/main/res/layout/activity_addquestion.xml" value="0.17074275362318841" />
+        <entry key="..\:/AMS Android/app/src/main/res/layout/activity_addstudymat.xml" value="0.17074275362318841" />
+        <entry key="..\:/AMS Android/app/src/main/res/layout/activity_addsurvey.xml" value="0.1671195652173913" />
+        <entry key="..\:/AMS Android/app/src/main/res/layout/activity_attendancemark.xml" value="0.1671195652173913" />
+        <entry key="..\:/AMS Android/app/src/main/res/layout/activity_login.xml" value="0.17074275362318841" />
+        <entry key="..\:/AMS Android/app/src/main/res/layout/activity_main.xml" value="0.17074275362318841" />
+        <entry key="..\:/AMS Android/app/src/main/res/layout/activity_manageassignment.xml" value="0.17074275362318841" />
+        <entry key="..\:/AMS Android/app/src/main/res/layout/activity_stdaddchat.xml" value="0.17074275362318841" />
+        <entry key="..\:/AMS Android/app/src/main/res/layout/activity_stdfeedetails.xml" value="0.17074275362318841" />
+        <entry key="..\:/AMS Android/app/src/main/res/layout/activity_stdpostexam.xml" value="0.1671195652173913" />
+        <entry key="..\:/AMS Android/app/src/main/res/layout/activity_stdstudymaterials.xml" value="0.16847826086956522" />
+        <entry key="..\:/AMS Android/app/src/main/res/layout/activity_stdviewannoucement.xml" value="0.16847826086956522" />
+        <entry key="..\:/AMS Android/app/src/main/res/layout/activity_stdviewassignment.xml" value="0.2" />
+        <entry key="..\:/AMS Android/app/src/main/res/layout/activity_stdviewattendance.xml" value="0.1671195652173913" />
+        <entry key="..\:/AMS Android/app/src/main/res/layout/activity_stdviewchat.xml" value="0.17074275362318841" />
+        <entry key="..\:/AMS Android/app/src/main/res/layout/activity_stdviewexam.xml" value="0.1671195652173913" />
+        <entry key="..\:/AMS Android/app/src/main/res/layout/activity_stdviewfeedback.xml" value="0.16847826086956522" />
+        <entry key="..\:/AMS Android/app/src/main/res/layout/activity_stdviewinternalmark.xml" value="0.1671195652173913" />
+        <entry key="..\:/AMS Android/app/src/main/res/layout/activity_stdviewprofile.xml" value="0.17074275362318841" />
+        <entry key="..\:/AMS Android/app/src/main/res/layout/activity_stdviewsubject.xml" value="0.1671195652173913" />
+        <entry key="..\:/AMS Android/app/src/main/res/layout/activity_stdviewsurvey.xml" value="0.17074275362318841" />
+        <entry key="..\:/AMS Android/app/src/main/res/layout/activity_stdviewtimetable.xml" value="0.17074275362318841" />
+        <entry key="..\:/AMS Android/app/src/main/res/layout/activity_updateprofile.xml" value="0.1671195652173913" />
+        <entry key="..\:/AMS Android/app/src/main/res/layout/activity_viewannoucement.xml" value="0.17074275362318841" />
+        <entry key="..\:/AMS Android/app/src/main/res/layout/activity_viewassignment.xml" value="0.17074275362318841" />
+        <entry key="..\:/AMS Android/app/src/main/res/layout/activity_viewchat.xml" value="0.1671195652173913" />
+        <entry key="..\:/AMS Android/app/src/main/res/layout/activity_viewexam.xml" value="0.17074275362318841" />
+        <entry key="..\:/AMS Android/app/src/main/res/layout/activity_viewfeedback.xml" value="0.17074275362318841" />
+        <entry key="..\:/AMS Android/app/src/main/res/layout/activity_viewinternalmarks.xml" value="0.17074275362318841" />
+        <entry key="..\:/AMS Android/app/src/main/res/layout/activity_viewprofile.xml" value="0.1671195652173913" />
+        <entry key="..\:/AMS Android/app/src/main/res/layout/activity_viewquestion.xml" value="0.17074275362318841" />
+        <entry key="..\:/AMS Android/app/src/main/res/layout/activity_viewstudents.xml" value="0.17074275362318841" />
+        <entry key="..\:/AMS Android/app/src/main/res/layout/activity_viewstudymat.xml" value="0.17074275362318841" />
+        <entry key="..\:/AMS Android/app/src/main/res/layout/activity_viewsurvey.xml" value="0.17074275362318841" />
+        <entry key="..\:/AMS Android/app/src/main/res/layout/activity_viewtimetable.xml" value="0.17074275362318841" />
+        <entry key="..\:/AMS Android/app/src/main/res/layout/activity_viewtimetable_std.xml" value="0.1671195652173913" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
