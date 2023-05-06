@@ -15,19 +15,8 @@
             android:id="@+id/textView64"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Subject" />
+            android:text="exam" />
 
-        <TextView
-            android:id="@+id/textView65"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Topic" />
-
-        <TextView
-            android:id="@+id/textView70"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Date of submission" />
     </TableRow>
 
     <TableRow
