@@ -11,6 +11,15 @@ def iud(qry,val):
 
     return id
 
+def selectonee(qry):
+    con=pymysql.connect(host='localhost',port=3306,user='root',password='',db='ams',cursorclass=pymysql.cursors.DictCursor)
+    cmd=con.cursor()
+    cmd.execute(qry)
+    res=cmd.fetchone()
+
+    return res
+
+
 def selectone(qry,val):
     con=pymysql.connect(host='localhost',port=3306,user='root',password='',db='ams',cursorclass=pymysql.cursors.DictCursor)
     cmd=con.cursor()

@@ -1,5 +1,5 @@
 /*
-SQLyog Community v13.0.1 (64 bit)
+SQLyog Community v13.1.2 (64 bit)
 MySQL - 5.5.20-log : Database - ams
 *********************************************************************
 */
@@ -72,11 +72,18 @@ CREATE TABLE `assignment` (
   `staf_id` int(11) DEFAULT NULL,
   `topic` varchar(25) DEFAULT NULL,
   `description` varchar(25) DEFAULT NULL,
-  `last date` date DEFAULT NULL,
+  `last date` varchar(10) DEFAULT NULL,
+  `curdate` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`ass_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 /*Data for the table `assignment` */
+
+insert  into `assignment`(`ass_id`,`staf_id`,`topic`,`description`,`last date`,`curdate`) values 
+(1,2,'gbf','gfgfg','2023-04-30','2023-04-30'),
+(2,3,'hhh','hhh','0000-00-00','2023-05-03'),
+(3,3,'hhh','hhh','0000-00-00','2023-05-03'),
+(5,3,'ash','ash','','2023-05-06');
 
 /*Table structure for table `assignsub` */
 
@@ -112,9 +119,14 @@ CREATE TABLE `attendence` (
   `hour` bigint(15) DEFAULT NULL,
   `attendence` bigint(15) DEFAULT NULL,
   PRIMARY KEY (`att_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `attendence` */
+
+insert  into `attendence`(`att_id`,`stud_id`,`sub_id`,`date`,`hour`,`attendence`) values 
+(1,4,1,'2023-04-30',3,1),
+(2,4,2,'2005-06-23',2,0),
+(3,4,2,'0000-00-00',1,1);
 
 /*Table structure for table `chat` */
 
@@ -127,9 +139,19 @@ CREATE TABLE `chat` (
   `message` varchar(25) DEFAULT NULL,
   `date` date DEFAULT NULL,
   PRIMARY KEY (`chat_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 /*Data for the table `chat` */
+
+insert  into `chat`(`chat_id`,`from_id`,`to_id`,`message`,`date`) values 
+(3,4,2,'hlo','2023-04-30'),
+(4,4,2,'hh','2023-04-30'),
+(5,4,3,'hi','2023-04-30'),
+(6,3,4,'hi','2023-05-02'),
+(7,4,2,'hi','2023-05-06'),
+(8,4,3,'hi i','2023-05-06'),
+(9,4,3,'','2023-05-06'),
+(10,3,4,'ok','2023-05-06');
 
 /*Table structure for table `exam` */
 
@@ -141,9 +163,13 @@ CREATE TABLE `exam` (
   `date` date DEFAULT NULL,
   `topic` varchar(25) DEFAULT NULL,
   PRIMARY KEY (`exam_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `exam` */
+
+insert  into `exam`(`exam_id`,`sub_id`,`date`,`topic`) values 
+(1,2,'2023-04-30','eng'),
+(2,2,'0000-00-00','hhh');
 
 /*Table structure for table `fee` */
 
@@ -178,14 +204,18 @@ CREATE TABLE `fee details` (
   `date paid` date DEFAULT NULL,
   `status` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`fd_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 /*Data for the table `fee details` */
 
 insert  into `fee details`(`fd_id`,`f_id`,`stud_id`,`amount paid`,`amount due`,`date paid`,`status`) values 
 (1,1,4,100,900,'2023-03-16','not completed'),
 (2,2,4,10000,100,'2023-03-29','complted'),
-(3,2,5,10000,200,'2023-03-29','ok');
+(3,2,5,10000,200,'2023-03-29','ok'),
+(4,0,4,100,0,'2023-04-30','paid'),
+(5,0,4,100,0,'2023-04-30','paid'),
+(6,2,4,100,0,'2023-04-30','paid'),
+(7,3,4,200,0,'2023-05-06','paid');
 
 /*Table structure for table `feed_response` */
 
@@ -196,10 +226,15 @@ CREATE TABLE `feed_response` (
   `feed_id` int(5) DEFAULT NULL,
   `stud_id` int(5) DEFAULT NULL,
   `response` varchar(25) DEFAULT NULL,
+  `mark` int(11) DEFAULT NULL,
   PRIMARY KEY (`res_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `feed_response` */
+
+insert  into `feed_response`(`res_id`,`feed_id`,`stud_id`,`response`,`mark`) values 
+(1,1,4,'q',0),
+(2,2,4,'nnn',0);
 
 /*Table structure for table `feedback` */
 
@@ -209,10 +244,21 @@ CREATE TABLE `feedback` (
   `feed_id` int(5) NOT NULL AUTO_INCREMENT,
   `feed_questions` varchar(50) DEFAULT NULL,
   `staff_id` int(11) DEFAULT NULL,
+  `op1` varchar(100) DEFAULT NULL,
+  `op2` varchar(100) DEFAULT NULL,
+  `op3` varchar(100) DEFAULT NULL,
+  `op4` varchar(100) DEFAULT NULL,
+  `ans` varchar(100) DEFAULT NULL,
+  `date` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`feed_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `feedback` */
+
+insert  into `feedback`(`feed_id`,`feed_questions`,`staff_id`,`op1`,`op2`,`op3`,`op4`,`ans`,`date`) values 
+(1,'bnbvnv',2,'q','r','qe','qu','r','2023-04-30'),
+(2,'jhh',3,'jjj','hjj','nnn','nn','nn','2023-05-02'),
+(3,'what is this',3,'1','w','f','t','1','2023-05-06');
 
 /*Table structure for table `internal marks` */
 
@@ -220,15 +266,19 @@ DROP TABLE IF EXISTS `internal marks`;
 
 CREATE TABLE `internal marks` (
   `in_id` int(5) NOT NULL AUTO_INCREMENT,
-  `sub_id` int(5) DEFAULT NULL,
   `stud_id` int(5) DEFAULT NULL,
-  `exam name` varchar(25) DEFAULT NULL,
+  `examid` int(25) DEFAULT NULL,
   `mark` bigint(15) DEFAULT NULL,
   `date` date DEFAULT NULL,
   PRIMARY KEY (`in_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `internal marks` */
+
+insert  into `internal marks`(`in_id`,`stud_id`,`examid`,`mark`,`date`) values 
+(1,4,1,55,'2023-04-30'),
+(2,4,2,22,'2023-05-05'),
+(3,9,2,10,'2023-05-06');
 
 /*Table structure for table `login` */
 
@@ -266,9 +316,16 @@ CREATE TABLE `materials` (
   `materials` text,
   `date` date DEFAULT NULL,
   PRIMARY KEY (`mat_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 /*Data for the table `materials` */
+
+insert  into `materials`(`mat_id`,`sub_id`,`topic`,`materials`,`date`) values 
+(1,NULL,'ssss',NULL,NULL),
+(2,0,'hhh','storage_emulated_0_Empty_Freight_src_static_assets_img_clients_client-3.png','0000-00-00'),
+(3,0,'uuu','storage_emulated_0_Empty_Freight_src_static_assets_img_clients_client-3.png','0000-00-00'),
+(4,3,'hhh','storage_emulated_0_Empty_Freight_src_static_assets_img_clients_client-4.png','0000-00-00'),
+(5,2,'mm','storage_emulated_0_Pictures_Screenshots_Screenshot_20230504-085509.png','0000-00-00');
 
 /*Table structure for table `proposedplan` */
 
@@ -301,9 +358,36 @@ CREATE TABLE `questions` (
   `op4` varchar(25) DEFAULT NULL,
   `ans` varchar(25) DEFAULT NULL,
   PRIMARY KEY (`q_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `questions` */
+
+insert  into `questions`(`q_id`,`exam_id`,`question`,`op1`,`op2`,`op3`,`op4`,`ans`) values 
+(1,1,'bvbv','a','b','c','d','a'),
+(2,1,'efef','b','t','h','k','k');
+
+/*Table structure for table `result` */
+
+DROP TABLE IF EXISTS `result`;
+
+CREATE TABLE `result` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `qid` int(11) DEFAULT NULL,
+  `lid` int(11) DEFAULT NULL,
+  `ans` varchar(30) DEFAULT NULL,
+  `res` int(11) DEFAULT NULL,
+  `date` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+/*Data for the table `result` */
+
+insert  into `result`(`id`,`qid`,`lid`,`ans`,`res`,`date`) values 
+(1,1,1,'a',4,'2023-04-30'),
+(2,2,1,'k',4,'2023-04-30'),
+(3,1,4,'q',0,'2023-05-02'),
+(4,1,4,'c',0,'2023-05-06'),
+(5,2,4,'b',0,'2023-05-06');
 
 /*Table structure for table `student` */
 
@@ -327,7 +411,7 @@ CREATE TABLE `student` (
 /*Data for the table `student` */
 
 insert  into `student`(`stud_id`,`login_id`,`name`,`addmission no`,`smester`,`gender`,`dob`,`address`,`phone`,`jointdate`,`photo`) values 
-(1,4,'Ashique',123456,1,'male','2000-07-06','Wayanad',9876543211,'2023-03-01','Screenshot_1.png'),
+(1,4,'Ashique',123456,2,'male','2023-04-07','Wayanad',98766788,'2019-04-26','Screenshot_1.png'),
 (3,9,'Nihad',16665,2,'male','2023-04-07','korome',9874563211,'2023-04-26','Screenshot_1.png');
 
 /*Table structure for table `subject` */
@@ -356,11 +440,23 @@ DROP TABLE IF EXISTS `survey`;
 
 CREATE TABLE `survey` (
   `sur_id` int(5) NOT NULL AUTO_INCREMENT,
-  `survey questions` varchar(15) DEFAULT NULL,
+  `survey questions` varchar(100) DEFAULT NULL,
+  `op1` varchar(100) DEFAULT NULL,
+  `op2` varchar(100) DEFAULT NULL,
+  `op3` varchar(100) DEFAULT NULL,
+  `op4` varchar(100) DEFAULT NULL,
+  `ans` varchar(100) DEFAULT NULL,
+  `date` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`sur_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 /*Data for the table `survey` */
+
+insert  into `survey`(`sur_id`,`survey questions`,`op1`,`op2`,`op3`,`op4`,`ans`,`date`) values 
+(1,'fgbfgf','1','2','3','4','1','2023-04-30'),
+(2,'dddddd','2','3','4','5','5',NULL),
+(3,'hhh','hh','kkk','nnn','nnn','kkk','2023-05-02'),
+(4,'hhh','hh','kkk','nnn','nnn','kkk','2023-05-02');
 
 /*Table structure for table `survey_response` */
 
@@ -370,12 +466,26 @@ CREATE TABLE `survey_response` (
   `surres_id` int(5) NOT NULL AUTO_INCREMENT,
   `sur_id` int(5) DEFAULT NULL,
   `stud_id` int(5) DEFAULT NULL,
-  `sub_id` int(5) DEFAULT NULL,
+  `mark` int(5) DEFAULT NULL,
   `response` varchar(25) DEFAULT NULL,
   PRIMARY KEY (`surres_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 /*Data for the table `survey_response` */
+
+insert  into `survey_response`(`surres_id`,`sur_id`,`stud_id`,`mark`,`response`) values 
+(1,1,4,0,'1'),
+(2,1,4,1,'1'),
+(3,2,4,5,'1'),
+(4,1,4,1,'1'),
+(5,2,4,1,'5'),
+(6,1,4,0,'2'),
+(7,2,4,0,'3'),
+(8,3,4,1,'kkk'),
+(9,1,4,1,'1'),
+(10,2,4,0,'2'),
+(11,3,4,0,'hh'),
+(12,4,4,0,'hh');
 
 /*Table structure for table `teacher` */
 
@@ -398,7 +508,7 @@ CREATE TABLE `teacher` (
 
 insert  into `teacher`(`t_id`,`login_id`,`name`,`qualification`,`designation`,`gender`,`age`,`phone`,`photo`) values 
 (1,'2','Vasudevan','MCA','Assistant professor','male',45,7894561233,'Screenshot_1.png'),
-(2,'3','Geevar','MCA','Assistant Professor','male',46,456789123334,'Screenshot_1.png');
+(2,'3','Geevar','MSC','Assistant Professor','male',46,456789123334,'storage_emulated_0_Empty_Freight_src_static_assets_img_clients_client-2.png');
 
 /*Table structure for table `time_table` */
 
@@ -515,13 +625,16 @@ CREATE TABLE `up_assignment` (
   `up_id` int(5) NOT NULL AUTO_INCREMENT,
   `ass_id` int(5) DEFAULT NULL,
   `stud_id` int(5) DEFAULT NULL,
-  `date upload` date DEFAULT NULL,
-  `data` text,
+  `file` varchar(100) DEFAULT NULL,
+  `data` varchar(10) DEFAULT NULL,
   `marks` bigint(50) DEFAULT NULL,
   PRIMARY KEY (`up_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 /*Data for the table `up_assignment` */
+
+insert  into `up_assignment`(`up_id`,`ass_id`,`stud_id`,`file`,`data`,`marks`) values 
+(1,2,4,'storage_emulated_0_DCIM_Camera_IMG_20230504_162522.jpg','2023-05-06',0);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

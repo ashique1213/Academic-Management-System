@@ -5,6 +5,22 @@ from werkzeug.utils import secure_filename
 app=Flask(__name__)
 app.secret_key='111'
 from src.dbconnectionnew import *
+import functools
+
+def login_required(func):
+    @functools.wraps(func)
+    def secure_function():
+        if "lid" not in session:
+            return render_template('loginindex.html')
+        return func()
+
+    return secure_function
+
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect('/')
 
 @app.route('/')
 def login():
@@ -25,6 +41,7 @@ def login_code():
         return '''<script> alert ("username");window.location ="/" </script>'''
 
     elif res ['type']== 'admin':
+        session['lid']=res['login id']
         return redirect('/hod')
 
     else:
@@ -33,16 +50,19 @@ def login_code():
 
 
 @app.route('/hod')
+@login_required
 def hod():
     return render_template("hodindex.html")
 
 
 @app.route('/timetable')
+@login_required
 def timetable():
     return render_template("/timetable.html")
 
 
 @app.route('/tt1',methods=['post'])
+@login_required
 def tt1():
     sem=request.form['s']
     qry="SELECT `time_table`.*,`subject`.`subject name`  FROM `subject` JOIN `time_table` ON `time_table`.`sub_id`=`subject`.`subj_id` WHERE `time_table`.`semester`=%s"
@@ -69,6 +89,8 @@ def tt1():
 
 
 @app.route('/ttedit',methods=['post'])
+
+@login_required
 def ttedit():
     sem=session['sem']
     qry="SELECT `time_table`.*,`subject`.`subject name`  FROM `subject` JOIN `time_table` ON `time_table`.`sub_id`=`subject`.`subj_id` WHERE `time_table`.`semester`=%s"
@@ -92,6 +114,7 @@ def ttedit():
 
 
 @app.route('/tt2',methods=['post'])
+@login_required
 def tt2():
         day=['Monday','Tuesday','Wednesday','Thursday','Friday']
         for i in day:
@@ -105,6 +128,7 @@ def tt2():
 
 
 @app.route('/tt_update',methods=['post'])
+@login_required
 def tt_update():
         day=['Monday','Tuesday','Wednesday','Thursday','Friday']
         for i in day:
@@ -117,11 +141,17 @@ def tt_update():
 
 
 @app.route('/addfees',methods=['post'])
+@login_required
 def addfees():
     return render_template("add fee.html")
 
+@app.route('/indexfor',methods=['post'])
+@login_required
+def indexfor():
+    return render_template("indexfor allll.html")
 
 @app.route('/addfees1',methods=['post'])
+@login_required
 def addfees1():
     title = request.form['textfield22']
     sem = request.form['select']
@@ -135,6 +165,7 @@ def addfees1():
 
 
 @app.route('/addfeedettails',methods=['post'])
+@login_required
 def addfeedetails():
     qry="SELECT * FROM `fee`"
     res=selectall(qry)
@@ -143,6 +174,7 @@ def addfeedetails():
     return render_template("add fee details.html",val=res,v=re)
 
 @app.route('/addfeedettails1',methods=['post'])
+@login_required
 def addfeedetails1():
     title = request.form['select2']
     stdname = request.form['select3']
@@ -158,6 +190,7 @@ def addfeedetails1():
 
 
 @app.route('/addstudent',methods=['post'])
+@login_required
 def addstudent():
     name = request.form['textfield']
     addno = request.form['textfield2']
@@ -182,15 +215,18 @@ def addstudent():
 
 
 @app.route('/addst',methods=['get','post'])
+@login_required
 def addst():
     return render_template("add student.html")
 
 @app.route('/addteacher',methods=['post'])
+@login_required
 def addteacher():
     return render_template("add teacher.html")
 
 
 @app.route('/addteacher1',methods=['post'])
+@login_required
 def addteacher1():
    name=request.form['textfield']
    quali=request.form['textfield2']
@@ -213,10 +249,12 @@ def addteacher1():
 
 
 @app.route('/addsubject',methods=['post'])
+@login_required
 def addsubject():
     return render_template("add subject.html")
 
 @app.route('/addsubject1',methods=['post'])
+@login_required
 def addsubject1():
     subjname = request.form['textfield']
     sem = request.form['select']
@@ -227,10 +265,12 @@ def addsubject1():
     return '''<script>alert("success");window.location="/viewsubject#about"</script>'''
 
 @app.route('/addanoucement',methods=['post'])
+@login_required
 def addanoucement():
     return render_template("addanoucement.html")
 
 @app.route('/addanoucement1',methods=['post'])
+@login_required
 def addanoucement1():
     an = request.form['textfield']
     qr = "INSERT INTO `anoucement` VALUES(NULL,%s,curdate())"
@@ -239,60 +279,84 @@ def addanoucement1():
     return '''<script>alert("success");window.location="/viewannouncement#about"</script>'''
 
 @app.route('/viewannouncement')
+@login_required
 def viewannouncement():
     qry = "SELECT * FROM anoucement "
     res = selectall(qry)
     return render_template("viewannouncement.html",val=res)
 
 @app.route('/viewsubject')
+@login_required
 def viewsubject():
     qry = "SELECT * FROM subject "
     res = selectall(qry)
     return render_template("view subject.html",val=res)
 
 @app.route('/viewfee')
+@login_required
 def viewfee():
     qry = "SELECT * FROM fee"
     res = selectall(qry)
     return render_template("view fee.html",val=res)
 
 @app.route('/viewfeedetails')
+@login_required
 def viewfeedetails():
      qry = "SELECT * FROM `fee details` JOIN `fee` ON `fee details`.f_id=`fee`.f_id JOIN `student` ON `fee details`.stud_id=`student`.login_id"
      res=selectall(qry)
      return render_template("view fee details.html",val=res)
 
 @app.route('/viewteacher')
+@login_required
 def viewteacher():
     qry="SELECT * FROM teacher "
     res=selectall(qry)
     return render_template("view teacher.html",val=res)
 
 @app.route('/viewstudents')
+@login_required
 def viewstudents():
     qry = "SELECT * FROM student"
     res = selectall(qry)
     return render_template("view students.html",val=res)
 
 @app.route('/viewfeedback')
+@login_required
 def viewfeedback():
-    qry = "SELECT * FROM feed_response JOIN SUBJECT ON feed_response .sub_id=`subject`.subj_id"
+    qry = "SELECT * FROM `teacher`"
     res = selectall(qry)
     return render_template("view feedback.html",val=res)
 
+
+@app.route('/viewfeedback1',methods=['post'])
+@login_required
+def viewfeedback1():
+    sid=request.form['select']
+    qry ="SELECT * FROM `feedback` WHERE`staff_id`=%s "
+    res = selectall2(qry,sid)
+    q = "SELECT * FROM `teacher`"
+    r = selectall(q)
+    return render_template("view feedback.html",v=res,val=r)
+
+
+
+
 @app.route('/viewsurvey')
+@login_required
 def viewsurvey():
-    qry = "SELECT * FROM survey_response JOIN SUBJECT ON survey_response .sub_id=`subject`.subj_id"
+    qry = "SELECT * FROM `survey`"
     res = selectall(qry)
     return render_template("view survey.html",val=res)
 
 @app.route('/viewassignsub')
+@login_required
 def viewassignsub():
     qry ="SELECT  `assignsub`.*,`teacher`.`name`,`subject`.`subject name` FROM `assignsub` JOIN `subject`ON `subject`.`subj_id`=`assignsub`.`sub_id` JOIN `teacher`ON `teacher`.`login_id`=`assignsub`.`t_id`"
     res = selectall(qry)
     return render_template("viewassignsub.html",val=res)
 
 @app.route('/assignsub',methods=['post'])
+@login_required
 def assignsub():
     qry = "SELECT * FROM `teacher`"
     res = selectall(qry)
@@ -301,6 +365,7 @@ def assignsub():
     return render_template("assignsub.html",data=res1,val=res)
 
 @app.route('/assignsub1',methods=['post'])
+@login_required
 def assignsub1():
     teachername = request.form['select']
     sub = request.form['select2']
@@ -311,6 +376,7 @@ def assignsub1():
 
 
 @app.route('/editteacher')
+@login_required
 def editteacher():
     id=request.args.get('id')
     session['tid']=id
@@ -320,6 +386,7 @@ def editteacher():
 
 
 @app.route('/deleteteacher')
+@login_required
 def deleteteacher():
     id=request.args.get('id')
     qry = "delete from `teacher` where  login_id=%s"
@@ -328,6 +395,7 @@ def deleteteacher():
 
 
 @app.route('/updateteacher',methods=['post'])
+@login_required
 def updateteacher():
     try:
        name=request.form['textfield']
@@ -357,6 +425,7 @@ def updateteacher():
 
 
 @app.route('/editstudent')
+@login_required
 def editstudent():
     id=request.args.get('id')
     session['stid']=id
@@ -365,6 +434,7 @@ def editstudent():
     return render_template("editstudent.html",val=res)
 
 @app.route('/deletestudent')
+@login_required
 def deletestudent():
     id=request.args.get('id')
     qry = "delete from `student` where  login_id=%s"
@@ -372,6 +442,7 @@ def deletestudent():
     return  '''<script>alert("success");window.location="/viewstudents#about"</script>'''
 
 @app.route('/updatestudent',methods=['post'])
+@login_required
 def updatestudent():
     try:
         name = request.form['textfield']
@@ -404,6 +475,7 @@ def updatestudent():
         return '''<script>alert("success");window.location="/viewstudents#about"</script>'''
 
 @app.route('/editsubject')
+@login_required
 def editsubject():
     id=request.args.get('id')
     session['sid']=id
@@ -412,6 +484,7 @@ def editsubject():
     return render_template("editsubject.html",val=res)
 
 @app.route('/deletesubject')
+@login_required
 def deletesubject():
     id=request.args.get('id')
     qry = "delete from `subject` where  subj_id=%s"
@@ -419,6 +492,7 @@ def deletesubject():
     return  '''<script>alert("success");window.location="/viewsubject#about"</script>'''
 
 @app.route('/updatesubject',methods=['post'])
+@login_required
 def updatesubject():
     subjname = request.form['textfield']
     sem = request.form['select']
@@ -429,6 +503,7 @@ def updatesubject():
     return '''<script>alert("success");window.location="/viewsubject#about"</script>'''
 
 @app.route('/editassignsub')
+@login_required
 def editassignsub():
     id=request.args.get('id')
     session['asid']=id
@@ -442,6 +517,7 @@ def editassignsub():
     return render_template("editassignsub.html",vall=ress,val=res,data=res1)
 
 @app.route('/deleteassignsub')
+@login_required
 def deleteassignsub():
     id=request.args.get('id')
     qry = "delete from `assignsub` where  assign_id=%s"
@@ -449,6 +525,7 @@ def deleteassignsub():
     return  '''<script>alert("success");window.location="/viewassignsub#about"</script>'''
 
 @app.route('/updateassignsub',methods=['post'])
+@login_required
 def updateassignsub():
     teachername = request.form['select']
     sub = request.form['select2']
@@ -459,6 +536,7 @@ def updateassignsub():
 
 
 @app.route('/editfee')
+@login_required
 def editfee():
     id=request.args.get('id')
     session['fid']=id
@@ -467,6 +545,7 @@ def editfee():
     return render_template("editfee.html",val=res)
 
 @app.route('/deletefee')
+@login_required
 def deletefee():
     id=request.args.get('id')
     qry = "delete from `fee` where  f_id=%s"
@@ -474,6 +553,7 @@ def deletefee():
     return  '''<script>alert("success");window.location="/viewfee#about"</script>'''
 
 @app.route('/updatefee',methods=['post'])
+@login_required
 def updatefee():
     sem = request.form['select']
     amount = request.form['textfield']
@@ -495,6 +575,7 @@ def deletefeedetails():
 
 
 @app.route('/editfeedetails')
+@login_required
 def editfeedetails():
     id=request.args.get('id')
     session['fdid']=id
@@ -508,6 +589,7 @@ def editfeedetails():
 
 
 @app.route('/updatefeedetails',methods=['post'])
+@login_required
 def updatefeedetails():
     title = request.form['select2']
     stdname = request.form['select3']
@@ -521,6 +603,7 @@ def updatefeedetails():
     return '''<script>alert("success");window.location="/viewfeedetails#about"</script>'''
 
 @app.route('/editanoucement')
+@login_required
 def editanoucement():
     id=request.args.get('id')
     session['anid']=id
@@ -530,6 +613,7 @@ def editanoucement():
 
 
 @app.route('/updatanoucement',methods=['post'])
+@login_required
 def updatanoucement():
     an = request.form['textfield']
     qry = "UPDATE `anoucement` SET `anouncement`=%s where `an_id`=%s"
@@ -538,6 +622,7 @@ def updatanoucement():
     return '''<script>alert("success");window.location="/viewannouncement#about"</script>'''
 
 @app.route('/deleteanoucement')
+@login_required
 def deleteanoucement():
     id=request.args.get('id')
     qry = "delete from `anoucement` where  an_id=%s"
