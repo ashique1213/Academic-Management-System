@@ -4,12 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -27,20 +27,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class STDviewexam extends AppCompatActivity implements AdapterView.OnItemClickListener {
-
+public class stdviewstaff extends AppCompatActivity implements AdapterView.OnItemClickListener {
     ListView l1;
     SharedPreferences sh;
-    ArrayList<String> Subject,Topic,dateofsub;
-    String url;
+    ArrayList<String> topic,materials,mmid;
+    String url,mid ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_stdviewexam);
-        l1=findViewById(R.id.list7);
+        setContentView(R.layout.activity_stdviewstaff);
+        l1=findViewById(R.id.list3);
         sh= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        url ="http://"+sh.getString("ip", "") + ":5000/ssviewtexam";
-        RequestQueue queue = Volley.newRequestQueue(STDviewexam.this);
+        url ="http://"+sh.getString("ip", "") + ":5000/viewstaff";
+        RequestQueue queue = Volley.newRequestQueue(stdviewstaff.this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {
             @Override
@@ -50,25 +50,26 @@ public class STDviewexam extends AppCompatActivity implements AdapterView.OnItem
                 try {
 
                     JSONArray ar=new JSONArray(response);
-                    Subject= new ArrayList<>();
-                    Topic= new ArrayList<>();
-                    dateofsub= new ArrayList<>();
+//                    Toast.makeText(STDstudymaterials.this, ""+response, Toast.LENGTH_SHORT).show();
+                    ArrayList<String> topic,materials;
+                    topic= new ArrayList<>();
+                    mmid= new ArrayList<>();
+                    materials= new ArrayList<>();
 
                     for(int i=0;i<ar.length();i++)
                     {
                         JSONObject jo=ar.getJSONObject(i);
-                        Subject.add(jo.getString("exam_id"));
-                        dateofsub.add(jo.getString("date"));
-                        Topic.add(jo.getString("topic"));
-
+                        topic.add(jo.getString("name"));
+                        materials.add(jo.getString("qualification"));
+                        mmid.add(jo.getString("login_id"));
 
                     }
 
-                     ArrayAdapter<String> ad=new ArrayAdapter<>(STDviewexam.this,android.R.layout.simple_list_item_1,Topic);
-                    l1.setAdapter(ad);
+                    // ArrayAdapter<String> ad=new ArrayAdapter<>(Home.this,android.R.layout.simple_list_item_1,name);
+                    //lv.setAdapter(ad);
 
-//                    l1.setAdapter(new Custom(viewuser.this,name,place));
-                    l1.setOnItemClickListener(STDviewexam.this);
+                    l1.setAdapter(new custion2forall(stdviewstaff.this,topic,materials));
+                    l1.setOnItemClickListener(stdviewstaff.this);
 
                 } catch (Exception e) {
                     Log.d("=========", e.toString());
@@ -81,7 +82,7 @@ public class STDviewexam extends AppCompatActivity implements AdapterView.OnItem
                     @Override
                     public void onErrorResponse(VolleyError error) {
 
-                        Toast.makeText(STDviewexam.this, "err"+error, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(stdviewstaff.this, "err"+error, Toast.LENGTH_SHORT).show();
                     }
                 }) {
             @Override
@@ -92,17 +93,17 @@ public class STDviewexam extends AppCompatActivity implements AdapterView.OnItem
             }
         };
         queue.add(stringRequest);
-
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         SharedPreferences.Editor edp = sh.edit();
-        edp.putString("pid",Subject.get(position));
+        edp.putString("pid",mmid.get(position));
         edp.commit();
 
-        Intent ik = new Intent(getApplicationContext(), online_test.class);
-        ik.putExtra("pid",Subject.get(position));
+        Intent ik = new Intent(getApplicationContext(), online_testFEEDBACK.class);
+        ik.putExtra("pid",mmid.get(position));
         startActivity(ik);
+
     }
 }

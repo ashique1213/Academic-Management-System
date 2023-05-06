@@ -21,7 +21,7 @@ public class viewsurvey extends AppCompatActivity {
         setContentView(R.layout.activity_viewsurvey);
         r1=findViewById(R.id.radioButton);
         r2=findViewById(R.id.radioButton2);
-        r3=findViewById(R.id.radioButton4);
+        r3= findViewById(R.id.radioButton4);
         r4=findViewById(R.id.radioButton3);
         b1=findViewById(R.id.button15);
         b2=findViewById(R.id.button16);

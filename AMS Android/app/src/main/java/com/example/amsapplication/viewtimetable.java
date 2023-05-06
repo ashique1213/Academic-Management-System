@@ -5,11 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ListView;
 
 public class viewtimetable extends AppCompatActivity {
-    ListView l1;
+    WebView l1;
     SharedPreferences sh;
 
     @Override
@@ -17,6 +18,6 @@ public class viewtimetable extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viewtimetable);
         l1=findViewById(R.id.list19);
-        sh= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        sh=PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
     }
 }

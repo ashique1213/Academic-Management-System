@@ -2,8 +2,11 @@ package com.example.amsapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -27,20 +30,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class STDviewexam extends AppCompatActivity implements AdapterView.OnItemClickListener {
-
+public class STDVIEWFEDDSTATUS extends AppCompatActivity {
     ListView l1;
     SharedPreferences sh;
-    ArrayList<String> Subject,Topic,dateofsub;
+    ArrayList<String> feename,amount,amountpaid,amountdue,lastdate,status;
     String url;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_stdviewexam);
-        l1=findViewById(R.id.list7);
+        setContentView(R.layout.activity_stdviewfeddstatus);
+        l1=findViewById(R.id.list1);
         sh= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        url ="http://"+sh.getString("ip", "") + ":5000/ssviewtexam";
-        RequestQueue queue = Volley.newRequestQueue(STDviewexam.this);
+        url ="http://"+sh.getString("ip", "") + ":5000/viewfee1";
+        RequestQueue queue = Volley.newRequestQueue(STDVIEWFEDDSTATUS.this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {
             @Override
@@ -50,25 +52,31 @@ public class STDviewexam extends AppCompatActivity implements AdapterView.OnItem
                 try {
 
                     JSONArray ar=new JSONArray(response);
-                    Subject= new ArrayList<>();
-                    Topic= new ArrayList<>();
-                    dateofsub= new ArrayList<>();
+                    Toast.makeText(STDVIEWFEDDSTATUS.this, "fffff"+response, Toast.LENGTH_SHORT).show();
+                    feename= new ArrayList<>();
+                    amount= new ArrayList<>();
+                    amountpaid=new ArrayList<>();
+                    amountdue=new ArrayList<>();
+                    lastdate=new ArrayList<>();
+//                    status=new ArrayList<>();
 
                     for(int i=0;i<ar.length();i++)
                     {
                         JSONObject jo=ar.getJSONObject(i);
-                        Subject.add(jo.getString("exam_id"));
-                        dateofsub.add(jo.getString("date"));
-                        Topic.add(jo.getString("topic"));
-
+                        feename.add(jo.getString("f_id"));
+                        amount.add(jo.getString("amount paid"));
+                        amountpaid.add(jo.getString("amount due"));
+                        amountdue.add(jo.getString("date paid"));
+                        lastdate.add(jo.getString("status"));
+//                        status.add(jo.getString("description"));
 
                     }
+//
+//                     ArrayAdapter<String> ad=new ArrayAdapter<>(STDfeedetails.this,android.R.layout.simple_list_item_1,amount,amountpaid,amountdue,lastdate,status);
+//                    l1.setAdapter(ad);
 
-                     ArrayAdapter<String> ad=new ArrayAdapter<>(STDviewexam.this,android.R.layout.simple_list_item_1,Topic);
-                    l1.setAdapter(ad);
-
-//                    l1.setAdapter(new Custom(viewuser.this,name,place));
-                    l1.setOnItemClickListener(STDviewexam.this);
+                    l1.setAdapter(new custom4viewfeestatus(STDVIEWFEDDSTATUS.this,amount,amountpaid,amountdue,lastdate));
+//                    l1.setOnItemClickListener(STDfeedetails.this);
 
                 } catch (Exception e) {
                     Log.d("=========", e.toString());
@@ -81,12 +89,13 @@ public class STDviewexam extends AppCompatActivity implements AdapterView.OnItem
                     @Override
                     public void onErrorResponse(VolleyError error) {
 
-                        Toast.makeText(STDviewexam.this, "err"+error, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(STDVIEWFEDDSTATUS.this, "err"+error, Toast.LENGTH_SHORT).show();
                     }
                 }) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
+                params.put("rid",sh.getString("rid",""));
 
                 return params;
             }
@@ -95,14 +104,4 @@ public class STDviewexam extends AppCompatActivity implements AdapterView.OnItem
 
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        SharedPreferences.Editor edp = sh.edit();
-        edp.putString("pid",Subject.get(position));
-        edp.commit();
-
-        Intent ik = new Intent(getApplicationContext(), online_test.class);
-        ik.putExtra("pid",Subject.get(position));
-        startActivity(ik);
-    }
-}
+   }
