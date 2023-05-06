@@ -35,7 +35,7 @@
         <entry key="..\:/AMS Android/app/src/main/res/layout/activity_updateprofile.xml" value="0.1671195652173913" />
         <entry key="..\:/AMS Android/app/src/main/res/layout/activity_viewannoucement.xml" value="0.17074275362318841" />
         <entry key="..\:/AMS Android/app/src/main/res/layout/activity_viewassignment.xml" value="0.17074275362318841" />
-        <entry key="..\:/AMS Android/app/src/main/res/layout/activity_viewchat.xml" value="0.1671195652173913" />
+        <entry key="..\:/AMS Android/app/src/main/res/layout/activity_viewchat.xml" value="0.25" />
         <entry key="..\:/AMS Android/app/src/main/res/layout/activity_viewexam.xml" value="0.17074275362318841" />
         <entry key="..\:/AMS Android/app/src/main/res/layout/activity_viewfeedback.xml" value="0.17074275362318841" />
         <entry key="..\:/AMS Android/app/src/main/res/layout/activity_viewinternalmarks.xml" value="0.17074275362318841" />
@@ -46,6 +46,64 @@
         <entry key="..\:/AMS Android/app/src/main/res/layout/activity_viewsurvey.xml" value="0.17074275362318841" />
         <entry key="..\:/AMS Android/app/src/main/res/layout/activity_viewtimetable.xml" value="0.17074275362318841" />
         <entry key="..\:/AMS Android/app/src/main/res/layout/activity_viewtimetable_std.xml" value="0.1671195652173913" />
+        <entry key="..\:/Users/ELECTRONICS/Desktop/AMS Android/app/src/main/res/layout/activity_addassignment.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/ELECTRONICS/Desktop/AMS Android/app/src/main/res/layout/activity_addchat.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/ELECTRONICS/Desktop/AMS Android/app/src/main/res/layout/activity_addexam.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/ELECTRONICS/Desktop/AMS Android/app/src/main/res/layout/activity_addfeedback.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/ELECTRONICS/Desktop/AMS Android/app/src/main/res/layout/activity_addinternalmarks.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/ELECTRONICS/Desktop/AMS Android/app/src/main/res/layout/activity_addquestion.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/ELECTRONICS/Desktop/AMS Android/app/src/main/res/layout/activity_addstudymat.xml" value="0.1" />
+        <entry key="..\:/Users/ELECTRONICS/Desktop/AMS Android/app/src/main/res/layout/activity_addsurvey.xml" value="0.209375" />
+        <entry key="..\:/Users/ELECTRONICS/Desktop/AMS Android/app/src/main/res/layout/activity_attendancemark.xml" value="0.33" />
+        <entry key="..\:/Users/ELECTRONICS/Desktop/AMS Android/app/src/main/res/layout/activity_custion2forall.xml" value="0.1" />
+        <entry key="..\:/Users/ELECTRONICS/Desktop/AMS Android/app/src/main/res/layout/activity_custom2.xml" value="0.1" />
+        <entry key="..\:/Users/ELECTRONICS/Desktop/AMS Android/app/src/main/res/layout/activity_custom4.xml" value="0.209375" />
+        <entry key="..\:/Users/ELECTRONICS/Desktop/AMS Android/app/src/main/res/layout/activity_customforviewstudent.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/ELECTRONICS/Desktop/AMS Android/app/src/main/res/layout/activity_editdptea.xml" value="0.209375" />
+        <entry key="..\:/Users/ELECTRONICS/Desktop/AMS Android/app/src/main/res/layout/activity_home_student.xml" value="0.209375" />
+        <entry key="..\:/Users/ELECTRONICS/Desktop/AMS Android/app/src/main/res/layout/activity_home_teacher.xml" value="0.209375" />
+        <entry key="..\:/Users/ELECTRONICS/Desktop/AMS Android/app/src/main/res/layout/activity_stdstudymaterials.xml" value="0.1" />
+        <entry key="..\:/Users/ELECTRONICS/Desktop/AMS Android/app/src/main/res/layout/activity_stdviewattendance.xml" value="0.33" />
+        <entry key="..\:/Users/ELECTRONICS/Desktop/AMS Android/app/src/main/res/layout/activity_stdviewexam.xml" value="0.209375" />
+        <entry key="..\:/Users/ELECTRONICS/Desktop/AMS Android/app/src/main/res/layout/activity_stdviewprofile.xml" value="0.22" />
+        <entry key="..\:/Users/ELECTRONICS/Desktop/AMS Android/app/src/main/res/layout/activity_stdviewstaff.xml" value="0.1953125" />
+        <entry key="..\:/Users/ELECTRONICS/Desktop/AMS Android/app/src/main/res/layout/activity_uploadassigment.xml" value="0.209375" />
+        <entry key="..\:/Users/ELECTRONICS/Desktop/AMS Android/app/src/main/res/layout/activity_viewassignment.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/ELECTRONICS/Desktop/AMS Android/app/src/main/res/layout/activity_viewinternalmarks.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/ELECTRONICS/Desktop/AMS Android/app/src/main/res/layout/activity_viewprofile.xml" value="0.209375" />
+        <entry key="..\:/Users/ELECTRONICS/Desktop/AMS Android/app/src/main/res/layout/activity_viewstudents.xml" value="0.209375" />
+        <entry key="..\:/Users/ELECTRONICS/Desktop/AMS Android/app/src/main/res/layout/activity_viewtimetable.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/SIGNET/Desktop/AMS Android/app/src/main/res/layout/activity_addfeedback.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/SIGNET/Desktop/AMS Android/app/src/main/res/layout/activity_addstudymat.xml" value="0.33" />
+        <entry key="..\:/Users/SIGNET/Desktop/AMS Android/app/src/main/res/layout/activity_addsurvey.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/SIGNET/Desktop/AMS Android/app/src/main/res/layout/activity_main.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/SIGNET/Desktop/AMS Android/app/src/main/res/layout/activity_online_testfeedback.xml" value="0.1046875" />
+        <entry key="..\:/Users/SIGNET/Desktop/AMS Android/app/src/main/res/layout/activity_online_testsurvey.xml" value="0.1046875" />
+        <entry key="..\:/Users/SIGNET/Desktop/AMS Android/app/src/main/res/layout/activity_viewexam.xml" value="0.16304347826086957" />
+        <entry key="..\:/akhila/AMS Android/AMS Android/app/src/main/res/layout/activity_addassignment.xml" value="0.18" />
+        <entry key="..\:/akhila/AMS Android/AMS Android/app/src/main/res/layout/activity_addchat.xml" value="0.209375" />
+        <entry key="..\:/akhila/AMS Android/AMS Android/app/src/main/res/layout/activity_custom2.xml" value="0.209375" />
+        <entry key="..\:/akhila/AMS Android/AMS Android/app/src/main/res/layout/activity_custom3.xml" value="0.209375" />
+        <entry key="..\:/akhila/AMS Android/AMS Android/app/src/main/res/layout/activity_custom4.xml" value="0.209375" />
+        <entry key="..\:/akhila/AMS Android/AMS Android/app/src/main/res/layout/activity_custom4viewfeestatus.xml" value="0.209375" />
+        <entry key="..\:/akhila/AMS Android/AMS Android/app/src/main/res/layout/activity_editimage.xml" value="0.209375" />
+        <entry key="..\:/akhila/AMS Android/AMS Android/app/src/main/res/layout/activity_home_student.xml" value="0.209375" />
+        <entry key="..\:/akhila/AMS Android/AMS Android/app/src/main/res/layout/activity_home_teacher.xml" value="0.209375" />
+        <entry key="..\:/akhila/AMS Android/AMS Android/app/src/main/res/layout/activity_online_test.xml" value="0.209375" />
+        <entry key="..\:/akhila/AMS Android/AMS Android/app/src/main/res/layout/activity_payment.xml" value="0.209375" />
+        <entry key="..\:/akhila/AMS Android/AMS Android/app/src/main/res/layout/activity_stdaddchat.xml" value="0.209375" />
+        <entry key="..\:/akhila/AMS Android/AMS Android/app/src/main/res/layout/activity_stdfeedcustom.xml" value="0.209375" />
+        <entry key="..\:/akhila/AMS Android/AMS Android/app/src/main/res/layout/activity_stdfeedetails.xml" value="0.209375" />
+        <entry key="..\:/akhila/AMS Android/AMS Android/app/src/main/res/layout/activity_stdviewannoucement.xml" value="0.209375" />
+        <entry key="..\:/akhila/AMS Android/AMS Android/app/src/main/res/layout/activity_stdviewassignment.xml" value="0.209375" />
+        <entry key="..\:/akhila/AMS Android/AMS Android/app/src/main/res/layout/activity_stdviewfeddstatus.xml" value="0.1953125" />
+        <entry key="..\:/akhila/AMS Android/AMS Android/app/src/main/res/layout/activity_stdviewfeedback.xml" value="0.209375" />
+        <entry key="..\:/akhila/AMS Android/AMS Android/app/src/main/res/layout/activity_stdviewinternalmark.xml" value="0.209375" />
+        <entry key="..\:/akhila/AMS Android/AMS Android/app/src/main/res/layout/activity_stdviewprofile.xml" value="0.209375" />
+        <entry key="..\:/akhila/AMS Android/AMS Android/app/src/main/res/layout/activity_stdviewsubject.xml" value="0.209375" />
+        <entry key="..\:/akhila/AMS Android/AMS Android/app/src/main/res/layout/activity_stdviewsurvey.xml" value="0.209375" />
+        <entry key="..\:/akhila/AMS Android/AMS Android/app/src/main/res/layout/activity_viewassignment.xml" value="0.1" />
+        <entry key="..\:/akhila/AMS Android/AMS Android/app/src/main/res/layout/row_message.xml" value="0.209375" />
       </map>
     </option>
   </component>
