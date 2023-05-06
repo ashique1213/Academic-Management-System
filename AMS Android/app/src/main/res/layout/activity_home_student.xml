@@ -1,82 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    tools:context=".Home_student">
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:context=".Home_student">
+
 
     <Button
         android:id="@+id/button39"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:text="View Timetable" />
 
     <Button
         android:id="@+id/button38"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:text="View Subject" />
 
     <Button
         android:id="@+id/button40"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:text="Assignment" />
 
     <Button
         android:id="@+id/button41"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:text="Internal mark" />
 
     <Button
         android:id="@+id/button42"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:text="Exams" />
 
     <Button
         android:id="@+id/button43"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:text="Study Matrerials" />
 
     <Button
         android:id="@+id/button44"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:text="Feedback/Survey" />
+        android:text="Feedback" />
+
+    <Button
+        android:id="@+id/button19"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="Survey" />
 
     <Button
         android:id="@+id/button45"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:text="Attendance" />
 
     <Button
         android:id="@+id/button46"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:text="Annoucement" />
 
     <Button
         android:id="@+id/button47"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:text="fee details" />
 
     <Button
         android:id="@+id/button48"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:text="chat" />
 
     <Button
         android:id="@+id/button49"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:text="profile" />
 
+    <Button
+        android:id="@+id/button20"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="logout" />
+
 </LinearLayout>
+</ScrollView>
