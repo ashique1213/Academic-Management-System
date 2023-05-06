@@ -1,0 +1,45 @@
+<!--<!DOCTYPE html>-->
+<html lang="en">
+{% extends 'indexfor allll.html' %}
+{% block body %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<center>
+<body>
+<form method="post" action="tt2#about">
+<table border="1">
+<tr>
+        <th>Day/Hour</th>
+        <th>1</th>
+        <th>2</th>
+        <th>3</th>
+        <th>4</th>
+        <th>5</th>
+        <th>6</th>
+    </tr>
+    {% for i in day %}
+   <tr>
+       <td>{{i}}</td>
+       {% for j in range(0,6) %}
+       <td>
+            <select name="{{i}}{{j}}">
+           {% for ii in val%}
+         <option value="{{ii['subj_id']}}">{{ii['subject name']}}</option>
+           {% endfor %}  </select>
+       </td>
+       {% endfor %}
+   </tr>
+    {% endfor %}
+    <!--<tr>-->
+        <!--<td colspan="7" align="center">-->
+        <!--<input type="submit" value="Add">-->
+    <!--</tr>-->
+</table>
+</form>
+</body>
+    </center>
+<!--</html>-->
+{% endblock %}

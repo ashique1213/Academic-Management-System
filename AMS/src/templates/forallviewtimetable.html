@@ -1,0 +1,31 @@
+{% extends 'indexfor allll.html' %}
+{% block body %}
+<center>
+ <form method="post" action="/ttedit#about">
+<table border="1" >
+
+    {% for i in rr %}
+    <tr >
+        {% if i[0]=='Day/Hour' %}
+        {% for j in i %}
+        <th>{{j}}</th>
+        {% endfor %}
+        {% else %}
+        {% for j in i %}
+        <td>{{j}}</td>
+        {% endfor %}
+        {% endif %}
+    </tr>
+    {% endfor %}
+    <!--<tr>-->
+      <!--<td colspan="7" align="center"><label>-->
+        <!--&lt;!&ndash;<div >&ndash;&gt;-->
+          <!--&lt;!&ndash;<input type="submit" name="Submit" value="Edit" />&ndash;&gt;-->
+          <!--&lt;!&ndash;</div>&ndash;&gt;-->
+      <!--</label></td>-->
+    <!--</tr>-->
+</table>
+</form>
+    </center>
+
+{% endblock %}
