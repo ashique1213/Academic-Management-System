@@ -7,20 +7,30 @@
     android:orientation="vertical"
     tools:context=".viewstudents">
 
-    <TextView
-        android:id="@+id/textView2"
+    <TableRow
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Academic year" />
+        android:layout_height="wrap_content">
 
-    <Spinner
-        android:id="@+id/spinner2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="175dp"
+            android:layout_height="match_parent"
+            android:text="Academic year" />
 
-    <ListView
-        android:id="@+id/list20"
+        <Spinner
+            android:id="@+id/spinner2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </TableRow>
+
+    <TableRow
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent" >
+
+        <ListView
+            android:id="@+id/list20"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </TableRow>
 
 </LinearLayout>

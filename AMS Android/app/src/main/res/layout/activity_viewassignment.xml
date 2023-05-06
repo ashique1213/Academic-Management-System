@@ -17,20 +17,20 @@
 
         <TextView
             android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="103dp"
+            android:layout_height="match_parent"
             android:text="Topic" />
 
         <TextView
             android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="125dp"
+            android:layout_height="match_parent"
             android:text="Description" />
 
         <TextView
             android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="130dp"
+            android:layout_height="match_parent"
             android:text="Last date " />
 
     </TableRow>
@@ -40,7 +40,7 @@
         android:layout_height="600dp">
 
         <ListView
-            android:id="@+id/list13"
+            android:id="@+id/list16"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </TableRow>
@@ -55,6 +55,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Button" />
+            android:text="add" />
     </TableRow>
 </LinearLayout>
