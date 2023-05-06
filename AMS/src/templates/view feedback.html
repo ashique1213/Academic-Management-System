@@ -8,18 +8,39 @@
 </head>
 <center>
 <body>
-<form id="form1" name="form1" method="post" action="">
+<form id="form1" name="form1" method="post" action="viewfeedback1">
   <table width="200" border="1">
     <tr>
-      <th>Subject</th>
-      <th>Response</th>
-      <th>&nbsp;</th>
+      <td>staffname</td>
+      <td><select name="select">
+        {%for i in val %}
+        <option value="{{i['login_id']}}">{{i['name']}}</option>
+        {% endfor %}
+      </select>
+         <td colspan="2"><label>
+        <div align="center">
+          <input type="submit" name="Submit" value="SEARCH" />
+          </div>
+      </label></td></td>
     </tr>
-    {% for i in val %}
     <tr>
-      <td>{{i['subject name']}}</td>
-      <td>{{i['response']}}</td>
-      <td><a href="#">Delete</a></td>
+      <th>feedback</th>
+      <th>op1</th>
+      <th>&nbsp;op2</th>
+      <th>op3</th>
+      <th>op4</th>
+      <th>answer</th>
+      <th>date</th>
+    </tr>
+    {% for i in v %}
+    <tr>
+      <td>{{i['feed_questions']}}</td>
+      <td>{{i['op1']}}</td>
+      <td>{{i['op2']}}</td>
+      <td>{{i['op3']}}</td>
+      <td>{{i['op4']}}</td>
+      <td>{{i['ans']}}</td>
+      <td>{{i['date']}}</td>
     </tr>
     {% endfor %}
   </table>

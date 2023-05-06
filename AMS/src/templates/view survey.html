@@ -11,17 +11,26 @@
 <form id="form1" name="form1" method="post" action="">
   <table width="200" border="1">
     <tr>
-      <th>Subject</th>
-      <th>Response</th>
-      <th>&nbsp;</th>
+      <th>survey questions</th>
+      <th>op1</th>
+      <th>&nbsp;op2</th>
+      <th>op3</th>
+      <th>op4</th>
+      <th>answer</th>
+
     </tr>
     {% for i in val %}
     <tr>
-      <td>{{i['subject name']}}</td>
-      <td>{{i['response']}}</td>
-      <td><a href="#">Delete</a></td>
+      <td>{{i['survey questions']}}</td>
+      <td>{{i['op1']}}</td>
+      <td>{{i['op2']}}</td>
+      <td>{{i['op3']}}</td>
+      <td>{{i['op4']}}</td>
+      <td>{{i['ans']}}</td>
+
     </tr>
     {% endfor %}
+
   </table>
 </form>
 </body>
