@@ -5,17 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     tools:context=".addstudymat">
 
     <TableRow
         android:layout_width="match_parent"
+        android:gravity="center"
         android:layout_height="wrap_content" >
 
         <TextView
             android:id="@+id/textView32"
-            android:layout_width="wrap_content"
+            android:layout_width="137dp"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="subject" />
 
         <Spinner
             android:id="@+id/spinner7"
@@ -25,6 +27,7 @@
 
     <TableRow
         android:layout_width="match_parent"
+        android:gravity="center"
         android:layout_height="wrap_content" >
 
         <TextView
@@ -43,6 +46,7 @@
 
     <TableRow
         android:layout_width="match_parent"
+        android:gravity="center"
         android:layout_height="wrap_content" >
 
         <EditText
@@ -79,7 +83,8 @@
 
     <TableRow
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="wrap_content"
+        android:gravity="center">
 
         <Button
             android:id="@+id/button12"
