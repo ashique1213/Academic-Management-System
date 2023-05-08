@@ -152,67 +152,100 @@ public class STDviewprofile extends AppCompatActivity {
                 phone=e7.getText().toString();
 //                photo=e8.getText().toString();
                 dateofadd=e9.getText().toString();
+                if (name.equalsIgnoreCase(""))
+                {
+                    e1.setError("Enter name");
+                }
+                else if (addno.equalsIgnoreCase(""))
+                {
+                    e2.setError("Enter addno");
+                }
+                else if (sem.equalsIgnoreCase(""))
+                {
+                    e3.setError("Enter sem");
+                }
+                else if (gender.equalsIgnoreCase(""))
+                {
+                    e4.setError("Enter gender");
+                }
+                else if (dob.equalsIgnoreCase(""))
+                {
+                    e5.setError("Enter dob");
+                }
+                else if (address.equalsIgnoreCase(""))
+                {
+                    e6.setError("Enter address");
+                }
+                else if (phone.equalsIgnoreCase(""))
+                {
+                    e7.setError("Enter phone");
+                }
+                else if (dateofadd.equalsIgnoreCase(""))
+                {
+                    e9.setError("Enter date ");
+                }
 
-                RequestQueue queue = Volley.newRequestQueue(STDviewprofile.this);
-                String url = "http://" + sh.getString("ip","") + ":5000/editstdprofile";
+   else {
+                    RequestQueue queue = Volley.newRequestQueue(STDviewprofile.this);
+                    String url = "http://" + sh.getString("ip", "") + ":5000/editstdprofile";
 
-                // Request a string response from the provided URL.
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // Display the response string.
-                        Log.d("+++++++++++++++++", response);
-                        try {
-                            JSONObject json = new JSONObject(response);
-                            String res = json.getString("task");
+                    // Request a string response from the provided URL.
+                    StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            // Display the response string.
+                            Log.d("+++++++++++++++++", response);
+                            try {
+                                JSONObject json = new JSONObject(response);
+                                String res = json.getString("task");
 
-                            if (res.equalsIgnoreCase("success")) {
+                                if (res.equalsIgnoreCase("success")) {
 //                                String lid = json.getString("id");
 //                                String type = json.getString("type");
 //                                SharedPreferences.Editor edp = sh.edit();
 //                                edp.putString("lid", lid);
 //                                edp.commit();
-                                Intent ik = new Intent(getApplicationContext(), Home_student.class);
-                                startActivity(ik);
+                                    Intent ik = new Intent(getApplicationContext(), Home_student.class);
+                                    startActivity(ik);
 
-                            } else {
+                                } else {
 
-                                Toast.makeText(STDviewprofile.this, "Invalid username or password", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(STDviewprofile.this, "Invalid username or password", Toast.LENGTH_SHORT).show();
 
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+
+
                         }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
 
 
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(getApplicationContext(), "Error" + error, Toast.LENGTH_LONG).show();
+                        }
+                    }) {
+                        @Override
+                        protected Map<String, String> getParams() {
+                            Map<String, String> params = new HashMap<String, String>();
+                            params.put("name", name);
+                            params.put("ano", addno);
+                            params.put("sem", sem);
+                            params.put("gender", gender);
+                            params.put("dob", dob);
+                            params.put("add", address);
+                            params.put("ph", phone);
+                            params.put("doj", dateofadd);
+                            params.put("lid", sh.getString("lid", ""));
 
 
-                        Toast.makeText(getApplicationContext(), "Error" + error, Toast.LENGTH_LONG).show();
-                    }
-                }) {
-                    @Override
-                    protected Map<String, String> getParams() {
-                        Map<String, String> params = new HashMap<String, String>();
-                        params.put("name", name);
-                        params.put("ano", addno);
-                        params.put("sem", sem);
-                        params.put("gender", gender);
-                        params.put("dob", dob);
-                        params.put("add", address);
-                        params.put("ph", phone);
-                        params.put("doj", dateofadd);
-                        params.put("lid", sh.getString("lid",""));
-
-
-                        return params;
-                    }
-                };
-                queue.add(stringRequest);
-
+                            return params;
+                        }
+                    };
+                    queue.add(stringRequest);
+                }
             }
         });
 

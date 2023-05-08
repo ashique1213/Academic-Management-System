@@ -5,22 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".custion2forall">
+    tools:context=".customattendance">
 
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
         <TextView
-            android:id="@+id/textView52"
-            android:layout_width="200dp"
+            android:id="@+id/textView19"
+            android:layout_width="163dp"
             android:layout_height="wrap_content"
             android:text="TextView" />
 
-        <TextView
-            android:id="@+id/textView54"
-            android:layout_width="200dp"
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="present" />
     </TableRow>
 </LinearLayout>

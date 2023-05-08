@@ -24,6 +24,13 @@
         android:layout_height="wrap_content"
         android:text="Subject Planner" />
 
+
+        <Button
+            android:id="@+id/button50"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="add exam question" />
+
         <Button
             android:id="@+id/button24"
             android:layout_width="249dp"

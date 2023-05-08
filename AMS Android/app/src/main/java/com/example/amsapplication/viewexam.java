@@ -55,7 +55,7 @@ public class viewexam extends AppCompatActivity implements AdapterView.OnItemCli
                 try {
 
                     JSONArray ar=new JSONArray(response);
-                    Toast.makeText(viewexam.this, "ggg"+response, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(viewexam.this, "ggg"+response, Toast.LENGTH_SHORT).show();
                     ttid= new ArrayList<>();
                     subject= new ArrayList<>();
                     date= new ArrayList<>();

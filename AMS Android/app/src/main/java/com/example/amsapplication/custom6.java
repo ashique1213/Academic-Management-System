@@ -1,3 +1,5 @@
+
+
 package com.example.amsapplication;
 
 import android.content.Context;
@@ -10,17 +12,25 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class custom3 extends BaseAdapter{
+public class custom6 extends BaseAdapter {
     private Context context;
 
-    ArrayList<String> a,b,c;
+    ArrayList<String> a,b,c,d,e,f;
 
-    public custom3(Context applicationContext, ArrayList<String> a, ArrayList<String> b, ArrayList<String> c) {
+
+
+
+    public custom6(Context applicationContext, ArrayList<String> a, ArrayList<String> b, ArrayList<String> c, ArrayList<String> d, ArrayList<String> e, ArrayList<String> f) {
         // TODO Auto-generated constructor stub
         this.context=applicationContext;
         this.a=a;
         this.b=b;
         this.c=c;
+        this.d=d;
+        this.e=e;
+        this.f=f;
+
+
 
 
     }
@@ -58,7 +68,7 @@ public class custom3 extends BaseAdapter{
         if(convertview==null)
         {
             gridView=new View(context);
-            gridView=inflator.inflate(R.layout.activity_custom3, null);
+            gridView=inflator.inflate(R.layout.activity_custom6, null);
 
         }
         else
@@ -66,9 +76,14 @@ public class custom3 extends BaseAdapter{
             gridView=(View)convertview;
 
         }
-        TextView tv1=(TextView)gridView.findViewById(R.id.textView31);
-        TextView tv2=(TextView)gridView.findViewById(R.id.textView32);
-        TextView tv3=(TextView)gridView.findViewById(R.id.textView33);
+        TextView tv1=(TextView)gridView.findViewById(R.id.textView81);
+        TextView tv2=(TextView)gridView.findViewById(R.id.textView82);
+        TextView tv3=(TextView)gridView.findViewById(R.id.textView83);
+        TextView tv4=(TextView)gridView.findViewById(R.id.textView78);
+        TextView tv5=(TextView)gridView.findViewById(R.id.textView66);
+        TextView tv6=(TextView)gridView.findViewById(R.id.textView70);
+
+
 
 
 
@@ -76,12 +91,20 @@ public class custom3 extends BaseAdapter{
         tv1.setText(a.get(position));
         tv2.setText(b.get(position));
         tv3.setText(c.get(position));
+        tv4.setText(d.get(position));
+        tv5.setText(e.get(position));
+        tv6.setText(f.get(position));
+
 
 
 
         tv1.setTextColor(Color.BLACK);
         tv2.setTextColor(Color.BLACK);
         tv3.setTextColor(Color.BLACK);
+        tv4.setTextColor(Color.BLACK);
+        tv5.setTextColor(Color.BLACK);
+        tv6.setTextColor(Color.BLACK);
+
 
 
 
@@ -97,3 +120,5 @@ public class custom3 extends BaseAdapter{
     }
 
 }
+
+

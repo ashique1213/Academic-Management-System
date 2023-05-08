@@ -1,26 +1,35 @@
 package com.example.amsapplication;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class custom3 extends BaseAdapter{
+public class customattendance extends BaseAdapter{
     private Context context;
 
-    ArrayList<String> a,b,c;
+    ArrayList<String> a;
+    ArrayList<String> b;
+    SharedPreferences sh;
 
-    public custom3(Context applicationContext, ArrayList<String> a, ArrayList<String> b, ArrayList<String> c) {
+
+
+
+    public customattendance(Context applicationContext, ArrayList<String> a, ArrayList<String> b) {
         // TODO Auto-generated constructor stub
         this.context=applicationContext;
         this.a=a;
         this.b=b;
-        this.c=c;
+        sh= PreferenceManager.getDefaultSharedPreferences(context);
+
 
 
     }
@@ -58,7 +67,7 @@ public class custom3 extends BaseAdapter{
         if(convertview==null)
         {
             gridView=new View(context);
-            gridView=inflator.inflate(R.layout.activity_custom3, null);
+            gridView=inflator.inflate(R.layout.activity_customattendance, null);
 
         }
         else
@@ -66,22 +75,39 @@ public class custom3 extends BaseAdapter{
             gridView=(View)convertview;
 
         }
-        TextView tv1=(TextView)gridView.findViewById(R.id.textView31);
-        TextView tv2=(TextView)gridView.findViewById(R.id.textView32);
-        TextView tv3=(TextView)gridView.findViewById(R.id.textView33);
+        TextView tv1=(TextView)gridView.findViewById(R.id.textView19);
+        CheckBox cb=(CheckBox)gridView.findViewById(R.id.checkBox);
+
+
 
 
 
 
         tv1.setText(a.get(position));
-        tv2.setText(b.get(position));
-        tv3.setText(c.get(position));
+
 
 
 
         tv1.setTextColor(Color.BLACK);
-        tv2.setTextColor(Color.BLACK);
-        tv3.setTextColor(Color.BLACK);
+
+        cb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (cb.isChecked())
+                {
+                    String s=sh.getString("att","")+b.get(position)+",";
+                    SharedPreferences.Editor ed=sh.edit();
+                    ed.putString("att",s);
+                    ed.commit();
+                }
+                else {
+                    String s=sh.getString("att","").replace(","+b.get(position)+",",",");
+                    SharedPreferences.Editor ed=sh.edit();
+                    ed.putString("att",s);
+                    ed.commit();
+                }
+            }
+        });
 
 
 

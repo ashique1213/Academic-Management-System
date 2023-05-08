@@ -52,7 +52,7 @@ public class STDfeedetails extends AppCompatActivity implements AdapterView.OnIt
                 try {
 
                     JSONArray ar=new JSONArray(response);
-                    Toast.makeText(STDfeedetails.this, "fffff"+response, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(STDfeedetails.this, "fffff"+response, Toast.LENGTH_SHORT).show();
                     feename= new ArrayList<>();
                     amount= new ArrayList<>();
                     amountpaid=new ArrayList<>();

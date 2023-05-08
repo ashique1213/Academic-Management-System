@@ -36,7 +36,7 @@ public class addinternalmarks extends AppCompatActivity implements AdapterView.O
     Button b1;
     SharedPreferences sh;
     ArrayList<String> name,sid,subject,subid;
-    String subjectid,studentid,examname,mark,date,url1,url;
+    String subjectid,studentid,examname,mark,date,url1,url,stid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,59 +49,8 @@ public class addinternalmarks extends AppCompatActivity implements AdapterView.O
 
         b1=findViewById(R.id.button6);
         sh= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        url ="http://"+sh.getString("ip", "") + ":5000/viewstudents1";
-        RequestQueue queue = Volley.newRequestQueue(addinternalmarks.this);
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                // Display the response string.
-                Log.d("+++++++++++++++++",response);
-                try {
-
-                    JSONArray ar=new JSONArray(response);
-                    subid= new ArrayList<>();
-                    subject= new ArrayList<>();
-
-
-                    for(int i=0;i<ar.length();i++)
-                    {
-                        JSONObject jo=ar.getJSONObject(i);
-                        subid.add(jo.getString("login_id"));
-                        subject.add(jo.getString("name"));
-
-
-
-                    }
-
-                    ArrayAdapter<String> ad=new ArrayAdapter<>(addinternalmarks.this,android.R.layout.simple_list_item_1,subject);
-                    s2.setAdapter(ad);
-s2.setOnItemSelectedListener(addinternalmarks.this);
-//                    l1.setAdapter(new Custom(viewuser.this,name,place));
-//                    l1.setOnItemClickListener(viewuser.this);
-
-                } catch (Exception e) {
-                    Log.d("=========", e.toString());
-                }
-
-            }
-
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-                Toast.makeText(addinternalmarks.this, "err"+error, Toast.LENGTH_SHORT).show();
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-
-                return params;
-            }
-        };
-        queue.add(stringRequest);
-        url1 ="http://"+sh.getString("ip", "") + ":5000/ssviewtexam";
+        url1 ="http://"+sh.getString("ip", "") + ":5000/viewsubjectonlyforexam";
         RequestQueue queue1 = Volley.newRequestQueue(addinternalmarks.this);
 
         StringRequest stringRequest1 = new StringRequest(Request.Method.POST, url1,new Response.Listener<String>() {
@@ -119,9 +68,9 @@ s2.setOnItemSelectedListener(addinternalmarks.this);
                     for(int i=0;i<ar.length();i++)
                     {
                         JSONObject jo=ar.getJSONObject(i);
-                        name.add(jo.getString("topic"));
-                        sid.add(jo.getString("exam_id"));
 
+                        name.add(jo.getString("subject name"));
+                        sid.add(jo.getString("subj_id"));
 
                     }
 
@@ -148,6 +97,7 @@ s2.setOnItemSelectedListener(addinternalmarks.this);
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
+                params.put("lid",sh.getString("lid",""));
 
                 return params;
             }
@@ -161,72 +111,138 @@ s2.setOnItemSelectedListener(addinternalmarks.this);
 
 
                 mark=e2.getText().toString();
+                if (mark.equalsIgnoreCase(""))
+                {
+                    e2.setError("Enter first name");
+                }
+                {
+                    RequestQueue queue = Volley.newRequestQueue(addinternalmarks.this);
+                    url = "http://" + sh.getString("ip", "") + ":5000/addinternal";
 
+                    // Request a string response from the provided URL.
+                    StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            // Display the response string.
+                            Log.d("+++++++++++++++++", response);
+                            try {
+                                JSONObject json = new JSONObject(response);
+                                String res = json.getString("task");
 
-                RequestQueue queue = Volley.newRequestQueue(addinternalmarks.this);
-                url = "http://" + sh.getString("ip","") + ":5000/addinternal";
-
-                // Request a string response from the provided URL.
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // Display the response string.
-                        Log.d("+++++++++++++++++", response);
-                        try {
-                            JSONObject json = new JSONObject(response);
-                            String res = json.getString("task");
-
-                            if (res.equalsIgnoreCase("success")) {
+                                if (res.equalsIgnoreCase("success")) {
 //                                String lid = json.getString("id");
 //                                String type = json.getString("type");
 //                                SharedPreferences.Editor edp = sh.edit();
 //                                edp.putString("lid", lid);
 //                                edp.commit();
-                                Toast.makeText(addinternalmarks.this, "success", Toast.LENGTH_SHORT).show();
-                                Intent ik = new Intent(getApplicationContext(), viewinternalmarks.class);
-                                startActivity(ik);
+                                    Toast.makeText(addinternalmarks.this, "success", Toast.LENGTH_SHORT).show();
+                                    Intent ik = new Intent(getApplicationContext(), viewinternalmarks.class);
+                                    startActivity(ik);
 
-                            } else {
+                                } else {
 
-                                Toast.makeText(addinternalmarks.this, "Invalid username or password", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(addinternalmarks.this, "Invalid username or password", Toast.LENGTH_SHORT).show();
 
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+
+
                         }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
 
 
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(getApplicationContext(), "Error" + error, Toast.LENGTH_LONG).show();
+                        }
+                    }) {
+                        @Override
+                        protected Map<String, String> getParams() {
+                            Map<String, String> params = new HashMap<String, String>();
 
+                            params.put("mark", mark);
 
-                        Toast.makeText(getApplicationContext(), "Error" + error, Toast.LENGTH_LONG).show();
-                    }
-                }) {
-                    @Override
-                    protected Map<String, String> getParams() {
-                        Map<String, String> params = new HashMap<String, String>();
+                            params.put("eid", subjectid);
+                            params.put("sid", stid);
 
-                        params.put("mark", mark);
-
-                        params.put("eid", subjectid);
-                        params.put("sid", studentid);
-
-                        return params;
-                    }
-                };
-                queue.add(stringRequest);
+                            return params;
+                        }
+                    };
+                    queue.add(stringRequest);
+                }
             }
         });
 
     }
 
     @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        studentid=subid.get(i);
-        subjectid=sid.get(i);
+    public void onItemSelected(AdapterView<?> parent, View view, int i, long l) {
+
+        subjectid = sid.get(i);
+
+
+        if (parent==s1) {
+
+
+
+            url = "http://" + sh.getString("ip", "") + ":5000/viewstudents1";
+            RequestQueue queue = Volley.newRequestQueue(addinternalmarks.this);
+
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    // Display the response string.
+                    Log.d("+++++++++++++++++", response);
+                    try {
+
+                        JSONArray ar = new JSONArray(response);
+                        subid = new ArrayList<>();
+                        subject = new ArrayList<>();
+
+
+                        for (int i = 0; i < ar.length(); i++) {
+                            JSONObject jo = ar.getJSONObject(i);
+                            subid.add(jo.getString("login_id"));
+                            subject.add(jo.getString("name"));
+
+
+                        }
+
+                        ArrayAdapter<String> ad = new ArrayAdapter<>(addinternalmarks.this, android.R.layout.simple_list_item_1, subject);
+                        s2.setAdapter(ad);
+                        s2.setOnItemSelectedListener(addinternalmarks.this);
+//                    l1.setAdapter(new Custom(viewuser.this,name,place));
+//                    l1.setOnItemClickListener(viewuser.this);
+
+                    } catch (Exception e) {
+                        Log.d("=========", e.toString());
+                    }
+
+                }
+
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                    Toast.makeText(addinternalmarks.this, "err" + error, Toast.LENGTH_SHORT).show();
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("sid",subjectid);
+
+                    return params;
+                }
+            };
+            queue.add(stringRequest);
+        }
+        else{
+            stid=subid.get(i);
+
+        }
     }
 
     @Override

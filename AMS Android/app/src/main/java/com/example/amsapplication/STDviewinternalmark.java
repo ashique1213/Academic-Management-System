@@ -46,9 +46,9 @@ public class STDviewinternalmark extends AppCompatActivity {
                 try {
 
                     JSONArray ar=new JSONArray(response);
-                    Toast.makeText(STDviewinternalmark.this, "ddd"+response, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(STDviewinternalmark.this, "ddd"+response, Toast.LENGTH_SHORT).show();
                     Subject= new ArrayList<>();
-                    Exam= new ArrayList<>();
+
                     mark= new ArrayList<>();
                     date=new ArrayList<>();
 
@@ -56,7 +56,7 @@ public class STDviewinternalmark extends AppCompatActivity {
                     {
                         JSONObject jo=ar.getJSONObject(i);
                         Subject.add(jo.getString("subject name"));
-                        Exam.add(jo.getString("topic"));
+
                         mark.add(jo.getString("mark"));
                         date.add(jo.getString("date"));
 
@@ -66,7 +66,7 @@ public class STDviewinternalmark extends AppCompatActivity {
                     // ArrayAdapter<String> ad=new ArrayAdapter<>(Home.this,android.R.layout.simple_list_item_1,name);
                     //lv.setAdapter(ad);
 
-                    l1.setAdapter(new custom4(STDviewinternalmark.this,Subject,Exam,mark,date));
+                    l1.setAdapter(new custom3(STDviewinternalmark.this,Subject,mark,date));
 //                    l1.setOnItemClickListener(viewuser.this);
 
                 } catch (Exception e) {

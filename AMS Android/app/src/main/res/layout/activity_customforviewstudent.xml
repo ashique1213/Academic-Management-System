@@ -13,7 +13,7 @@
 
         <TextView
             android:id="@+id/textView86"
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:text="Name" />
 
@@ -30,9 +30,9 @@
 
         <TextView
             android:id="@+id/textView87"
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:text="Addmisssion NO" />
+            android:text="Ad NO" />
 
         <TextView
             android:id="@+id/textView2"
@@ -48,7 +48,7 @@
 
         <TextView
             android:id="@+id/textView88"
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:text="Semester" />
 
@@ -66,7 +66,7 @@
 
         <TextView
             android:id="@+id/textView89"
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:text="Gender" />
 
@@ -83,7 +83,7 @@
 
         <TextView
             android:id="@+id/textView90"
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:text="DOB" />
 
@@ -100,7 +100,7 @@
 
         <TextView
             android:id="@+id/textView91"
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:text="Address" />
 
@@ -117,7 +117,7 @@
 
         <TextView
             android:id="@+id/textView92"
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:text="Phone" />
         <TextView
@@ -132,14 +132,14 @@
 
         <TextView
             android:id="@+id/textView93"
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:text="Photo" />
 
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_height="200dp"
             tools:srcCompat="@tools:sample/avatars" />
 
 
@@ -151,7 +151,7 @@
 
         <TextView
             android:id="@+id/textView94"
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:text="Date of join" />
 

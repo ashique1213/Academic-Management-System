@@ -55,7 +55,7 @@ public class STDaddchat extends AppCompatActivity implements AdapterView.OnItemC
                 try {
 
                     JSONArray ar=new JSONArray(response);
-                    Toast.makeText(STDaddchat.this, "fffff"+response, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(STDaddchat.this, "fffff"+response, Toast.LENGTH_SHORT).show();
                    feename= new ArrayList<>();
                   amount= new ArrayList<>();
 

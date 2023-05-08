@@ -118,28 +118,25 @@
 
     </TableRow>
 
+
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center">
 
         <TextView
-            android:id="@+id/textView47"
+            android:id="@+id/textView59"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="anser" />
+            android:text="last date" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName26"
+            android:id="@+id/editTextTextPersonName9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:gravity="center"
             android:inputType="textPersonName" />
-
     </TableRow>
-
 
     <TableRow
         android:layout_width="wrap_content"

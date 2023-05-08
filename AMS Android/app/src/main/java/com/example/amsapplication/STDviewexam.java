@@ -31,7 +31,7 @@ public class STDviewexam extends AppCompatActivity implements AdapterView.OnItem
 
     ListView l1;
     SharedPreferences sh;
-    ArrayList<String> Subject,Topic,dateofsub;
+    ArrayList<String> Subject,Topic,dateofsub,time;
     String url;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +53,7 @@ public class STDviewexam extends AppCompatActivity implements AdapterView.OnItem
                     Subject= new ArrayList<>();
                     Topic= new ArrayList<>();
                     dateofsub= new ArrayList<>();
+                    time= new ArrayList<>();
 
                     for(int i=0;i<ar.length();i++)
                     {
@@ -60,6 +61,7 @@ public class STDviewexam extends AppCompatActivity implements AdapterView.OnItem
                         Subject.add(jo.getString("exam_id"));
                         dateofsub.add(jo.getString("date"));
                         Topic.add(jo.getString("topic"));
+                        time.add(jo.getString("time"));
 
 
                     }
@@ -103,6 +105,7 @@ public class STDviewexam extends AppCompatActivity implements AdapterView.OnItem
 
         Intent ik = new Intent(getApplicationContext(), online_test.class);
         ik.putExtra("pid",Subject.get(position));
+        ik.putExtra("time",time.get(position));
         startActivity(ik);
     }
 }

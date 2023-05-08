@@ -50,7 +50,7 @@ public class STDviewassignment extends AppCompatActivity implements AdapterView.
                 try {
 
                     JSONArray ar = new JSONArray(response);
-                    Toast.makeText(STDviewassignment.this, "ccccc"+response, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(STDviewassignment.this, "ccccc"+response, Toast.LENGTH_SHORT).show();
 
                     topic = new ArrayList<>();
                     Descrption = new ArrayList<>();

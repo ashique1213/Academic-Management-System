@@ -51,7 +51,7 @@ public class STDstudymaterials extends AppCompatActivity implements AdapterView.
 
                     JSONArray ar=new JSONArray(response);
 //                    Toast.makeText(STDstudymaterials.this, ""+response, Toast.LENGTH_SHORT).show();
-                    ArrayList<String> topic,materials;
+          
                     topic= new ArrayList<>();
                     mmid= new ArrayList<>();
                     materials= new ArrayList<>();
@@ -95,10 +95,10 @@ public class STDstudymaterials extends AppCompatActivity implements AdapterView.
         queue.add(stringRequest);
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        String url2="http://"+sh.getString("ip","")+":5000/static/photos/"+materials.get(position);
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        String url2="http://"+sh.getString("ip","")+":5000/static/photos/"+materials.get(i);
         Intent dwnl=new Intent(Intent.ACTION_VIEW,
                 Uri.parse(url2));
         startActivity(dwnl);

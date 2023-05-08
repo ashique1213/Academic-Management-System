@@ -10,6 +10,22 @@
 
     <TableRow
         android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/textView24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="subject" />
+
+        <Spinner
+            android:id="@+id/spinner10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
         android:gravity="center"
         android:layout_height="wrap_content">
 
@@ -111,7 +127,7 @@
             android:id="@+id/textView47"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="anser" />
+            android:text="last date" />
 
         <EditText
             android:id="@+id/editTextTextPersonName26"

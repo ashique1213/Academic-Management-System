@@ -12,10 +12,37 @@
         android:layout_height="wrap_content" >
 
         <TextView
+            android:id="@+id/textView65"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="subject" />
+
+        <Spinner
+            android:id="@+id/spinner13"
+            android:layout_width="208dp"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/button16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="search" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
             android:id="@+id/textView72"
             android:layout_width="132dp"
             android:layout_height="match_parent"
             android:text="total working" />
+
+        <TextView
+            android:id="@+id/textView95"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
     </TableRow>
 
@@ -27,7 +54,7 @@
             android:id="@+id/textView73"
             android:layout_width="134dp"
             android:layout_height="match_parent"
-            android:text="absent" />
+            android:text="present" />
 
         <TextView
             android:id="@+id/textView67"
@@ -43,10 +70,26 @@
             android:id="@+id/textView14"
             android:layout_width="135dp"
             android:layout_height="match_parent"
-            android:text="present" />
+            android:text="absent" />
 
         <TextView
             android:id="@+id/textView68"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/textView96"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:text="Percentage" />
+
+        <TextView
+            android:id="@+id/textView97"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </TableRow>

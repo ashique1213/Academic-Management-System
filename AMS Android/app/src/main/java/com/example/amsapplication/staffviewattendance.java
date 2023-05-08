@@ -1,7 +1,6 @@
 package com.example.amsapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -15,6 +14,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -25,37 +26,48 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class STDviewattendance extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class staffviewattendance extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     TextView t1,t2,t3,t4;
     SharedPreferences sh;
     String total,abbb,Attendance,tot,per;
     Spinner s1;
-    Button b1;
-    ArrayList<String>sub,sid;
-    String siid;
+    Button b1,b2;
+    ArrayList<String>stdent,perc,sub,sid;
+    String siid,url;
+    ListView l1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_stdviewattendance);
+        setContentView(R.layout.activity_staffviewattendance);
         t1=findViewById(R.id.textView95);
         t2=findViewById(R.id.textView67);
         t3=findViewById(R.id.textView68);
         t4=findViewById(R.id.textView97);
         s1=findViewById(R.id.spinner13);
         b1=findViewById(R.id.button16);
+        b2=findViewById(R.id.button25);
+        l1=findViewById(R.id.eee);
         sh= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+        b2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(getApplicationContext(),Attendancemark.class);
+                startActivity(i);
+            }
+        });
+
 
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String url ="http://"+sh.getString("ip", "") + ":5000/viewattendance";
-                RequestQueue queue = Volley.newRequestQueue(STDviewattendance.this);
+                url ="http://"+sh.getString("ip", "") + ":5000/staffviewattendance";
+                RequestQueue queue = Volley.newRequestQueue(staffviewattendance.this);
 
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {
                     @Override
@@ -63,38 +75,26 @@ public class STDviewattendance extends AppCompatActivity implements AdapterView.
                         // Display the response string.
                         Log.d("+++++++++++++++++",response);
                         try {
-                            JSONObject js=new JSONObject(response);
-                            total=js.getString("res1");
-                            t1.setText(js.getString("res1"));
 
-                            Attendance=js.getString("res2");
-                            t2.setText(js.getString("res2"));
+                            JSONArray ar=new JSONArray(response);
+//                    Toast.makeText(viewexam.this, "ggg"+response, Toast.LENGTH_SHORT).show();
+                            stdent= new ArrayList<>();
+                            perc= new ArrayList<>();
 
-                            abbb=js.getString("res3");
-                            t3.setText(js.getString("res3"));
 
-                            per=js.getString("res4");
-                            t4.setText(js.getString("res4"));
+                            for(int i=0;i<ar.length();i++)
+                            {
+                                JSONObject jo=ar.getJSONObject(i);
+                                stdent.add(jo.getString("name"));
+                                perc.add(jo.getString("per"));
 
-//                    JSONArray ar=new JSONArray(response);
-//                    total= new ArrayList<>();
-//                    abbb= new ArrayList<>();
-//                    Attendance= new ArrayList<>();
-//
-//                    for(int i=0;i<ar.length();i++)
-//                    {
-//                        JSONObject jo=ar.getJSONObject(i);
-//                        total.add(jo.getString("totalworking"));
-//                        abbb.add(jo.getString("present"));
-//                        Attendance.add(jo.getString("absent"));
-//
-//
-//                    }
+
+                            }
 
                             // ArrayAdapter<String> ad=new ArrayAdapter<>(Home.this,android.R.layout.simple_list_item_1,name);
                             //lv.setAdapter(ad);
 
-//                    l1.setAdapter(new custom3(STDviewattendance.this,total,abbb,Attendance));
+                            l1.setAdapter(new custion2forall(staffviewattendance.this,stdent,perc));
 //                    l1.setOnItemClickListener(viewuser.this);
 
                         } catch (Exception e) {
@@ -108,14 +108,15 @@ public class STDviewattendance extends AppCompatActivity implements AdapterView.
                             @Override
                             public void onErrorResponse(VolleyError error) {
 
-                                Toast.makeText(STDviewattendance.this, "err"+error, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(staffviewattendance.this, "err"+error, Toast.LENGTH_SHORT).show();
                             }
                         }) {
                     @Override
                     protected Map<String, String> getParams() {
                         Map<String, String> params = new HashMap<>();
-                        params.put("lid",sh.getString("lid",""));
+
                         params.put("sid",siid);
+
                         return params;
                     }
                 };
@@ -124,8 +125,8 @@ public class STDviewattendance extends AppCompatActivity implements AdapterView.
             }
         });
 
-        String url1 ="http://"+sh.getString("ip", "") + ":5000/viewstusub";
-        RequestQueue queue1 = Volley.newRequestQueue(STDviewattendance.this);
+        String url1 ="http://"+sh.getString("ip", "") + ":5000/viewsubjectonlyforexam";
+        RequestQueue queue1 = Volley.newRequestQueue(staffviewattendance.this);
 
         StringRequest stringRequest1 = new StringRequest(Request.Method.POST, url1,new Response.Listener<String>() {
             @Override
@@ -148,9 +149,9 @@ public class STDviewattendance extends AppCompatActivity implements AdapterView.
 
                     }
 
-                    ArrayAdapter<String> ad=new ArrayAdapter<String >(STDviewattendance.this,android.R.layout.simple_spinner_dropdown_item,sub);
+                    ArrayAdapter<String> ad=new ArrayAdapter<String >(staffviewattendance.this,android.R.layout.simple_spinner_dropdown_item,sub);
                     s1.setAdapter(ad);
-                    s1.setOnItemSelectedListener(STDviewattendance.this);
+                    s1.setOnItemSelectedListener(staffviewattendance.this);
 //                    l1.setAdapter(new Custom(viewuser.this,name,place));
 //                    l1.setOnItemClickListener(viewuser.this);
 
@@ -165,7 +166,7 @@ public class STDviewattendance extends AppCompatActivity implements AdapterView.
                     @Override
                     public void onErrorResponse(VolleyError error) {
 
-                        Toast.makeText(STDviewattendance.this, "err"+error, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(staffviewattendance.this, "err"+error, Toast.LENGTH_SHORT).show();
                     }
                 }) {
             @Override

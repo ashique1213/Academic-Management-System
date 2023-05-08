@@ -1,21 +1,18 @@
 package com.example.amsapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -31,21 +28,23 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class addchat extends AppCompatActivity implements AdapterView.OnItemClickListener {
-    ListView e1;
+public class viewuploadedfile extends AppCompatActivity implements AdapterView.OnItemClickListener {
+    ListView l1;
 
-    ArrayList<String> feename,amount;
     SharedPreferences sh;
+    ArrayList<String> name,file,date,adm;
+    String url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_addchat);
-        e1=findViewById(R.id.list1);
+        setContentView(R.layout.activity_viewuploadedfile);
+        l1=findViewById(R.id.list18);
 
         sh= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        String url ="http://"+sh.getString("ip", "") + ":5000/viewstudentss";
-        RequestQueue queue = Volley.newRequestQueue(addchat.this);
+
+        url ="http://"+sh.getString("ip", "") + ":5000/viewuploadedfiles";
+        RequestQueue queue = Volley.newRequestQueue(viewuploadedfile.this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {
             @Override
@@ -55,28 +54,28 @@ public class addchat extends AppCompatActivity implements AdapterView.OnItemClic
                 try {
 
                     JSONArray ar=new JSONArray(response);
-//                    Toast.makeText(addchat.this, "fffff"+response, Toast.LENGTH_SHORT).show();
-                    feename= new ArrayList<>();
-                    amount= new ArrayList<>();
-
-//                    status=new ArrayList<>();
+                    name= new ArrayList<>();
+                    date= new ArrayList<>();
+                    file= new ArrayList<>();
+                    adm=new ArrayList<>();
 
                     for(int i=0;i<ar.length();i++)
                     {
                         JSONObject jo=ar.getJSONObject(i);
-                        feename.add(jo.getString("login_id"));
-                        amount.add(jo.getString("name"));
+                        name.add(jo.getString("name"));
+                        date.add(jo.getString("data"));
+                        file.add(jo.getString("file"));
+                        adm.add(jo.getString("addmission no"));
 
-
-//                        status.add(jo.getString("description"));
 
                     }
-//
-                    ArrayAdapter<String> ad=new ArrayAdapter<>(addchat.this,android.R.layout.simple_list_item_1,amount);
-                    e1.setAdapter(ad);
 
-//                    e1.setAdapter(new custom4viewfeestatus(STDaddchat.this,amount,amountpaid,amountdue,lastdate));
-                    e1.setOnItemClickListener(addchat.this);
+//                     ArrayAdapter<String> ad=new ArrayAdapter<>(Home.this,android.R.layout.simple_list_item_1,name);
+//                    lv.setAdapter(ad);
+
+                    l1.setAdapter(new custom4(viewuploadedfile.this,name,date,file,adm));
+//                    l1.setAdapter(new Custom(viewuser.this,name,place));
+                    l1.setOnItemClickListener(viewuploadedfile.this);
 
                 } catch (Exception e) {
                     Log.d("=========", e.toString());
@@ -86,35 +85,30 @@ public class addchat extends AppCompatActivity implements AdapterView.OnItemClic
 
         },
                 new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
+             @Override
+            public void onErrorResponse(VolleyError error) {
 
-                        Toast.makeText(addchat.this, "err"+error, Toast.LENGTH_SHORT).show();
-                    }
-                }) {
+                Toast.makeText(viewuploadedfile.this, "err"+error, Toast.LENGTH_SHORT).show();
+            }
+        }) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-
+                params.put("aaid",getIntent().getStringExtra("asid"));
 
                 return params;
             }
         };
         queue.add(stringRequest);
 
+
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-        SharedPreferences.Editor edp = sh.edit();
-        edp.putString("uid",feename.get(position));
-        edp.commit();
-
-        Intent ik = new Intent(getApplicationContext(), Test.class);
-        ik.putExtra("uid",feename.get(position));
-        startActivity(ik);
-
-
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        String url2="http://"+sh.getString("ip","")+":5000/static/photos/"+file.get(i);
+        Intent dwnl=new Intent(Intent.ACTION_VIEW,
+                Uri.parse(url2));
+        startActivity(dwnl);
     }
 }

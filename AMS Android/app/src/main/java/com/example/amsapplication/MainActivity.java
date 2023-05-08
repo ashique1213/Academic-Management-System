@@ -28,11 +28,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ip=e1.getText().toString();
-                SharedPreferences.Editor edp = sh.edit();
-                edp.putString("ip", ip);
-                edp.commit();
-                Intent ii=new Intent(getApplicationContext(),Login.class);
-                startActivity(ii);
+                if (ip.equalsIgnoreCase(""))
+                {
+                    e1.setError("Enter feedback");
+                }
+                else {
+                    SharedPreferences.Editor edp = sh.edit();
+                    edp.putString("ip", ip);
+                    edp.commit();
+                    Intent ii = new Intent(getApplicationContext(), Login.class);
+                    startActivity(ii);
+                }
 
             }
         });

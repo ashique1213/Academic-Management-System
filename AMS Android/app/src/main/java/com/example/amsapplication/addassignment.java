@@ -47,61 +47,74 @@ public class addassignment extends AppCompatActivity {
                 topic=e1.getText().toString();
                 details=e2.getText().toString();
                 date=e3.getText().toString();
-                RequestQueue queue = Volley.newRequestQueue(addassignment.this);
-                url = "http://" + sh.getString("ip","") + ":5000/addassigment";
+                if (topic.equalsIgnoreCase(""))
+                {
+                    e1.setError("Enter topic");
+                }
+                else if (details.equalsIgnoreCase(""))
+                {
+                    e2.setError("Enter details");
+                }
+                else if (date.equalsIgnoreCase(""))
+                {
+                    e1.setError("Enter date");
+                }
+                else {
+                    RequestQueue queue = Volley.newRequestQueue(addassignment.this);
+                    url = "http://" + sh.getString("ip", "") + ":5000/addassigment";
 
-                // Request a string response from the provided URL.
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // Display the response string.
-                        Log.d("+++++++++++++++++", response);
-                        try {
-                            JSONObject json = new JSONObject(response);
-                            String res = json.getString("task");
+                    // Request a string response from the provided URL.
+                    StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            // Display the response string.
+                            Log.d("+++++++++++++++++", response);
+                            try {
+                                JSONObject json = new JSONObject(response);
+                                String res = json.getString("task");
 
-                            if (res.equalsIgnoreCase("success")) {
+                                if (res.equalsIgnoreCase("success")) {
 //                                String lid = json.getString("id");
 //                                String type = json.getString("type");
 //                                SharedPreferences.Editor edp = sh.edit();
 //                                edp.putString("lid", lid);
 //                                edp.commit();
-                                Intent ik = new Intent(getApplicationContext(), Home_teacher.class);
-                                startActivity(ik);
+                                    Intent ik = new Intent(getApplicationContext(), Home_teacher.class);
+                                    startActivity(ik);
 
-                            } else {
+                                } else {
 
-                                Toast.makeText(addassignment.this, "Invalid username or password", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(addassignment.this, "Invalid username or password", Toast.LENGTH_SHORT).show();
 
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+
+
                         }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
 
 
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(getApplicationContext(), "Error" + error, Toast.LENGTH_LONG).show();
+                        }
+                    }) {
+                        @Override
+                        protected Map<String, String> getParams() {
+                            Map<String, String> params = new HashMap<String, String>();
+                            params.put("topic", topic);
+                            params.put("des", details);
+                            params.put("ldate", date);
+                            params.put("lid", sh.getString("lid", ""));
 
+                            return params;
+                        }
+                    };
+                    queue.add(stringRequest);
 
-                        Toast.makeText(getApplicationContext(), "Error" + error, Toast.LENGTH_LONG).show();
-                    }
-                }) {
-                    @Override
-                    protected Map<String, String> getParams() {
-                        Map<String, String> params = new HashMap<String, String>();
-                        params.put("topic", topic);
-                        params.put("des", details);
-                        params.put("ldate", date);
-                        params.put("lid", sh.getString("lid",""));
-
-                        return params;
-                    }
-                };
-                queue.add(stringRequest);
-
-
+                }
 
 
 

@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -47,6 +48,7 @@ public class Attendancemark extends AppCompatActivity implements AdapterView.OnI
     String subject,datee,hour,student,att;
     ArrayList<String> eid,exam,sub,sid;
     String hur[]={"1","2","3","5","6","7"};
+    ListView l1;
 
     final Calendar myCalendar= Calendar.getInstance();
 
@@ -57,11 +59,11 @@ public class Attendancemark extends AppCompatActivity implements AdapterView.OnI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attendancemark);
         s1=findViewById(R.id.spinner8);
-        s2=findViewById(R.id.spinner9);
-        s3=findViewById(R.id.spinner10);
+        s2=findViewById(R.id.spinner12);
+        l1=findViewById(R.id.listv);
+
         e1=findViewById(R.id.editTextTextPersonName30);
-        r1=findViewById(R.id.radioButton9);
-        r2=findViewById(R.id.radioButton10);
+
         b1=findViewById(R.id.button18);
         sh= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
@@ -85,7 +87,7 @@ public class Attendancemark extends AppCompatActivity implements AdapterView.OnI
         s2.setAdapter(ad);
 //        s1.setOnItemSelectedListener(Attendancemark.this);
 
-        String url1 ="http://"+sh.getString("ip", "") + ":5000/viewsubject";
+        String url1 ="http://"+sh.getString("ip", "") + ":5000/viewsubjectonlyforexam";
         RequestQueue queue1 = Volley.newRequestQueue(Attendancemark.this);
 
         StringRequest stringRequest1 = new StringRequest(Request.Method.POST, url1,new Response.Listener<String>() {
@@ -132,7 +134,7 @@ public class Attendancemark extends AppCompatActivity implements AdapterView.OnI
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-
+params.put("lid",sh.getString("lid",""));
                 return params;
             }
         };
@@ -140,58 +142,7 @@ public class Attendancemark extends AppCompatActivity implements AdapterView.OnI
 
 
 
-       String url5 ="http://"+sh.getString("ip", "") + ":5000/viewstudents1";
-        RequestQueue queue5 = Volley.newRequestQueue(Attendancemark.this);
 
-        StringRequest stringRequest5 = new StringRequest(Request.Method.POST, url5,new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                // Display the response string.
-                Log.d("+++++++++++++++++",response);
-                try {
-
-                    JSONArray ar=new JSONArray(response);
-                    sid= new ArrayList<>();
-                    sub= new ArrayList<>();
-
-
-                    for(int i=0;i<ar.length();i++)
-                    {
-                        JSONObject jo=ar.getJSONObject(i);
-                        sid.add(jo.getString("login_id"));
-                        sub.add(jo.getString("name"));
-
-
-
-                    }
-
-                    ArrayAdapter<String> ad=new ArrayAdapter<>(Attendancemark.this,android.R.layout.simple_list_item_1,sub);
-                    s3.setAdapter(ad);
-                    s1.setOnItemSelectedListener(Attendancemark.this);
-//                    l1.setAdapter(new Custom(viewuser.this,name,place));
-//                    l1.setOnItemClickListener(viewuser.this);
-
-                } catch (Exception e) {
-                    Log.d("=========", e.toString());
-                }
-
-            }
-
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-                Toast.makeText(Attendancemark.this, "err"+error, Toast.LENGTH_SHORT).show();
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-
-                return params;
-            }
-        };
-        queue5.add(stringRequest5);
 
 
         b1.setOnClickListener(new View.OnClickListener() {
@@ -200,73 +151,77 @@ public class Attendancemark extends AppCompatActivity implements AdapterView.OnI
 
                 datee=e1.getText().toString();
                 att="";
-                if(r1.isChecked())
+
+                if (datee.equalsIgnoreCase(""))
                 {
-                    att=r1.getText().toString();
+                    e1.setError("Enter date");
                 }
-                else
-                {
-                    att=r2.getText().toString();
-                }
+                else {
 
-                RequestQueue queue = Volley.newRequestQueue(Attendancemark.this);
-                String url = "http://" + sh.getString("ip","") + ":5000/addatten";
+                    RequestQueue queue = Volley.newRequestQueue(Attendancemark.this);
+                    String url = "http://" + sh.getString("ip", "") + ":5000/addatten";
 
-                // Request a string response from the provided URL.
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // Display the response string.
-                        Log.d("+++++++++++++++++", response);
-                        try {
-                            JSONObject json = new JSONObject(response);
-                            String res = json.getString("task");
+                    // Request a string response from the provided URL.
+                    StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            // Display the response string.
+                            Log.d("+++++++++++++++++", response);
+                            try {
+                                JSONObject json = new JSONObject(response);
+                                String res = json.getString("task");
 
-                            if (res.equalsIgnoreCase("success")) {
+                                if (res.equalsIgnoreCase("success")) {
 //                                String lid = json.getString("id");
 //                                String type = json.getString("type");
 //                                SharedPreferences.Editor edp = sh.edit();
 //                                edp.putString("lid", lid);
 //                                edp.commit();
-                                Intent ik = new Intent(getApplicationContext(), Home_teacher.class);
-                                startActivity(ik);
+                                    Intent ik = new Intent(getApplicationContext(), Home_teacher.class);
+                                    startActivity(ik);
 
-                            } else {
+                                } else {
 
-                                Toast.makeText(Attendancemark.this, "Invalid", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Attendancemark.this, "Invalid", Toast.LENGTH_SHORT).show();
+
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+
+                            Toast.makeText(getApplicationContext(), "Error" + error, Toast.LENGTH_LONG).show();
+                        }
+                    }) {
+                        @Override
+                        protected Map<String, String> getParams() {
+                            Map<String, String> params = new HashMap<String, String>();
+
+                            params.put("date", datee);
+                            params.put("eid", subject);
+                            params.put("sid", sh.getString("att",""));
+                            if(sh.getString("att","").equalsIgnoreCase("")) {
+                                params.put("att", "0");
+                            }
+                            else{
+                                params.put("att", "1");
 
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                            params.put("hur", s2.getSelectedItem().toString());
+
+                            return params;
                         }
+                    };
+                    queue.add(stringRequest);
 
 
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-
-
-                        Toast.makeText(getApplicationContext(), "Error" + error, Toast.LENGTH_LONG).show();
-                    }
-                }) {
-                    @Override
-                    protected Map<String, String> getParams() {
-                        Map<String, String> params = new HashMap<String, String>();
-
-                        params.put("date", datee);
-                        params.put("eid", subject);
-                        params.put("sid", student);
-                        params.put("att", att);
-                        params.put("hur", s2.getSelectedItem().toString());
-
-                        return params;
-                    }
-                };
-                queue.add(stringRequest);
-
-
-
+                }
             }
         });
 
@@ -279,8 +234,71 @@ public class Attendancemark extends AppCompatActivity implements AdapterView.OnI
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        subject=eid.get(position);
-        student=sid.get(position);
+        subject = eid.get(position);
+
+        if (parent==s1) {
+            subject = eid.get(position);
+            String url5 ="http://"+sh.getString("ip", "") + ":5000/viewstudents1";
+            RequestQueue queue5 = Volley.newRequestQueue(Attendancemark.this);
+
+            StringRequest stringRequest5 = new StringRequest(Request.Method.POST, url5,new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    // Display the response string.
+                    Log.d("+++++++++++++++++",response);
+                    try {
+
+                        JSONArray ar=new JSONArray(response);
+                        sid= new ArrayList<>();
+                        sub= new ArrayList<>();
+
+
+                        for(int i=0;i<ar.length();i++)
+                        {
+                            JSONObject jo=ar.getJSONObject(i);
+                            sid.add(jo.getString("login_id"));
+                            sub.add(jo.getString("name"));
+
+
+
+                        }
+                        SharedPreferences.Editor ed=sh.edit();
+                        ed.putString("att","0,");
+                        ed.commit();
+
+//                        ArrayAdapter<String> ad=new ArrayAdapter<>(Attendancemark.this,android.R.layout.simple_list_item_1,sub);
+//                        s3.setAdapter(ad);
+//                        s1.setOnItemSelectedListener(Attendancemark.this);
+                    l1.setAdapter(new customattendance(Attendancemark.this,sub,sid));
+//                    l1.setOnItemClickListener(viewuser.this);
+
+                    } catch (Exception e) {
+                        Log.d("=========", e.toString());
+                    }
+
+                }
+
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                    Toast.makeText(Attendancemark.this, "err"+error, Toast.LENGTH_SHORT).show();
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("sid",subject);
+
+                    return params;
+                }
+            };
+            queue5.add(stringRequest5);
+
+
+
+        }
+
 
     }
 

@@ -35,7 +35,7 @@ public class online_test extends AppCompatActivity {
     SharedPreferences sh;
     String url;
     ArrayList<String>question,op1,op2,op3,op4,answer,qid;
-    int flag=0;
+    int flag=0,timee,a;
     public static int marks=0,correct=0,wrong=0;
     String qstn_id;
     public int counter;
@@ -45,8 +45,10 @@ public class online_test extends AppCompatActivity {
         setContentView(R.layout.activity_online_test);
         submitbutton=(Button)findViewById(R.id.button3);
         quitbutton=(Button)findViewById(R.id.buttonquit);
+        timee=Integer.parseInt(getIntent().getStringExtra("time"));
+        a=timee*1000;
         final TextView counttime=findViewById(R.id.textView9);
-        new CountDownTimer(30000,1000) {
+        new CountDownTimer(a,1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 counttime.setText(String.valueOf(counter));
@@ -194,7 +196,7 @@ public class online_test extends AppCompatActivity {
 
                                 } else {
 
-                                    Toast.makeText(online_test.this, "Invalid ", Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(online_test.this, "Invalid ", Toast.LENGTH_SHORT).show();
 
                                 }
                             } catch (JSONException e) {
@@ -225,7 +227,7 @@ public class online_test extends AppCompatActivity {
                         }
                     };
                     queue.add(stringRequest);
-                    Toast.makeText(getApplicationContext(), "Correct"+qid.get(flag), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getApplicationContext(), "Correct"+qid.get(flag), Toast.LENGTH_SHORT).show();
                 } else {
                     wrong++;
                     SharedPreferences.Editor e1=sh.edit();
@@ -248,7 +250,7 @@ public class online_test extends AppCompatActivity {
 
                                 } else {
 
-                                    Toast.makeText(online_test.this, "Invalid ", Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(online_test.this, "Invalid ", Toast.LENGTH_SHORT).show();
 
                                 }
                             } catch (JSONException e) {
@@ -279,7 +281,7 @@ public class online_test extends AppCompatActivity {
                         }
                     };
                     queue.add(stringRequest);
-                    Toast.makeText(getApplicationContext(), "Wrong"+qid.get(flag), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getApplicationContext(), "Wrong"+qid.get(flag), Toast.LENGTH_SHORT).show();
                 }
 
                 flag++;

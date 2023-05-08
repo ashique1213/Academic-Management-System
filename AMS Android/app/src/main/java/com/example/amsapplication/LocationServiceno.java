@@ -215,7 +215,7 @@ public class LocationServiceno extends Service {
 							notificationChecknew(noti[i]);
 						}
 
-						Toast.makeText(getApplicationContext(), "Request found", Toast.LENGTH_LONG).show();
+//						Toast.makeText(getApplicationContext(), "Request found", Toast.LENGTH_LONG).show();
 
 
 					} else {

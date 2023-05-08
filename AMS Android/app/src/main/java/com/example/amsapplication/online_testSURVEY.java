@@ -47,25 +47,10 @@ public class online_testSURVEY extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_online_test);
+        setContentView(R.layout.activity_online_testsurvey);
         submitbutton=(Button)findViewById(R.id.button3);
         quitbutton=(Button)findViewById(R.id.buttonquit);
-        final TextView counttime=findViewById(R.id.textView9);
-        new CountDownTimer(30000,1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                counttime.setText(String.valueOf(counter));
-                counter++;
-            }
-            @Override
-            public void onFinish() {
-                counttime.setText("Time Over");
-                Toast.makeText(getApplicationContext(), "Time Over...", Toast.LENGTH_SHORT).show();
 
-                Intent in=new Intent(getApplicationContext(),Home_student.class);
-                startActivity(in);
-            }
-        }.start();
         sh= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         url ="http://"+sh.getString("ip", "") + ":5000/get_questionsurvey";
         RequestQueue queue = Volley.newRequestQueue(online_testSURVEY.this);
@@ -199,7 +184,7 @@ public class online_testSURVEY extends AppCompatActivity {
 
                                 } else {
 
-                                    Toast.makeText(online_testSURVEY.this, "Invalid ", Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(online_testSURVEY.this, "Invalid ", Toast.LENGTH_SHORT).show();
 
                                 }
                             } catch (JSONException e) {
@@ -230,7 +215,7 @@ public class online_testSURVEY extends AppCompatActivity {
                         }
                     };
                     queue.add(stringRequest);
-                    Toast.makeText(getApplicationContext(), "Correct"+qid.get(flag), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getApplicationContext(), "Correct"+qid.get(flag), Toast.LENGTH_SHORT).show();
                 } else {
                     wrong++;
                     SharedPreferences.Editor e1=sh.edit();
@@ -253,7 +238,7 @@ public class online_testSURVEY extends AppCompatActivity {
 
                                 } else {
 
-                                    Toast.makeText(online_testSURVEY.this, "Invalid ", Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(online_testSURVEY.this, "Invalid ", Toast.LENGTH_SHORT).show();
 
                                 }
                             } catch (JSONException e) {
@@ -284,7 +269,7 @@ public class online_testSURVEY extends AppCompatActivity {
                         }
                     };
                     queue.add(stringRequest);
-                    Toast.makeText(getApplicationContext(), "Wrong"+qid.get(flag), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getApplicationContext(), "Wrong"+qid.get(flag), Toast.LENGTH_SHORT).show();
                 }
 
                 flag++;
@@ -301,13 +286,13 @@ public class online_testSURVEY extends AppCompatActivity {
                     rb4.setText(op4.get(flag));
 
                 } else {
-                    Toast.makeText(getApplicationContext(), "Exam finished...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "survey finished...", Toast.LENGTH_SHORT).show();
                     marks=correct;
 //                    Toast.makeText(online_test.this, "marks"+marks, Toast.LENGTH_SHORT).show();
 
 
                                 AlertDialog.Builder builder = new AlertDialog.Builder(online_testSURVEY.this);
-                                builder.setTitle("Exam Over!!! Press OK to Exit");
+                                builder.setTitle("finished!!! Press OK to Exit");
                                 builder.setItems(new CharSequence[]
                                                 {"Ok"},
                                         new DialogInterface.OnClickListener() {

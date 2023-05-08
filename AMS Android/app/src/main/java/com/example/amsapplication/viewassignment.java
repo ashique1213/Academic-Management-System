@@ -55,7 +55,7 @@ public class viewassignment extends AppCompatActivity implements AdapterView.OnI
                 try {
 
                     JSONArray ar=new JSONArray(response);
-                    Toast.makeText(viewassignment.this, "ccccc"+response, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(viewassignment.this, "ccccc"+response, Toast.LENGTH_SHORT).show();
                     ttid= new ArrayList<>();
                     topic= new ArrayList<>();
                     Descrption= new ArrayList<>();
@@ -145,12 +145,14 @@ public class viewassignment extends AppCompatActivity implements AdapterView.OnI
 //                                            SharedPreferences.Editor edp = sh.edit();
 //                                            edp.putString("lid", lid);
 //                                            edp.commit();
+                                            Toast.makeText(viewassignment.this, "deleted ", Toast.LENGTH_SHORT).show();
+
                                             Intent ik = new Intent(getApplicationContext(), Home_teacher.class);
                                             startActivity(ik);
 
                                         } else {
 
-                                            Toast.makeText(viewassignment.this, "Invalid username or password", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(viewassignment.this, "Invalid ", Toast.LENGTH_SHORT).show();
 
                                         }
                                     } catch (JSONException e) {
@@ -188,12 +190,13 @@ public class viewassignment extends AppCompatActivity implements AdapterView.OnI
 
                     }
                 })
-                .setNegativeButton(" cencel ", new DialogInterface.OnClickListener() {
+                .setNegativeButton(" view uploaded assignments ", new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
 
-                        Intent i=new Intent(getApplicationContext(),viewassignment.class);
+                        Intent i=new Intent(getApplicationContext(),viewuploadedfile.class);
+                        i.putExtra("asid",ttid.get(position));
 
                         startActivity(i);
                     }

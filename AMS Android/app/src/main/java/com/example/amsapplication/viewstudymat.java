@@ -1,10 +1,13 @@
 package com.example.amsapplication;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -25,7 +28,7 @@ import java.util.Map;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class viewstudymat extends AppCompatActivity {
+public class viewstudymat extends AppCompatActivity implements AdapterView.OnItemClickListener {
     ListView l1;
     Button b1;
     SharedPreferences sh;
@@ -67,11 +70,12 @@ public class viewstudymat extends AppCompatActivity {
 
                     }
 
-                    // ArrayAdapter<String> ad=new ArrayAdapter<>(Home.this,android.R.layout.simple_list_item_1,name);
-                    //lv.setAdapter(ad);
+//                     ArrayAdapter<String> ad=new ArrayAdapter<>(Home.this,android.R.layout.simple_list_item_1,name);
+//                    lv.setAdapter(ad);
 
+                    l1.setAdapter(new custom3(viewstudymat.this,topic,material,date));
 //                    l1.setAdapter(new Custom(viewuser.this,name,place));
-//                    l1.setOnItemClickListener(viewuser.this);
+                    l1.setOnItemClickListener(viewstudymat.this);
 
                 } catch (Exception e) {
                     Log.d("=========", e.toString());
@@ -99,8 +103,18 @@ public class viewstudymat extends AppCompatActivity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent ik = new Intent(getApplicationContext(), addstudymat.class);
+                startActivity(ik);
             }
         });
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        String url2="http://"+sh.getString("ip","")+":5000/static/photos/"+material.get(i);
+        Intent dwnl=new Intent(Intent.ACTION_VIEW,
+                Uri.parse(url2));
+        startActivity(dwnl);
+
     }
 }

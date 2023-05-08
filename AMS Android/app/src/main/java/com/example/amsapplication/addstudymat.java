@@ -62,7 +62,7 @@ public class addstudymat extends AppCompatActivity implements AdapterView.OnItem
         b2 = findViewById(R.id.button12);
         s1 = findViewById(R.id.spinner7);
         sh = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        String url3 = "http://" + sh.getString("ip", "") + ":5000/viewsubject";
+        String url3 = "http://" + sh.getString("ip", "") + ":5000/viewsubjectonlyforexam";
         RequestQueue queue1 = Volley.newRequestQueue(addstudymat.this);
 
         StringRequest stringRequest1 = new StringRequest(Request.Method.POST, url3, new Response.Listener<String>() {
@@ -108,7 +108,7 @@ public class addstudymat extends AppCompatActivity implements AdapterView.OnItem
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-
+params.put("lid",sh.getString("lid",""));
                 return params;
             }
         };
@@ -139,7 +139,17 @@ public class addstudymat extends AppCompatActivity implements AdapterView.OnItem
                 topic = e1.getText().toString();
 
                 date = e3.getText().toString();
-                uploadBitmap(title);
+                if (topic.equalsIgnoreCase(""))
+                {
+                    e1.setError("Enter topic");
+                }  if (date.equalsIgnoreCase(""))
+                {
+                    e3.setError("Enter date");
+                }
+
+                else {
+                    uploadBitmap(title);
+                }
             }
         });
     }

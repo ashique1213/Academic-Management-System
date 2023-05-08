@@ -44,69 +44,77 @@ public class Login extends AppCompatActivity {
             public void onClick(View view) {
                 uname=e1.getText().toString();
                 pswd=e2.getText().toString();
-                RequestQueue queue = Volley.newRequestQueue(Login.this);
-                url = "http://" + sh.getString("ip","") + ":5000/login_code";
+                if (uname.equalsIgnoreCase(""))
+                {
+                    e1.setError("Enter username");
+                }
+                else if (pswd.equalsIgnoreCase(""))
+                {
+                    e2.setError("Enter password");
+                }
+                else {
+                    RequestQueue queue = Volley.newRequestQueue(Login.this);
+                    url = "http://" + sh.getString("ip", "") + ":5000/login_code";
 
-                // Request a string response from the provided URL.
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // Display the response string.
-                        Log.d("+++++++++++++++++", response);
-                        try {
-                            JSONObject json = new JSONObject(response);
-                            String res = json.getString("task");
+                    // Request a string response from the provided URL.
+                    StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            // Display the response string.
+                            Log.d("+++++++++++++++++", response);
+                            try {
+                                JSONObject json = new JSONObject(response);
+                                String res = json.getString("task");
 
-                            if (res.equalsIgnoreCase("success")) {
-                                String lid = json.getString("lid");
-                                String type = json.getString("type");
-                                SharedPreferences.Editor edp = sh.edit();
-                                edp.putString("lid", lid);
-                                edp.commit();
-                                if (type.equalsIgnoreCase("student")) {
+                                if (res.equalsIgnoreCase("success")) {
+                                    String lid = json.getString("lid");
+                                    String type = json.getString("type");
+                                    SharedPreferences.Editor edp = sh.edit();
+                                    edp.putString("lid", lid);
+                                    edp.commit();
+                                    if (type.equalsIgnoreCase("student")) {
 
-                                    Intent ii = new Intent(getApplicationContext(), LocationServiceno.class);
-                                    startService(ii);
+                                        Intent ii = new Intent(getApplicationContext(), LocationServiceno.class);
+                                        startService(ii);
 
-                                    Intent ik = new Intent(getApplicationContext(), Home_student.class);
-                                    startActivity(ik);
+                                        Intent ik = new Intent(getApplicationContext(), Home_student.class);
+                                        startActivity(ik);
+                                    } else {
+                                        Intent ik = new Intent(getApplicationContext(), Home_teacher.class);
+                                        startActivity(ik);
+                                    }
+                                } else {
+
+                                    Toast.makeText(Login.this, "Invalid username or password", Toast.LENGTH_SHORT).show();
+
                                 }
-                                else {
-                                    Intent ik = new Intent(getApplicationContext(), Home_teacher.class);
-                                    startActivity(ik);
-                                }
-                            } else {
-
-                                Toast.makeText(Login.this, "Invalid username or password", Toast.LENGTH_SHORT).show();
-
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+
+
                         }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
 
 
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(getApplicationContext(), "Error" + error, Toast.LENGTH_LONG).show();
+                        }
+                    }) {
+                        @Override
+                        protected Map<String, String> getParams() {
+                            Map<String, String> params = new HashMap<String, String>();
+                            params.put("uname", uname);
+                            params.put("pword", pswd);
+
+                            return params;
+                        }
+                    };
+                    queue.add(stringRequest);
 
 
-                        Toast.makeText(getApplicationContext(), "Error" + error, Toast.LENGTH_LONG).show();
-                    }
-                }) {
-                    @Override
-                    protected Map<String, String> getParams() {
-                        Map<String, String> params = new HashMap<String, String>();
-                        params.put("uname", uname);
-                        params.put("pword", pswd);
-
-                        return params;
-                    }
-                };
-                queue.add(stringRequest);
-
-
-
+                }
 
             }
         });

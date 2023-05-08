@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class Home_student extends AppCompatActivity {
-    Button b1,b2,b3,b4,b5,b6,b7,b8,b9,b10,b11,b12,b13,b14;
+    Button b1,b2,b3,b4,b5,b6,b7,b8,b9,b10,b11,b12,b13,b14,b15;
     SharedPreferences sh;
 
 
@@ -33,12 +33,24 @@ public class Home_student extends AppCompatActivity {
         b12=findViewById(R.id.button48);
         b13=findViewById(R.id.button49);
         b14=findViewById(R.id.button20);
+        b15=findViewById(R.id.button15);
         sh= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i=new Intent(getApplicationContext(),STDviewsubject.class);
                 startActivity(i);
+
+
+            }
+        });
+        b15.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String url3="http://"+sh.getString("ip","")+":5000/viewproposedplan";
+                Intent dwnl1=new Intent(Intent.ACTION_VIEW,
+                        Uri.parse(url3));
+                startActivity(dwnl1);
 
 
             }

@@ -5,15 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     tools:context=".viewprofile">
 
     <TableRow
         android:layout_width="match_parent"
+        android:gravity="center"
         android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/textView86"
-            android:layout_width="wrap_content"
+            android:layout_width="101dp"
             android:layout_height="wrap_content"
             android:text="Name" />
 
@@ -27,11 +29,12 @@
 
     <TableRow
         android:layout_width="match_parent"
+        android:gravity="center"
         android:layout_height="wrap_content" >
 
         <TextView
             android:id="@+id/textView87"
-            android:layout_width="wrap_content"
+            android:layout_width="101dp"
             android:layout_height="wrap_content"
             android:text="qualification" />
 
@@ -45,11 +48,12 @@
 
     <TableRow
         android:layout_width="match_parent"
+        android:gravity="center"
         android:layout_height="wrap_content" >
 
         <TextView
             android:id="@+id/textView89"
-            android:layout_width="wrap_content"
+            android:layout_width="101dp"
             android:layout_height="wrap_content"
             android:text="Gender" />
 
@@ -63,11 +67,12 @@
 
     <TableRow
         android:layout_width="match_parent"
+        android:gravity="center"
         android:layout_height="wrap_content" >
 
         <TextView
             android:id="@+id/textView90"
-            android:layout_width="wrap_content"
+            android:layout_width="101dp"
             android:layout_height="wrap_content"
             android:text="designation" />
 
@@ -81,11 +86,12 @@
 
     <TableRow
         android:layout_width="match_parent"
+        android:gravity="center"
         android:layout_height="wrap_content" >
 
         <TextView
             android:id="@+id/textView91"
-            android:layout_width="wrap_content"
+            android:layout_width="101dp"
             android:layout_height="wrap_content"
             android:text="age" />
 
@@ -99,11 +105,13 @@
 
     <TableRow
         android:layout_width="match_parent"
+        android:gravity="center"
+
         android:layout_height="wrap_content" >
 
         <TextView
             android:id="@+id/textView92"
-            android:layout_width="wrap_content"
+            android:layout_width="101dp"
             android:layout_height="wrap_content"
             android:text="Phone" />
 
@@ -117,11 +125,12 @@
 
     <TableRow
         android:layout_width="match_parent"
+        android:gravity="center"
         android:layout_height="wrap_content" >
 
         <TextView
             android:id="@+id/textView93"
-            android:layout_width="wrap_content"
+            android:layout_width="101dp"
             android:layout_height="wrap_content"
             android:text="Photo" />
 
@@ -141,7 +150,8 @@
 
     <TableRow
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:gravity="center"
+        android:layout_height="wrap_content">
 
         <Button
             android:id="@+id/button26"

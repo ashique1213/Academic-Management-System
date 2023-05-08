@@ -15,7 +15,13 @@
         tools:context=".Home_student">
 
 
-    <Button
+        <Button
+            android:id="@+id/button15"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="view subjectplan" />
+
+        <Button
         android:id="@+id/button39"
         android:layout_width="250dp"
         android:layout_height="wrap_content"

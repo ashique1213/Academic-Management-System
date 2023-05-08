@@ -16,10 +16,10 @@
 
         <TextView
             android:id="@+id/textView10"
-            android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Exam name" />
+            android:gravity="center"
+            android:text="Subject name" />
 
         <Spinner
             android:id="@+id/spinner3"
