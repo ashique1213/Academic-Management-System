@@ -16,7 +16,7 @@
     <tr>
       <th width="350">Name</th>
       <td >
-        <input type="text" size="" name="textfield" required/>
+        <input type="text" size="" name="textfield" required pattern="[A-Z a-z.]{3,25}"/>
       </td>
     </tr>
     <tr>
@@ -37,7 +37,7 @@
     <tr>
       <th>Gender</th>
       <td><label>
-        <input name="radiobutton" type="radio" value="male" />
+        <input name="radiobutton" type="radio" value="male" required/>
         </label>
         male
         <label>
@@ -51,7 +51,7 @@
     </tr>
     <tr>
       <th>Dob</th>
-      <td><input type="date" name="textfield33"required /></td>
+      <td><input type="date" name="textfield33" required /></td>
     </tr>
     <tr>
       <th>Address</th>
@@ -59,7 +59,7 @@
     </tr>
     <tr>
       <th>Phone</th>
-      <td><input type="text" name="textfield35" required/></td>
+      <td><input type="text" name="textfield35" required pattern="[0-9]{10}"/></td>
     </tr>
     <tr>
       <th>Photo</th>

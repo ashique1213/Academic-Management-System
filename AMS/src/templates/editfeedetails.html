@@ -35,19 +35,19 @@
     </tr>
     <tr>
       <th>Amount paid </th>
-      <td><input type="text" name="textfield2"  value="{{val['amount paid']}}"/></td>
+      <td><input type="text" name="textfield2"  required pattern="[0-9]{1,3}" value="{{val['amount paid']}}"/></td>
     </tr>
     <tr>
       <th>Amount Due </th>
-      <td><input type="text" name="textfield3" value="{{val['amount due']}}"/></td>
+      <td><input type="text" name="textfield3" required pattern="[0-9]{1,3}" value="{{val['amount due']}}"/></td>
     </tr>
     <tr>
       <th>date paid </th>
-      <td><input type="date" name="textfield4" value="{{val['date paid']}}"/></td>
+      <td><input type="date" name="textfield4" required value="{{val['date paid']}}"/></td>
     </tr>
     <tr>
       <th>Status</th>
-      <td><input type="text" name="textfield5" value="{{val['status']}}"/></td>
+      <td><input type="text" name="textfield5"required value="{{val['status']}}"/></td>
     </tr>
     <tr>
       <td colspan="2" align="center"><label>

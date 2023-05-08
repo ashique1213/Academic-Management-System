@@ -16,13 +16,13 @@
     <tr>
       <th >Name</th>
       <td ><label>
-        <input type="text" size="" name="textfield" value="{{val['name']}}" />
+        <input type="text" size="" name="textfield" value="{{val['name']}}" required pattern="[A-Z a-z.]{3,25}" />
       </label></td>
     </tr>
     <tr>
       <th>Addmission no </th>
       <td><label>
-        <input type="text" name="textfield2" value="{{val['addmission no']}}" />
+        <input type="text" name="textfield2" value="{{val['addmission no']}}"  required/>
       </label></td>
     </tr>
     <tr>
@@ -51,24 +51,24 @@
     </tr>
     <tr>
       <th>Dob</th>
-      <td><input type="date" name="textfield33" value="{{val['dob']}}" /></td>
+      <td><input type="date" name="textfield33" value="{{val['dob']}}" required/></td>
     </tr>
     <tr>
       <th>Address</th>
-      <td><input type="text" name="textfield34" value="{{val['address']}}"/></td>
+      <td><input type="text" name="textfield34" value="{{val['address']}}" required/></td>
     </tr>
     <tr>
       <th>Phone</th>
-      <td><input type="text" name="textfield35" value="{{val['phone']}}"/></td>
+      <td><input type="text" name="textfield35" value="{{val['phone']}}" required pattern="[0-9]{10}"/></td>
     </tr>
     <tr>
       <th>Photo</th>
-      <td><input type="file" name="file" ><img src="../static/photos/{{val['photo']}}" height="50px" width="50px"></td>
+      <td><input type="file" name="file" required ><img src="../static/photos/{{val['photo']}}" height="50px" width="50px"></td>
     </tr>
     <tr>
       <th>Date of jointed </th>
       <td><label>
-        <input type="date" name="textfield36" value="{{val['jointdate']}}"/>
+        <input type="date" name="textfield36" required value="{{val['jointdate']}}"/>
       </label></td>
     </tr>
     <tr>

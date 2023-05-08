@@ -8,25 +8,17 @@
 </head>
 <center>
 <body>
-<form id="form1" name="form1" method="post" action="">
-  <table width="200" border="1">
+<form id="form1" name="form1" method="post" action="addfees#about">
+  <table width="403" border="1">
     <tr>
-      <th>survey questions</th>
-      <th>op1</th>
-      <th>op2</th>
-      <th>op3</th>
-      <th>op4</th>
-      <th></th>
+      <th width="66">Option</th>
+      <th width="66">count</th>
 
     </tr>
     {% for i in val %}
     <tr>
-      <td>{{i['survey questions']}}</td>
-      <td>{{i['op1']}}</td>
-      <td>{{i['op2']}}</td>
-      <td>{{i['op3']}}</td>
-      <td>{{i['op4']}}</td>
-      <td><a href="viewresponsesurvey?id={{i['sur_id']}}">view response</a></td>
+      <td>{{i['response']}}</td>
+      <td>{{i['e']}}</td>
 
     </tr>
     {% endfor %}
@@ -34,6 +26,6 @@
   </table>
 </form>
 </body>
-</center>
+  </center>
 <!--</html>-->
 {% endblock %}

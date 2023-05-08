@@ -1,13 +1,28 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>Untitled Document</title>
-</head>
+{% extends 'indexfor allll.html' %}
+{% block body %}
 
 <body>
-<form id="form1" name="form1" method="post" action="">
+<form id="form1" name="form1" method="post" action="viewproposedplan1">
   <table width="476" border="1">
+
+
+       <tr>
+      <td colspan="1">Subject </td>
+      <td colspan="2">       <select  name="select">
+          {% for i in val %}
+          <option value="{{i['subj_id']}}">{{i['subject name']}}</option>
+          {% endfor %}
+        </select></td>
+
+
+
+ <td colspan="3" align="center"><label>
+
+        <div >
+          <input type="submit" name="Submit" value="search" />
+        </div>
+      </label></td>
+
     <tr>
       <td width="33">SI.no</td>
       <td width="35">Topic</td>
@@ -16,15 +31,18 @@
       <td width="31">Hour</td>
       <td width="55">Module</td>
     </tr>
+    {% for i in  val1 %}
     <tr>
-      <td><label></label></td>
-      <td><label></label></td>
-      <td><label></label></td>
-      <td><label></label></td>
-      <td><label></label></td>
-      <td><label></label></td>
+      <td><label>{{loop.index}}</label></td>
+      <td><label>{{i['topic']}}</label></td>
+      <td><label>{{i['description']}}</label></td>
+      <td><label>{{i['date']}}</label></td>
+      <td><label>{{i['hour']}}</label></td>
+      <td><label>{{i['module']}}</label></td>
     </tr>
+    {% endfor %}
   </table>
 </form>
 </body>
-</html>
+{% endblock %}
+

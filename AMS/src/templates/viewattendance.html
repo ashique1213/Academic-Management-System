@@ -1,0 +1,41 @@
+<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
+{% extends 'hodindex.html' %}
+{% block body %}
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Untitled Document</title>
+</head>
+<center>
+<body>
+<form id="form1" name="form1" method="post" action="viewattendance1#about">
+  <table width="403" border="1">
+    <tr>
+      <td></td>
+      <td><select name="select">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+      </select></td>
+      <td><input type="submit" value="search"></td>
+    </tr>
+    <tr>
+      <th width="66">name</th>
+      <th width="66">percentage</th>
+
+    </tr>
+    {% for i in val %}
+    <tr>
+      <td>{{i['name']}}</td>
+      <td>{{i['per']}}</td>
+
+    </tr>
+    {% endfor %}
+
+  </table>
+</form>
+</body>
+  </center>
+<!--</html>-->
+{% endblock %}
