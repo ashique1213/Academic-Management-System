@@ -36,10 +36,23 @@ def viewstudents():
 
 @app.route('/viewstudents1',methods=['POST'])
 def viewstudents1():
+    sid=request.form['sid']
+
+
+    qry="SELECT * FROM `student` WHERE `smester` IN(SELECT `semester` FROM `subject` WHERE `subj_id`=%s) "
+    res= selectall2(qry,sid)
+    return jsonify(res)
+
+
+@app.route('/viewstudentss',methods=['POST'])
+def viewstudentss():
+
+
 
     qry="SELECT * FROM `student` "
     res= selectall(qry)
     return jsonify(res)
+
 
 
 @app.route('/ttviewtimetable',methods=['POST'])
@@ -61,7 +74,7 @@ def ttviewtassignment():
 @app.route('/ttviewtassignment1',methods=['POST'])
 def ttviewtassignment1():
 
-    qry="SELECT * FROM `assignment`  "
+    qry="SELECT * FROM `assignment` WHERE `last date`>=CURDATE()  "
     res= selectall(qry)
     return jsonify(res)
 
@@ -76,6 +89,39 @@ def deleeassigment():
 
 
 
+
+@app.route('/selectqn',methods=['POST'])
+def selectqn():
+    lid = request.form['tid']
+    qry = "DELETE FROM `questions` WHERE `q_id`=%s"
+    iud(qry, lid)
+    return jsonify({'task': 'success'})
+
+
+@app.route('/delectfeed',methods=['POST'])
+def delectfeed():
+    lid = request.form['tid']
+    qry = "DELETE FROM `feedback` WHERE `feed_id`=%s"
+    iud(qry, lid)
+    return jsonify({'task': 'success'})
+
+
+
+
+@app.route('/delectsurvey',methods=['POST'])
+def delectsurvey():
+    lid = request.form['tid']
+    qry = "DELETE FROM `survey` WHERE `sur_id`=%s"
+    iud(qry, lid)
+    return jsonify({'task': 'success'})
+
+@app.route('/deleinnn',methods=['POST'])
+def deleinnn():
+    lid = request.form['tid']
+    qry = "delete from  `internal marks` where in_id=%s"
+    iud(qry, lid)
+    return jsonify({'task': 'success'})
+
 @app.route('/ssviewtassignment',methods=['POST'])
 def ssviewtassignment():
     qry="SELECT * FROM `assignment` "
@@ -85,14 +131,14 @@ def ssviewtassignment():
 @app.route('/ttviewtinternal',methods=['POST'])
 def ttviewtinternal():
     lid = request.form['eid']
-    qry="SELECT `internal marks`.*,`exam`.`topic`,`subject`.`subject name`,`student`.`name` FROM `internal marks` JOIN `exam`ON `internal marks`.`examid`=`exam`.`exam_id` JOIN `student`ON `student`.`login_id`=`internal marks`.`stud_id` JOIN `subject`ON`subject`.`subj_id`=`exam`.`sub_id` WHERE `internal marks`.`examid`=%s "
+    qry="SELECT * FROM `internal marks` JOIN `subject`ON `subject`.`subj_id`=`internal marks`.`examid`  JOIN `student`ON `student`.`login_id`=`internal marks`.`stud_id` WHERE `internal marks`.`examid`=%s"
     res= selectall2(qry,lid)
     return jsonify(res)
 
 @app.route('/ssviewtinternal',methods=['POST'])
 def ssviewtinternal():
     lid=request.form['lid']
-    qry="SELECT `internal marks`.`mark`,`internal marks`.`date` ,`exam`.`topic`,`subject`.`subject name`FROM `internal marks` JOIN `exam` ON `exam`.`exam_id`=`internal marks`.`examid` JOIN `subject`ON `subject`.`subj_id`=`exam`.`sub_id` WHERE `internal marks`.`stud_id`=%s"
+    qry="SELECT * FROM `internal marks` JOIN `subject`ON `subject`.`subj_id`=`internal marks`.`examid`  JOIN `student`ON `student`.`login_id`=`internal marks`.`stud_id`  WHERE  `internal marks`.`stud_id`=%s"
     res= selectall2(qry,lid)
     return jsonify(res)
 
@@ -112,6 +158,18 @@ def viewsubject():
     qry="SELECT * FROM `subject` "
     res= selectall(qry)
     return jsonify(res)
+
+@app.route('/viewsubjectonlyforexam',methods=['POST'])
+def viewsubjectonlyforexam():
+    lid=request.form['lid']
+    qry="SELECT * FROM `subject` JOIN `assignsub` ON  `assignsub`.`sub_id`=`subject`.`subj_id` WHERE `assignsub`.`t_id`=%s"
+    res= selectall2(qry,lid)
+    print(res)
+    return jsonify(res)
+
+
+
+
 
 @app.route('/ttviewstudymat',methods=['POST'])
 def ttviewstudymat():
@@ -259,18 +317,27 @@ def addinternal():
 def addatten():
     print(request.form)
     lid=request.form['sid']
-    topic=request.form['eid']
-    fname = request.form['hur']
-    lname = request.form['date']
+    subid=request.form['eid']
+    hour = request.form['hur']
+    date = request.form['date']
     att = request.form['att']
-    if att == 'present':
-        att = '1'
-    else:
-        att = '0'
-    qry="INSERT INTO `attendence` VALUES(NULL,%s,%s,%s,%s,%s)"
-    val=(lid,topic,lname,fname,att)
 
-    iud(qry,val)
+    sid = lid.split(',')
+    qry="SELECT `login_id` FROM `student` WHERE `smester` IN(SELECT `semester` FROM `subject` WHERE `subj_id`=%s)"
+    res=selectall2(qry,subid)
+    for ii in res:
+
+        if str(ii['login_id']) in sid:
+            qry="INSERT INTO `attendence` VALUES(NULL,%s,%s,%s,%s,%s)"
+            val=(ii['login_id'],subid,date,hour,'1')
+
+            iud(qry,val)
+        else:
+            qry = "INSERT INTO `attendence` VALUES(NULL,%s,%s,%s,%s,%s)"
+            val = (ii['login_id'], subid, date, hour, '0')
+
+            iud(qry, val)
+
     return jsonify({'task':'success'})
 
 
@@ -344,9 +411,9 @@ def addexam():
     lid=request.form['sid']
     topic=request.form['topic']
     fname = request.form['date']
-
-    qry="INSERT INTO `exam`VALUES(NULL,%s,%s,%s)"
-    val=(lid,fname,topic)
+    timee = request.form['time']
+    qry="INSERT INTO `exam`VALUES(NULL,%s,%s,%s,%s)"
+    val=(lid,fname,topic,timee)
     iud(qry,val)
     return jsonify({'task':'success'})
 
@@ -391,15 +458,42 @@ def viewfriends():
 @app.route('/viewattendance',methods=['post'])
 def viewattendance():
     lid=request.form['lid']
-    qry="SELECT COUNT(`attendence`)AS totalworking FROM `attendence` WHERE `stud_id`=%s"
-    res1 = selectone(qry,lid)
-    q="SELECT COUNT(`attendence`)AS present FROM `attendence` WHERE `stud_id`=%s AND `attendence`=1"
-    res2 = selectone(q,lid)
-    q1="SELECT COUNT(`attendence`)AS absent FROM `attendence` WHERE `stud_id`=%s AND `attendence`=0"
-    res3 = selectone(q1,lid)
-    return jsonify({"res1":res1,"res2":res2,"res3":res3})
+    sid=request.form['sid']
+    qry="SELECT COUNT(`attendence`)AS totalworking FROM `attendence` WHERE `stud_id`=%s AND `sub_id`=%s"
+    res1 = selectone(qry,(lid,sid))
+    print(res1)
+    q="SELECT COUNT(`attendence`)AS present FROM `attendence` WHERE `stud_id`=%s AND `sub_id`=%s AND `attendence`=1"
+    res2 = selectone(q,(lid,sid))
+    q1="SELECT COUNT(`attendence`)AS absent FROM `attendence` WHERE `stud_id`=%s AND `sub_id`=%s AND `attendence`=0"
+    res3 = selectone(q1,(lid,sid))
+    q="SELECT SUM(`attendence`) AS tpd,COUNT(*) AS twd,(SUM(`attendence`)/COUNT(*))*100 AS per,`subject`.`subject name` FROM `attendence` JOIN `subject` ON `subject`.`subj_id`=`attendence`.`sub_id` WHERE `attendence`.`stud_id`=%s and `attendence`.`sub_id`=%s  "
+    res4=selectone(q,(lid,sid))
+    return jsonify({"res1":res1['totalworking'],"res2":res2['present'],"res3":res3['absent'],"res4":res4['per']})
+
+@app.route('/staffviewattendance',methods=['post'])
+def staffviewattendance():
+
+    sid=request.form['sid']
+    # qry="SELECT COUNT(`attendence`)AS totalworking FROM `attendence` WHERE `stud_id`=%s AND `sub_id`=%s"
+    # res1 = selectone(qry,(lid,sid))
+    # print(res1)
+    # q="SELECT COUNT(`attendence`)AS present FROM `attendence` WHERE `stud_id`=%s AND `sub_id`=%s AND `attendence`=1"
+    # res2 = selectone(q,(lid,sid))
+    # q1="SELECT COUNT(`attendence`)AS absent FROM `attendence` WHERE `stud_id`=%s AND `sub_id`=%s AND `attendence`=0"
+    # res3 = selectone(q1,(lid,sid))
+    q="SELECT SUM(`attendence`) AS tpd,COUNT(*) AS twd,(SUM(`attendence`)/COUNT(*))*100 AS per,`subject`.`subject name`,`student`.`name` FROM `attendence` JOIN `subject` ON `subject`.`subj_id`=`attendence`.`sub_id` JOIN `student` ON `student`.`login_id`=`attendence`.`stud_id` WHERE `attendence`.`sub_id`=%s GROUP BY `attendence`.`stud_id`  "
+    res4=selectall2(q,(sid))
+    return jsonify(res4)
 
 
+
+
+@app.route('/ciewsubject1',methods=['post'])
+def ciewsubject1():
+    ii=request.form['year']
+    qry="SELECT * FROM subject where semester=%s"
+    res = selectall2(qry,ii)
+    return jsonify(res)
 
 
 @app.route('/ciewsubject',methods=['post'])
@@ -471,6 +565,17 @@ def get_question():
     print(s)
     return jsonify(s)
 
+@app.route('/viewstusub', methods=['post'])
+def viewstusub():
+    print (request.form)
+    lid = request.form['lid']
+
+
+    qry = "SELECT * FROM `subject` WHERE `semester` IN(SELECT `smester` FROM `student` WHERE `login_id`=%s)"
+    s = selectall2(qry,lid)
+    print(s)
+    return jsonify(s)
+
 
 @app.route('/answertest', methods=['post'])
 def answertest():
@@ -503,10 +608,16 @@ def answertestfeedback():
     lid = request.form['lid']
     ans = request.form['ans']
     res = request.form['res']
-    qry="INSERT INTO `feed_response` VALUES (NULL,%s,%s,%s,%s)"
-    val=(qid,lid,ans,res)
-    iud(qry,val)
-    return jsonify({'task': 'success'})
+    q="SELECT * FROM `feed_response` WHERE `feed_id`=%s AND `stud_id`=%s"
+    res=selectone(q,(qid,lid))
+    if res is None:
+        qry="INSERT INTO `feed_response` VALUES (NULL,%s,%s,%s,%s)"
+        val=(qid,lid,ans,res)
+        iud(qry,val)
+        return jsonify({'task': 'success'})
+    else:
+        return jsonify({'task': 'invalid'})
+
 
 
 
@@ -529,10 +640,16 @@ def answertestsuvey():
     lid = request.form['lid']
     ans = request.form['ans']
     res = request.form['res']
-    qry="INSERT INTO `survey_response`VALUES (NULL,%s,%s,%s,%s)"
-    val=(qid,lid,res,ans)
-    iud(qry,val)
-    return jsonify({'task': 'success'})
+    qr = "SELECT * FROM `survey_response` WHERE `sur_id`=%s AND `stud_id`=%s"
+    res = selectone(qr, (qid,lid))
+    if res is None:
+
+        qry="INSERT INTO `survey_response`VALUES (NULL,%s,%s,%s,%s)"
+        val=(qid,lid,res,ans)
+        iud(qry,val)
+        return jsonify({'task': 'success'})
+    else:
+        return jsonify({'task': 'invalid'})
 "======================================================================="
 
 @app.route('/editimage', methods=['post'])
@@ -621,10 +738,11 @@ def addsurvey():
     gender = request.form['op3']
     dob = request.form['op4']
     phone = request.form['ans']
+    sid = request.form['sid']
 
 
-    q="INSERT INTO `survey` VALUES(NULL,%s,%s,%s,%s,%s,%s,CURDATE())"
-    v=(name,ano,sem,gender,dob,phone)
+    q="INSERT INTO `survey` VALUES(NULL,%s,%s,%s,%s,%s,'kkk',CURDATE(),%s)"
+    v=(name,ano,sem,gender,dob,sid,phone)
     iud(q,v)
     return jsonify({'task':'valid'})
 
@@ -635,16 +753,30 @@ def addfeedback():
     sem = request.form['op2']
     gender = request.form['op3']
     dob = request.form['op4']
-    phone = request.form['ans']
+    ldate = request.form['ldate']
+
     lid = request.form['lid']
 
-
-    q="INSERT INTO `feedback` VALUES(NULL,%s,%s,%s,%s,%s,%s,%s,CURDATE())"
-    v=(name,lid,ano,sem,gender,dob,phone)
+    q="INSERT INTO `feedback` VALUES(NULL,%s,%s,%s,%s,%s,%s,'hhhh',CURDATE(),%s)"
+    v=(name,lid,ano,sem,gender,dob,ldate)
     iud(q,v)
     return jsonify({'task':'valid'})
 
+@app.route('/addquestion', methods=['post'])
+def addquestion():
+    name = request.form['question']
+    ano = request.form['op1']
+    sem = request.form['op2']
+    gender = request.form['op3']
+    dob = request.form['op4']
+    phone = request.form['ans']
+    lid = request.form['eid']
 
+
+    q="INSERT INTO `questions` VALUES(NULL,%s,%s,%s,%s,%s,%s,%s)"
+    v=(lid,name,ano,sem,gender,dob,phone)
+    iud(q,v)
+    return jsonify({'task':'valid'})
 @app.route('/addstudym', methods=['post'])
 def addstudym():
     print(request.form)
@@ -658,5 +790,116 @@ def addstudym():
     v=(pid,topic,p,date)
     iud(q,v)
     return jsonify({'task':'success'})
+
+
+
+
+
+@app.route('/addactualplan',methods=['post','get'])
+def addactualplan():
+    lid = request.args.get('id')
+    qr="SELECT * FROM `subject` JOIN `assignsub`ON `subject`.`subj_id`=`assignsub`.`sub_id` WHERE `t_id`=%s"
+    v1 = selectall2(qr, lid)
+    q="SELECT * FROM `proposedplan` "
+    v=selectall(q)
+    return render_template("plan/addactualplan.html",val1=v,val=v1)
+
+
+
+@app.route('/addactualplan1',methods=['post','get'])
+def addactualplan1():
+
+     Description  =request.form['textarea2']
+     Date  =request.form['textfield']
+     Hour  =request.form['select2']
+     module=request.form['select3']
+     status=request.form['select4']
+     pid=request.form['textfield5']
+
+     qry="INSERT INTO `actualplan` VALUES(NULL,%s,%s,%s,%s,%s,%s)"
+     val=(pid,Date,Hour,module,status,Description)
+     iud(qry,val)
+     return redirect('addactualplan')
+
+
+
+
+
+
+@app.route('/addproposedplan',methods=['post','get'])
+def addproposedplan():
+    lid=request.args.get('id')
+    q="SELECT * FROM `subject` JOIN `assignsub`ON `subject`.`subj_id`=`assignsub`.`sub_id` WHERE `t_id`=%s"
+    v=selectall2(q,lid)
+    return render_template("plan/addproposedplan.html",val=v)
+
+@app.route('/addproposedplan1',methods=['post','get'])
+def addproposedplan1():
+     Subject =request.form['select']
+     topic =request.form['textfield2']
+     Description  =request.form['textarea2']
+     Date  =request.form['textfield']
+     Hour  =request.form['select2']
+     module=request.form['select3']
+
+     qry="INSERT INTO `proposedplan` VALUES(NULL,%s,%s,%s,%s,%s,%s)"
+     val=(topic,Description,Date,Hour,module,Subject)
+     iud(qry,val)
+     return '''<script>alert("added");window.location='addproposedplan'</script>'''
+
+
+@app.route('/viewuploadedfiles',methods=['POST'])
+def viewuploadedfiles():
+    aid=request.form['aaid']
+    qry="SELECT `up_assignment`.*,`student`.`name`,`addmission no` FROM `up_assignment` JOIN `student` ON `student`.`login_id`=`up_assignment`.`stud_id` WHERE `up_assignment`.`ass_id`=%s "
+    res= selectall2(qry,aid)
+    print(res,"hhhhhhhh")
+    return jsonify(res)
+
+
+
+@app.route('/viewqn',methods=['POST'])
+def viewqn():
+    eid=request.form['eeid']
+    qry=" SELECT * FROM `questions` WHERE `exam_id`=%s "
+    res= selectall2(qry,eid)
+    return jsonify(res)
+
+
+@app.route('/viewsuuu',methods=['POST'])
+def viewsuuu():
+    lid = request.form['sid']
+    qry=" SELECT * FROM `survey`  WHERE `subid`=%s "
+    res= selectall2(qry,lid)
+    print(res)
+    return jsonify(res)
+
+@app.route('/viewfeedback',methods=['POST'])
+def viewfeedback():
+    lid=request.form['lid']
+    qry=" SELECT * FROM `feedback` where staff_id=%s "
+    res= selectall2(qry,lid)
+    return jsonify(res)
+
+
+@app.route('/viewactualplan',methods=['post','get'])
+def viewactualplan():
+    return render_template("plan/viewactualplan.html")
+@app.route('/viewproposedplan',methods=['post','get'])
+def viewproposedplan():
+    q="select * from subject"
+    v=selectall(q)
+    return render_template("plan/viewproposedplan.html",val=v)
+
+@app.route('/viewproposedplan1',methods=['post','get'])
+def viewproposedplan1():
+
+    sem=request.form['select']
+    qry="SELECT * FROM `proposedplan`  JOIN  `subject` ON `subject`.`subj_id`=`proposedplan`.`subid` WHERE   `proposedplan`.`subid`=%s "
+    t=(sem)
+    val = selectall2(qry,t)
+    q = "select * from subject"
+    v = selectall(q)
+    return render_template("plan/viewproposedplan.html",val1=val,val=v)
 
 app.run(host='0.0.0.0',port='5000')

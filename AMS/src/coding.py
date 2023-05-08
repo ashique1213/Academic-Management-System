@@ -339,6 +339,48 @@ def viewfeedback1():
     return render_template("view feedback.html",v=res,val=r)
 
 
+@app.route('/viewresponsesurvey')
+@login_required
+def viewresponsesurvey():
+    feedid=request.args.get('id')
+    print(feedid)
+
+    qry = "SELECT COUNT(*) as e,`response` FROM `survey_response` WHERE `sur_id`=%s"
+    res = selectall2(qry,feedid)
+    print(res)
+    return render_template("viewresponsesurvey.html",val=res)
+
+
+@app.route('/viewattendance')
+@login_required
+def viewattendance():
+    return render_template("viewattendance.html")
+
+
+@app.route('/viewattendance1',methods=['post'])
+@login_required
+def viewattendance1():
+    sem=request.form['select']
+    q="select SUM(`attendence`) AS tpd,count(*) AS twd,(sum(`attendence`)/count(*))*100 as per,`student`.`name` from `attendence` join `student` on `student`.`login_id`=`attendence`.`stud_id` where `student`.`smester`=%s group by `attendence`.`stud_id`  "
+    v=(sem)
+    res=selectall2(q,v)
+    print(res)
+    return render_template("viewattendance.html",val=res)
+
+
+
+
+@app.route('/viewresponsefeed')
+@login_required
+def viewresponsefeed():
+    feedid=request.args.get('id')
+    print(feedid)
+
+    qry = "SELECT COUNT(*) as e,`response` FROM `feed_response` WHERE `feed_id`=%s"
+    res = selectall2(qry,feedid)
+    print(res)
+    return render_template("viewresponsefeedback.html",val=res)
+
 
 
 @app.route('/viewsurvey')
