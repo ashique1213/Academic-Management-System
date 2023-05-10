@@ -2,6 +2,7 @@ package com.example.amsapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -26,8 +28,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class addsurvey extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -37,6 +42,7 @@ public class addsurvey extends AppCompatActivity implements AdapterView.OnItemSe
     String feedback,op1,op2,op3,op4,ans,ssid;
     Spinner s1;
     ArrayList<String>sid,sub;
+    final Calendar myCalendar= Calendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +57,21 @@ public class addsurvey extends AppCompatActivity implements AdapterView.OnItemSe
         b1=findViewById(R.id.button14);
         s1=findViewById(R.id.spinner10);
         sh= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        DatePickerDialog.OnDateSetListener date =new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int day) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH,month);
+                myCalendar.set(Calendar.DAY_OF_MONTH,day);
+                updateLabel();
+            }
+        };
+        e6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new DatePickerDialog(addsurvey.this,date,myCalendar.get(Calendar.YEAR),myCalendar.get(Calendar.MONTH),myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
         String url3 = "http://" + sh.getString("ip", "") + ":5000/viewsubjectonlyforexam";
         RequestQueue queue1 = Volley.newRequestQueue(addsurvey.this);
 
@@ -135,7 +156,7 @@ public class addsurvey extends AppCompatActivity implements AdapterView.OnItemSe
                 }
                 else if (ans.equalsIgnoreCase(""))
                 {
-                    e6.setError("Enteranswer");
+                    e6.setError("lasr date");
                 }
 
 
@@ -210,5 +231,10 @@ public class addsurvey extends AppCompatActivity implements AdapterView.OnItemSe
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+    private void updateLabel(){
+        String myFormat="MM/dd/yy";
+        SimpleDateFormat dateFormat=new SimpleDateFormat(myFormat, Locale.US);
+        e6.setText(dateFormat.format(myCalendar.getTime()));
     }
 }
