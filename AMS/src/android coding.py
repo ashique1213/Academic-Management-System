@@ -74,7 +74,7 @@ def ttviewtassignment():
 @app.route('/ttviewtassignment1',methods=['POST'])
 def ttviewtassignment1():
 
-    qry="SELECT * FROM `assignment` WHERE `last date`>=CURDATE()  "
+    qry="SELECT * FROM `assignment` WHERE `last date`<=CURDATE()  "
     res= selectall(qry)
     return jsonify(res)
 
@@ -732,6 +732,7 @@ def uploadassigment():
 
 @app.route('/addsurvey', methods=['post'])
 def addsurvey():
+    print(request.form)
     name = request.form['question']
     ano = request.form['op1']
     sem = request.form['op2']
@@ -741,7 +742,7 @@ def addsurvey():
     sid = request.form['sid']
 
 
-    q="INSERT INTO `survey` VALUES(NULL,%s,%s,%s,%s,%s,'kkk',CURDATE(),%s)"
+    q="INSERT INTO `survey` VALUES(NULL,%s,%s,%s,%s,%s,'kkk',CURDATE(),%s,%s)"
     v=(name,ano,sem,gender,dob,sid,phone)
     iud(q,v)
     return jsonify({'task':'valid'})

@@ -54,7 +54,7 @@ CREATE TABLE `anoucement` (
 /*Data for the table `anoucement` */
 
 insert  into `anoucement`(`an_id`,`anouncement`,`date`) values 
-(3,'Eid mubarak','2023-04-01');
+(3,'PLEASE SUBMIT SEMINAR REPORT','2023-04-01');
 
 /*Table structure for table `answer` */
 
@@ -83,15 +83,12 @@ CREATE TABLE `assignment` (
   `last date` varchar(10) DEFAULT NULL,
   `curdate` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`ass_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 /*Data for the table `assignment` */
 
 insert  into `assignment`(`ass_id`,`staf_id`,`topic`,`description`,`last date`,`curdate`) values 
-(1,2,'gbf','gfgfg','2023-04-30','2023-04-30'),
-(2,3,'hhh','hhh','2023-05-06','2023-05-03'),
-(3,3,'hhh','hhh','2023-05-06','2023-05-03'),
-(5,3,'ash','ash','2023-05-08','2023-05-06');
+(1,3,'ZZZ','xxx','05/11/23','2023-05-09');
 
 /*Table structure for table `assignsub` */
 
@@ -102,18 +99,17 @@ CREATE TABLE `assignsub` (
   `t_id` int(5) DEFAULT NULL,
   `sub_id` int(5) DEFAULT NULL,
   PRIMARY KEY (`assign_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 /*Data for the table `assignsub` */
 
 insert  into `assignsub`(`assign_id`,`t_id`,`sub_id`) values 
 (1,6,6),
-(2,2,6),
-(4,3,2),
-(5,3,3),
 (6,3,1),
-(7,3,3),
-(8,2,2);
+(9,3,5),
+(10,3,2),
+(11,2,10),
+(12,2,7);
 
 /*Table structure for table `attendence` */
 
@@ -127,7 +123,7 @@ CREATE TABLE `attendence` (
   `hour` bigint(15) DEFAULT NULL,
   `attendence` bigint(15) DEFAULT NULL,
   PRIMARY KEY (`att_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 /*Data for the table `attendence` */
 
@@ -137,7 +133,13 @@ insert  into `attendence`(`att_id`,`stud_id`,`sub_id`,`date`,`hour`,`attendence`
 (3,4,2,'2005-08-23',1,1),
 (4,9,2,'2005-08-23',1,0),
 (5,4,2,'2005-08-23',1,1),
-(6,9,2,'2005-08-23',1,0);
+(6,9,2,'2005-08-23',1,0),
+(7,4,5,'2005-09-23',2,0),
+(8,9,5,'2005-09-23',2,1),
+(9,4,5,'2005-09-23',5,1),
+(10,9,5,'2005-09-23',5,1),
+(11,4,5,'2005-11-23',1,1),
+(12,4,5,'2005-11-23',1,1);
 
 /*Table structure for table `chat` */
 
@@ -150,7 +152,7 @@ CREATE TABLE `chat` (
   `message` varchar(25) DEFAULT NULL,
   `date` date DEFAULT NULL,
   PRIMARY KEY (`chat_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 /*Data for the table `chat` */
 
@@ -162,7 +164,11 @@ insert  into `chat`(`chat_id`,`from_id`,`to_id`,`message`,`date`) values
 (7,4,2,'hi','2023-05-06'),
 (8,4,3,'hi i','2023-05-06'),
 (9,4,3,'','2023-05-06'),
-(10,3,4,'ok','2023-05-06');
+(10,3,4,'ok','2023-05-06'),
+(11,3,9,'hi','2023-05-09'),
+(12,3,9,'hi','2023-05-09'),
+(13,3,9,'hi','2023-05-09'),
+(14,3,9,'hi','2023-05-09');
 
 /*Table structure for table `exam` */
 
@@ -180,13 +186,8 @@ CREATE TABLE `exam` (
 /*Data for the table `exam` */
 
 insert  into `exam`(`exam_id`,`sub_id`,`date`,`topic`,`time`) values 
-(1,2,'2023-04-30','eng',NULL),
-(2,2,'0000-00-00','hhh',NULL),
-(3,3,'0000-00-00','hh',NULL),
-(4,3,'0000-00-00','hh',NULL),
-(5,2,'0000-00-00','as',NULL),
-(6,3,'05/11/23','gdfhhr',NULL),
-(7,2,'05/12/23','hv igc','15');
+(6,3,'05/11/23','SERIES 1',NULL),
+(7,2,'05/12/23','SERIES 2','15');
 
 /*Table structure for table `fee` */
 
@@ -200,13 +201,13 @@ CREATE TABLE `fee` (
   `description` varchar(50) DEFAULT NULL,
   `title` varchar(25) DEFAULT NULL,
   PRIMARY KEY (`f_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 /*Data for the table `fee` */
 
 insert  into `fee`(`f_id`,`semester`,`amount`,`lastdate`,`description`,`title`) values 
-(2,'1','100','2023-03-22','urgent','tution '),
-(3,'2','200','2023-03-30','hi','fee');
+(3,'1','200','2023-03-30','Urgent','Tution fee'),
+(4,'1','2000','2023-05-10','Urgent','EXAM FEE');
 
 /*Table structure for table `fee details` */
 
@@ -221,7 +222,7 @@ CREATE TABLE `fee details` (
   `date paid` date DEFAULT NULL,
   `status` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`fd_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 /*Data for the table `fee details` */
 
@@ -232,7 +233,10 @@ insert  into `fee details`(`fd_id`,`f_id`,`stud_id`,`amount paid`,`amount due`,`
 (4,0,4,100,0,'2023-04-30','paid'),
 (5,0,4,100,0,'2023-04-30','paid'),
 (6,2,4,100,0,'2023-04-30','paid'),
-(7,3,4,200,0,'2023-05-06','paid');
+(7,3,4,200,0,'2023-05-06','paid'),
+(8,4,9,0,2000,'2023-05-08','NO PAID'),
+(9,4,4,0,1000,'2023-05-11','Not paid'),
+(10,4,4,2000,0,'2023-05-09','paid');
 
 /*Table structure for table `feed_response` */
 
@@ -245,7 +249,7 @@ CREATE TABLE `feed_response` (
   `response` varchar(25) DEFAULT NULL,
   `mark` int(11) DEFAULT NULL,
   PRIMARY KEY (`res_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 /*Data for the table `feed_response` */
 
@@ -253,7 +257,10 @@ insert  into `feed_response`(`res_id`,`feed_id`,`stud_id`,`response`,`mark`) val
 (1,1,4,'f',0),
 (2,5,4,'v',0),
 (3,6,4,'r',0),
-(4,3,4,'f',NULL);
+(4,3,4,'f',NULL),
+(5,7,4,'B',NULL),
+(6,8,4,'B',NULL),
+(7,9,4,'B',NULL);
 
 /*Table structure for table `feedback` */
 
@@ -271,15 +278,15 @@ CREATE TABLE `feedback` (
   `date` varchar(10) DEFAULT NULL,
   `ldate` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`feed_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 /*Data for the table `feedback` */
 
 insert  into `feedback`(`feed_id`,`feed_questions`,`staff_id`,`op1`,`op2`,`op3`,`op4`,`ans`,`date`,`ldate`) values 
 (1,'bnbvnv',2,'q','r','qe','qu','r','2023-04-30',NULL),
-(3,'what is this',3,'1','w','f','t','1','2023-05-06',NULL),
-(5,'hgf',3,'ohc','g','v','v','hhhh','2023-05-07',NULL),
-(6,'hhh',3,'h','r','l','k','hhhh','2023-05-08','05/10/2023');
+(7,'xxxxxxxx',3,'A','B','C','D','hhhh','2023-05-09','05-10-2023'),
+(8,'YYYYYY',3,'A','B','C','D','hhhh','2023-05-09','05-10-2023'),
+(9,'ZZZZZ',3,'A','B','C','D','hhhh','2023-05-09','05-10-2023');
 
 /*Table structure for table `internal marks` */
 
@@ -292,16 +299,16 @@ CREATE TABLE `internal marks` (
   `mark` bigint(15) DEFAULT NULL,
   `date` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`in_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 /*Data for the table `internal marks` */
 
 insert  into `internal marks`(`in_id`,`stud_id`,`examid`,`mark`,`date`) values 
 (1,4,1,55,'2023-04-30'),
 (2,4,2,22,'2023-05-05'),
-(3,9,2,10,'2023-05-06'),
 (4,4,3,67,'2023-05-07'),
-(5,4,2,2,'2023-05-08');
+(8,9,2,30,'2023-05-09'),
+(9,9,5,0,'2023-05-09');
 
 /*Table structure for table `login` */
 
@@ -313,7 +320,7 @@ CREATE TABLE `login` (
   `password` varchar(15) DEFAULT NULL,
   `type` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`login id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 /*Data for the table `login` */
 
@@ -326,7 +333,11 @@ insert  into `login`(`login id`,`username`,`password`,`type`) values
 (6,'qwerty','qwerty','teacher'),
 (7,'123456','123456','student'),
 (8,'qwert','qqqqq','teacher'),
-(9,'123456','123456','student');
+(9,'123456','123456','student'),
+(10,'frz','123456','teacher'),
+(11,'fbn','123456','teacher'),
+(12,'rbh','123456','student'),
+(13,'nih','123456','student');
 
 /*Table structure for table `materials` */
 
@@ -344,11 +355,7 @@ CREATE TABLE `materials` (
 /*Data for the table `materials` */
 
 insert  into `materials`(`mat_id`,`sub_id`,`topic`,`materials`,`date`) values 
-(1,NULL,'ssss',NULL,NULL),
-(2,0,'hhh','storage_emulated_0_Empty_Freight_src_static_assets_img_clients_client-3.png','0000-00-00'),
-(3,0,'uuu','storage_emulated_0_Empty_Freight_src_static_assets_img_clients_client-3.png','0000-00-00'),
-(4,3,'hhh','storage_emulated_0_Empty_Freight_src_static_assets_img_clients_client-4.png','0000-00-00'),
-(5,2,'mm','storage_emulated_0_Pictures_Screenshots_Screenshot_20230504-085509.png','0000-00-00');
+(1,NULL,'ssss',NULL,NULL);
 
 /*Table structure for table `proposedplan` */
 
@@ -363,13 +370,14 @@ CREATE TABLE `proposedplan` (
   `module` bigint(50) DEFAULT NULL,
   `subid` int(11) DEFAULT NULL,
   PRIMARY KEY (`p_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 /*Data for the table `proposedplan` */
 
 insert  into `proposedplan`(`p_id`,`topic`,`description`,`date`,`hour`,`module`,`subid`) values 
-(1,'Hhh','Vvvv','2023-05-07',2,2,3),
-(2,'Introduction ','Introduction ','2023-05-10',2,3,3);
+(3,'INDRODUCTION','INDRODUCTION','2023-05-07',1,2,5),
+(4,'XXXX','Xxxxxx','2023-05-09',3,2,5),
+(5,'Xx','Ccxc','2023-05-09',1,1,2);
 
 /*Table structure for table `questions` */
 
@@ -385,14 +393,17 @@ CREATE TABLE `questions` (
   `op4` varchar(25) DEFAULT NULL,
   `ans` varchar(25) DEFAULT NULL,
   PRIMARY KEY (`q_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 /*Data for the table `questions` */
 
 insert  into `questions`(`q_id`,`exam_id`,`question`,`op1`,`op2`,`op3`,`op4`,`ans`) values 
 (1,1,'bvbv','a','b','c','d','a'),
 (2,1,'efef','b','t','h','k','k'),
-(4,5,'dd','de','fd','dd','dd','ff');
+(4,5,'dd','de','fd','dd','dd','ff'),
+(5,6,'ZZZZZ','A','B','C','D','D'),
+(6,6,'Xxxxx','A','B','C','D','A'),
+(7,6,'YYYYY','A','B','C','D','B');
 
 /*Table structure for table `result` */
 
@@ -434,13 +445,15 @@ CREATE TABLE `student` (
   `jointdate` date DEFAULT NULL,
   `photo` text,
   PRIMARY KEY (`stud_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 /*Data for the table `student` */
 
 insert  into `student`(`stud_id`,`login_id`,`name`,`addmission no`,`smester`,`gender`,`dob`,`address`,`phone`,`jointdate`,`photo`) values 
-(1,4,'Ashique',123456,2,'male','2023-04-07','Wayanad',98766788,'2019-04-26','Screenshot_1.png'),
-(3,9,'Nihad',16665,2,'male','2023-04-07','korome',9874563211,'2023-04-26','Screenshot_1.png');
+(1,4,'Ashique',16645,1,'male','2023-04-07','Wayanad',9876678822,'2023-04-26','download.jfif'),
+(3,9,'Nihad',16665,2,'male','2023-04-07','korome',9874563211,'2023-04-26','download.jfif'),
+(4,12,'Rabeeh',16714,3,'male','1999-07-10','vengara',7418529633,'2024-07-09','download.jfif'),
+(5,13,'Nihala',16666,3,'female','1999-05-10','kannur',8945632171,'2024-07-09','download.jfif');
 
 /*Table structure for table `subject` */
 
@@ -452,15 +465,25 @@ CREATE TABLE `subject` (
   `semester` bigint(25) DEFAULT NULL,
   `credit` bigint(25) DEFAULT NULL,
   PRIMARY KEY (`subj_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 /*Data for the table `subject` */
 
 insert  into `subject`(`subj_id`,`subject name`,`semester`,`credit`) values 
 (2,'DBMS',2,4),
-(3,'Network',2,4),
-(4,'os',1,4),
-(5,'OR',1,2);
+(3,'NETWORK',2,4),
+(4,'MATHS',1,4),
+(5,'DATA STRUCTURE',1,4),
+(6,'DFCA',1,4),
+(7,'SOFTWARE',1,4),
+(8,'OPERATING SYSTEM',2,4),
+(9,'A I',2,4),
+(10,'DS ML',3,4),
+(11,'DEEP LEARNING',3,3),
+(12,'OPERATION RESEARCH',3,4),
+(13,'DAA',3,4),
+(14,'SEMINAR',4,10),
+(15,'PROJECT',4,20);
 
 /*Table structure for table `survey` */
 
@@ -478,14 +501,14 @@ CREATE TABLE `survey` (
   `subid` int(11) DEFAULT NULL,
   `ldate` date DEFAULT NULL,
   PRIMARY KEY (`sur_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 /*Data for the table `survey` */
 
 insert  into `survey`(`sur_id`,`survey questions`,`op1`,`op2`,`op3`,`op4`,`ans`,`date`,`subid`,`ldate`) values 
-(1,'fgbfgf','1','2','3','4','1','2023-04-30',NULL,NULL),
-(2,'dddddd','2','3','4','5','5',NULL,NULL,NULL),
-(5,'ed','ec','ff','c','c','g','2023-05-07',3,NULL);
+(6,'Xxxx','A','B','C','D','kkk','2023-05-09',5,'2005-10-23'),
+(7,'Yyy','A','B','C','D','kkk','2023-05-09',5,'2005-10-23'),
+(9,'Aaaa','A','B','C','D','kkk','2023-05-09',2,'2005-10-23');
 
 /*Table structure for table `survey_response` */
 
@@ -534,13 +557,15 @@ CREATE TABLE `teacher` (
   `phone` bigint(25) DEFAULT NULL,
   `photo` text,
   PRIMARY KEY (`t_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 /*Data for the table `teacher` */
 
 insert  into `teacher`(`t_id`,`login_id`,`name`,`qualification`,`designation`,`gender`,`age`,`phone`,`photo`) values 
-(1,'2','Vasudevan','MCA','Assistant professor','male',45,7894561233,'Screenshot_1.png'),
-(2,'3','Geevar','MSC','Assistant Professor','male',46,456789123334,'storage_emulated_0_Empty_Freight_src_static_assets_img_clients_client-2.png');
+(1,'2','Vasudevan','MCA','Assistant professor','male',45,7894561233,'download.jfif'),
+(2,'3','Geevar','MSC','Assistant Professor','male',46,9874563211,'download.jfif'),
+(3,'10','Firoz','MCA','Assistant professor','male',45,9874563210,'download.jfif'),
+(4,'11','Febin','MCA','Assistant professor','female',40,7894561323,'download.jfif');
 
 /*Table structure for table `time_table` */
 
@@ -553,101 +578,161 @@ CREATE TABLE `time_table` (
   `day` varchar(20) DEFAULT NULL,
   `hours` bigint(10) DEFAULT NULL,
   PRIMARY KEY (`time_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=151 DEFAULT CHARSET=latin1;
 
 /*Data for the table `time_table` */
 
 insert  into `time_table`(`time_id`,`sub_id`,`semester`,`day`,`hours`) values 
-(1,2,2,'Monday',1),
+(1,3,2,'Monday',1),
 (2,3,2,'Monday',2),
 (3,2,2,'Monday',3),
 (4,2,2,'Monday',4),
-(5,2,2,'Monday',5),
+(5,9,2,'Monday',5),
 (6,2,2,'Monday',6),
-(7,2,2,'Tuesday',1),
-(8,2,2,'Tuesday',2),
+(7,8,2,'Tuesday',1),
+(8,3,2,'Tuesday',2),
 (9,2,2,'Tuesday',3),
-(10,2,2,'Tuesday',4),
+(10,9,2,'Tuesday',4),
 (11,2,2,'Tuesday',5),
-(12,2,2,'Tuesday',6),
+(12,9,2,'Tuesday',6),
 (13,2,2,'Wednesday',1),
-(14,2,2,'Wednesday',2),
-(15,2,2,'Wednesday',3),
+(14,8,2,'Wednesday',2),
+(15,3,2,'Wednesday',3),
 (16,2,2,'Wednesday',4),
 (17,2,2,'Wednesday',5),
-(18,2,2,'Wednesday',6),
-(19,2,2,'Thursday',1),
+(18,8,2,'Wednesday',6),
+(19,9,2,'Thursday',1),
 (20,2,2,'Thursday',2),
-(21,2,2,'Thursday',3),
+(21,8,2,'Thursday',3),
 (22,2,2,'Thursday',4),
-(23,2,2,'Thursday',5),
-(24,2,2,'Thursday',6),
+(23,8,2,'Thursday',5),
+(24,3,2,'Thursday',6),
 (25,2,2,'Friday',1),
-(26,2,2,'Friday',2),
+(26,9,2,'Friday',2),
 (27,2,2,'Friday',3),
-(28,2,2,'Friday',4),
-(29,2,2,'Friday',5),
+(28,8,2,'Friday',4),
+(29,3,2,'Friday',5),
 (30,2,2,'Friday',6),
 (31,5,1,'Monday',1),
 (32,5,1,'Monday',2),
 (33,4,1,'Monday',3),
 (34,4,1,'Monday',4),
 (35,4,1,'Monday',5),
-(36,4,1,'Monday',6),
-(37,5,1,'Tuesday',1),
-(38,5,1,'Tuesday',2),
-(39,4,1,'Tuesday',3),
-(40,4,1,'Tuesday',4),
-(41,4,1,'Tuesday',5),
-(42,4,1,'Tuesday',6),
-(43,4,1,'Wednesday',1),
-(44,4,1,'Wednesday',2),
+(36,5,1,'Monday',6),
+(37,4,1,'Tuesday',1),
+(38,6,1,'Tuesday',2),
+(39,5,1,'Tuesday',3),
+(40,6,1,'Tuesday',4),
+(41,5,1,'Tuesday',5),
+(42,6,1,'Tuesday',6),
+(43,6,1,'Wednesday',1),
+(44,6,1,'Wednesday',2),
 (45,5,1,'Wednesday',3),
-(46,4,1,'Wednesday',4),
+(46,5,1,'Wednesday',4),
 (47,4,1,'Wednesday',5),
-(48,4,1,'Wednesday',6),
-(49,4,1,'Thursday',1),
-(50,4,1,'Thursday',2),
-(51,4,1,'Thursday',3),
-(52,4,1,'Thursday',4),
-(53,4,1,'Thursday',5),
+(48,7,1,'Wednesday',6),
+(49,7,1,'Thursday',1),
+(50,6,1,'Thursday',2),
+(51,7,1,'Thursday',3),
+(52,7,1,'Thursday',4),
+(53,5,1,'Thursday',5),
 (54,4,1,'Thursday',6),
 (55,4,1,'Friday',1),
-(56,4,1,'Friday',2),
-(57,4,1,'Friday',3),
+(56,7,1,'Friday',2),
+(57,6,1,'Friday',3),
 (58,4,1,'Friday',4),
 (59,4,1,'Friday',5),
-(60,4,1,'Friday',6),
-(61,6,3,'Monday',1),
-(62,6,3,'Monday',2),
-(63,6,3,'Monday',3),
-(64,6,3,'Monday',4),
-(65,6,3,'Monday',5),
-(66,6,3,'Monday',6),
-(67,6,3,'Tuesday',1),
-(68,6,3,'Tuesday',2),
-(69,6,3,'Tuesday',3),
-(70,6,3,'Tuesday',4),
-(71,6,3,'Tuesday',5),
-(72,6,3,'Tuesday',6),
-(73,6,3,'Wednesday',1),
-(74,6,3,'Wednesday',2),
-(75,6,3,'Wednesday',3),
-(76,6,3,'Wednesday',4),
-(77,6,3,'Wednesday',5),
-(78,6,3,'Wednesday',6),
-(79,6,3,'Thursday',1),
-(80,6,3,'Thursday',2),
-(81,6,3,'Thursday',3),
-(82,6,3,'Thursday',4),
-(83,6,3,'Thursday',5),
-(84,6,3,'Thursday',6),
-(85,6,3,'Friday',1),
-(86,6,3,'Friday',2),
-(87,6,3,'Friday',3),
-(88,6,3,'Friday',4),
-(89,6,3,'Friday',5),
-(90,6,3,'Friday',6);
+(60,6,1,'Friday',6),
+(61,10,3,'Monday',1),
+(62,10,3,'Monday',2),
+(63,13,3,'Monday',3),
+(64,10,3,'Monday',4),
+(65,13,3,'Monday',5),
+(66,10,3,'Monday',6),
+(67,12,3,'Tuesday',1),
+(68,11,3,'Tuesday',2),
+(69,10,3,'Tuesday',3),
+(70,13,3,'Tuesday',4),
+(71,10,3,'Tuesday',5),
+(72,12,3,'Tuesday',6),
+(73,10,3,'Wednesday',1),
+(74,12,3,'Wednesday',2),
+(75,11,3,'Wednesday',3),
+(76,10,3,'Wednesday',4),
+(77,12,3,'Wednesday',5),
+(78,10,3,'Wednesday',6),
+(79,13,3,'Thursday',1),
+(80,10,3,'Thursday',2),
+(81,12,3,'Thursday',3),
+(82,11,3,'Thursday',4),
+(83,10,3,'Thursday',5),
+(84,11,3,'Thursday',6),
+(85,10,3,'Friday',1),
+(86,13,3,'Friday',2),
+(87,10,3,'Friday',3),
+(88,12,3,'Friday',4),
+(89,11,3,'Friday',5),
+(90,10,3,'Friday',6),
+(91,15,4,'Monday',1),
+(92,15,4,'Monday',2),
+(93,15,4,'Monday',3),
+(94,14,4,'Monday',4),
+(95,14,4,'Monday',5),
+(96,14,4,'Monday',6),
+(97,15,4,'Tuesday',1),
+(98,15,4,'Tuesday',2),
+(99,15,4,'Tuesday',3),
+(100,14,4,'Tuesday',4),
+(101,14,4,'Tuesday',5),
+(102,14,4,'Tuesday',6),
+(103,15,4,'Wednesday',1),
+(104,15,4,'Wednesday',2),
+(105,15,4,'Wednesday',3),
+(106,14,4,'Wednesday',4),
+(107,14,4,'Wednesday',5),
+(108,14,4,'Wednesday',6),
+(109,15,4,'Thursday',1),
+(110,15,4,'Thursday',2),
+(111,15,4,'Thursday',3),
+(112,14,4,'Thursday',4),
+(113,14,4,'Thursday',5),
+(114,14,4,'Thursday',6),
+(115,15,4,'Friday',1),
+(116,15,4,'Friday',2),
+(117,15,4,'Friday',3),
+(118,14,4,'Friday',4),
+(119,14,4,'Friday',5),
+(120,14,4,'Friday',6),
+(121,15,4,'Monday',1),
+(122,15,4,'Monday',2),
+(123,15,4,'Monday',3),
+(124,14,4,'Monday',4),
+(125,14,4,'Monday',5),
+(126,14,4,'Monday',6),
+(127,15,4,'Tuesday',1),
+(128,15,4,'Tuesday',2),
+(129,15,4,'Tuesday',3),
+(130,14,4,'Tuesday',4),
+(131,14,4,'Tuesday',5),
+(132,14,4,'Tuesday',6),
+(133,15,4,'Wednesday',1),
+(134,15,4,'Wednesday',2),
+(135,15,4,'Wednesday',3),
+(136,14,4,'Wednesday',4),
+(137,14,4,'Wednesday',5),
+(138,14,4,'Wednesday',6),
+(139,15,4,'Thursday',1),
+(140,15,4,'Thursday',2),
+(141,15,4,'Thursday',3),
+(142,14,4,'Thursday',4),
+(143,14,4,'Thursday',5),
+(144,14,4,'Thursday',6),
+(145,15,4,'Friday',1),
+(146,15,4,'Friday',2),
+(147,15,4,'Friday',3),
+(148,14,4,'Friday',4),
+(149,14,4,'Friday',5),
+(150,14,4,'Friday',6);
 
 /*Table structure for table `up_assignment` */
 
