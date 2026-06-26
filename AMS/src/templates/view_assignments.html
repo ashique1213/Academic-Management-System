@@ -1,0 +1,69 @@
+{% extends 'hodindex.html' %}
+{% block title %}Assignments{% endblock %}
+{% block body %}
+
+<!-- Page Header -->
+<div class="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div>
+        <h2 class="text-2xl font-bold text-slate-900">Assignments</h2>
+        <p class="text-sm text-slate-500 mt-1">Manage and track student assignments.</p>
+    </div>
+</div>
+
+<!-- Data Table Card -->
+<div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden relative">
+    <div class="overflow-x-auto">
+        <table class="w-full text-left dataTable">
+            <thead>
+                <tr>
+                    <th>Topic</th>
+                    <th>Teacher</th>
+                    <th>Due Date</th>
+                    <th>Posted</th>
+                    <th class="text-right">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in val %}
+                <tr>
+                    <td>
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 mr-3 shrink-0">
+                                <i class="bi bi-file-earmark-text"></i>
+                            </div>
+                            <div>
+                                <span class="font-medium text-slate-900 block">{{i['topic']}}</span>
+                                <span class="text-xs text-slate-500">{{i['description']}}</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="text-slate-600 text-sm font-medium">{{i['teacher_name']}}</span>
+                    </td>
+                    <td>
+                        <span class="text-slate-600 text-sm">{{i['last date']}}</span>
+                    </td>
+                    <td>
+                        <span class="text-slate-600 text-sm">{{i['curdate']}}</span>
+                    </td>
+                    <td class="text-right space-x-2 whitespace-nowrap">
+                        <a href="editassignment?id={{i['ass_id']}}" class="inline-flex items-center justify-center px-3 py-1.5 bg-blue-500 hover:bg-blue-600 text-white text-xs font-medium rounded-lg transition duration-150 ease-in-out shadow-sm">
+                            <i class="bi bi-pencil mr-1.5"></i> Edit
+                        </a>
+                        <a href="deleteassignment?id={{i['ass_id']}}" class="inline-flex items-center justify-center px-3 py-1.5 bg-rose-500 hover:bg-rose-600 text-white text-xs font-medium rounded-lg transition duration-150 ease-in-out shadow-sm" onclick="return confirm('Are you sure you want to delete this assignment?');">
+                            <i class="bi bi-trash mr-1.5"></i> Delete
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Floating Action Button -->
+<a href="/addassignment" class="fixed bottom-6 right-6 w-14 h-14 bg-violet-600 rounded-full shadow-xl flex items-center justify-center text-white hover:bg-violet-700 hover:scale-105 hover:shadow-2xl transition-all duration-200 z-50 group" title="Add New Assignment">
+    <i class="bi bi-plus text-3xl group-hover:rotate-90 transition-transform duration-300"></i>
+</a>
+
+{% endblock %}

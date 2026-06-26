@@ -88,6 +88,10 @@
                     <a href="/viewsubject" class="flex items-center px-3 py-2 text-sm font-medium rounded-lg text-slate-300 hover:bg-slate-700 hover:text-white transition duration-150 ease-in-out {% if 'subject' in request.path and 'assign' not in request.path %}bg-blue-600 text-white hover:bg-blue-600{% endif %}">
                         <i class="bi bi-journal-bookmark mr-3 text-lg opacity-75"></i> Subjects
                     </a>
+                    <a href="/viewassignments" class="flex items-center px-3 py-2 text-sm font-medium rounded-lg text-slate-300 hover:bg-slate-700 hover:text-white transition duration-150 ease-in-out {% if 'assignment' in request.path and 'assess' not in request.path %}bg-blue-600 text-white hover:bg-blue-600{% endif %}">
+                        <i class="bi bi-journal-text mr-3 text-lg opacity-75"></i> Assignments
+                    </a>
+
                     <a href="/viewassignsub" class="flex items-center px-3 py-2 text-sm font-medium rounded-lg text-slate-300 hover:bg-slate-700 hover:text-white transition duration-150 ease-in-out {% if 'assignsub' in request.path %}bg-blue-600 text-white hover:bg-blue-600{% endif %}">
                         <i class="bi bi-diagram-2 mr-3 text-lg opacity-75"></i> Assign Subjects
                     </a>

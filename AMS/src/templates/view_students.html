@@ -29,7 +29,11 @@
                 {% for i in val %}
                 <tr>
                     <td>
-                        <img src="static/photos/{{i['photo']}}" class="w-10 h-10 rounded-full object-cover border border-slate-200" alt="{{i['name']}}">
+                        {% if i['photo'] and i['photo'] != 'None' and i['photo'] != '' %}
+                            <img src="static/photos/{{i['photo']}}" class="w-10 h-10 rounded-full object-cover border border-slate-200" alt="{{i['name']}}">
+                        {% else %}
+                            <img src="https://ui-avatars.com/api/?name={{ i['name'] }}&background=random" class="w-10 h-10 rounded-full object-cover border border-slate-200" alt="{{i['name']}}">
+                        {% endif %}
                     </td>
                     <td>
                         <p class="font-medium text-slate-900">{{i['name']}}</p>

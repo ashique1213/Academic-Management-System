@@ -6,21 +6,20 @@
 <div class="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
     <div>
         <h2 class="text-2xl font-bold text-slate-900">Assessments</h2>
-        <p class="text-sm text-slate-500 mt-1">Manage examinations, tests, and quizzes.</p>
+        <p class="text-sm text-slate-500 mt-1">Manage examinations and assessments.</p>
     </div>
 </div>
 
 <!-- Data Table Card -->
 <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden relative">
-    <div class="overflow-x-auto p-4 md:p-6">
+    <div class="overflow-x-auto">
         <table class="w-full text-left dataTable">
             <thead>
                 <tr>
-                    <th>Assessment Name</th>
+                    <th>Topic</th>
                     <th>Date</th>
-                    <th>Type</th>
+                    <th>Time</th>
                     <th>Subject</th>
-                    <th>Total Marks</th>
                     <th class="text-right">Actions</th>
                 </tr>
             </thead>
@@ -32,23 +31,22 @@
                             <div class="w-8 h-8 rounded-full bg-violet-100 flex items-center justify-center text-violet-600 mr-3 shrink-0">
                                 <i class="bi bi-journal-check"></i>
                             </div>
-                            <span class="font-medium text-slate-900">{{i['assessment_name']}}</span>
+                            <span class="font-medium text-slate-900">{{i['topic']}}</span>
                         </div>
                     </td>
                     <td><span class="text-slate-600 text-sm">{{i['date']}}</span></td>
-                    <td><span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800">{{i['type']}}</span></td>
-                    <td>{{i['subject']}}</td>
-                    <td>{{i['total_marks']}}</td>
+                    <td><span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800">{{i['time']}}</span></td>
+                    <td><span class="font-medium text-slate-700">{{i['subject']}}</span></td>
                     <td class="text-right space-x-2 whitespace-nowrap">
-                        <a href="/view_results?id={{i['id']}}" class="inline-flex items-center justify-center px-3 py-1.5 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-medium rounded-lg transition duration-150 ease-in-out shadow-sm">
+                        <a href="/view_results?id={{i['exam_id']}}" class="inline-flex items-center justify-center px-3 py-1.5 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-medium rounded-lg transition duration-150 ease-in-out shadow-sm">
                             <i class="bi bi-bar-chart mr-1.5"></i> Results
                         </a>
-                        <button class="inline-flex items-center justify-center px-3 py-1.5 bg-blue-500 hover:bg-blue-600 text-white text-xs font-medium rounded-lg transition duration-150 ease-in-out shadow-sm">
+                        <a href="/edit_assessment?id={{i['exam_id']}}" class="inline-flex items-center justify-center px-3 py-1.5 bg-blue-500 hover:bg-blue-600 text-white text-xs font-medium rounded-lg transition duration-150 ease-in-out shadow-sm">
                             <i class="bi bi-pencil mr-1.5"></i> Edit
-                        </button>
-                        <button class="inline-flex items-center justify-center px-3 py-1.5 bg-rose-500 hover:bg-rose-600 text-white text-xs font-medium rounded-lg transition duration-150 ease-in-out shadow-sm">
+                        </a>
+                        <a href="/delete_assessment?id={{i['exam_id']}}" class="inline-flex items-center justify-center px-3 py-1.5 bg-rose-500 hover:bg-rose-600 text-white text-xs font-medium rounded-lg transition duration-150 ease-in-out shadow-sm" onclick="return confirm('Are you sure you want to delete this assessment?');">
                             <i class="bi bi-trash mr-1.5"></i> Delete
-                        </button>
+                        </a>
                     </td>
                 </tr>
                 {% endfor %}
@@ -58,8 +56,8 @@
 </div>
 
 <!-- Floating Action Button -->
-<button class="fixed bottom-6 right-6 w-14 h-14 bg-violet-600 rounded-full shadow-xl flex items-center justify-center text-white hover:bg-violet-700 hover:scale-105 hover:shadow-2xl transition-all duration-200 z-50 group" title="Create Assessment">
+<a href="/add_assessment" class="fixed bottom-6 right-6 w-14 h-14 bg-violet-600 rounded-full shadow-xl flex items-center justify-center text-white hover:bg-violet-700 hover:scale-105 hover:shadow-2xl transition-all duration-200 z-50 group" title="Add New Assessment">
     <i class="bi bi-plus text-3xl group-hover:rotate-90 transition-transform duration-300"></i>
-</button>
+</a>
 
 {% endblock %}

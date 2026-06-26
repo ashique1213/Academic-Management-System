@@ -173,7 +173,7 @@ def addfees1():
     qr = "INSERT INTO \"fee\" VALUES(DEFAULT,%s,%s,%s,%s,%s)"
     va = (sem, amount, ladate, desc,title)
     iud(qr, va)
-    return '''<script>alert("success");window.location="/viewfee#about"</script>'''
+    return redirect('/viewfee')
 
 
 @web_bp.route('/addfeedettails',methods=['post'])
@@ -198,7 +198,7 @@ def addfeedetails1():
     qr = "INSERT INTO \"fee details\" VALUES(DEFAULT,%s,%s,%s,%s,%s,%s)"
     va = (title,stdname, amtp, amtd,datep,status)
     iud(qr, va)
-    return '''<script>alert("success");window.location="/viewfeedetails#about"</script>'''
+    return redirect('/viewfeedetails')
 
 
 @web_bp.route('/addstudent',methods=['post'])
@@ -223,7 +223,7 @@ def addstudent():
     qr = "INSERT INTO \"student\" VALUES(DEFAULT,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
     va = (str(id), name, addno, sem, gender,dob,address, phone, jointdate,img)
     iud(qr, va)
-    return '''<script>alert("success");window.location="/viewstudents#about"</script>'''
+    return redirect('/viewstudents')
 
 
 @web_bp.route('/addst',methods=['get','post'])
@@ -257,7 +257,7 @@ def addteacher1():
    qr="INSERT INTO \"teacher\" VALUES(DEFAULT,%s,%s,%s,%s,%s,%s,%s,%s)"
    va=(str(id),name,quali,desig,gender,age,phone,img)
    iud(qr,va)
-   return '''<script>alert("success");window.location="/viewteacher#about"</script>'''
+   return redirect('/viewteacher')
 
 
 @web_bp.route('/addsubject',methods=['post'])
@@ -274,7 +274,7 @@ def addsubject1():
     qr = "INSERT INTO \"subject\" VALUES(DEFAULT,%s,%s,%s)"
     va = (subjname, sem, crd)
     iud(qr, va)
-    return '''<script>alert("success");window.location="/viewsubject#about"</script>'''
+    return redirect('/viewsubject')
 
 @web_bp.route('/addanoucement',methods=['post'])
 @login_required
@@ -288,7 +288,7 @@ def addanoucement1():
     qr = "INSERT INTO \"anoucement\" VALUES(DEFAULT,%s,curdate())"
     va = (an)
     iud(qr, va)
-    return '''<script>alert("success");window.location="/viewannouncement#about"</script>'''
+    return redirect('/viewannouncement')
 
 @web_bp.route('/viewannouncement')
 @login_required
@@ -426,7 +426,7 @@ def assignsub1():
     qr = "INSERT INTO \"assignsub\" VALUES(DEFAULT,%s,%s)"
     va = ( teachername,sub)
     iud(qr, va)
-    return '''<script>alert("success");window.location="/viewassignsub#about"</script>'''
+    return redirect('/viewassignsub')
 
 
 @web_bp.route('/editteacher')
@@ -445,7 +445,7 @@ def deleteteacher():
     id=request.args.get('id')
     qry = "delete from \"teacher\" where  login_id=%s"
     iud(qry,id)
-    return  '''<script>alert("success");window.location="/viewteacher#about"</script>'''
+    return redirect('/viewteacher')
 
 
 @web_bp.route('/updateteacher',methods=['post'])
@@ -464,7 +464,7 @@ def updateteacher():
        qry = "UPDATE teacher SET name=%s,qualification=%s,designation=%s,gender=%s,age=%s,phone=%s,photo=%s where login_id=%s"
        val=(name,quali,desig,gender,age,phone,img,session['tid'])
        iud(qry,val)
-       return '''<script>alert("success");window.location="/viewteacher#about"</script>'''
+       return redirect('/viewteacher')
     except Exception as e:
         name = request.form['textfield']
         quali = request.form['textfield2']
@@ -475,7 +475,7 @@ def updateteacher():
         qry = "UPDATE teacher SET name=%s,qualification=%s,designation=%s,gender=%s,age=%s,phone=%s where login_id=%s"
         val = (name, quali, desig, gender, age, phone, session['tid'])
         iud(qry, val)
-        return '''<script>alert("success");window.location="/viewteacher#about"</script>'''
+        return redirect('/viewteacher')
 
 
 @web_bp.route('/editstudent')
@@ -493,7 +493,7 @@ def deletestudent():
     id=request.args.get('id')
     qry = "delete from \"student\" where  login_id=%s"
     iud(qry,id)
-    return  '''<script>alert("success");window.location="/viewstudents#about"</script>'''
+    return redirect('/viewstudents')
 
 @web_bp.route('/updatestudent',methods=['post'])
 @login_required
@@ -513,7 +513,7 @@ def updatestudent():
         qry = "UPDATE student SET name=%s,\"addmission no\"=%s,smester=%s,gender=%s,dob=%s,address=%s,phone=%s,jointdate=%s,photo=%s where login_id=%s"
         val=(name,addno,sem,gender,dob,address,phone,jointdate,img,session['stid'])
         iud(qry,val)
-        return '''<script>alert("success");window.location="/viewstudents#about"</script>'''
+        return redirect('/viewstudents')
     except Exception as e:
         name = request.form['textfield']
         addno = request.form['textfield2']
@@ -526,7 +526,7 @@ def updatestudent():
         qry = "UPDATE student SET name=%s,\"addmission no\"=%s,smester=%s,gender=%s,dob=%s,address=%s,phone=%s,jointdate=%s where login_id=%s"
         val = (name, addno, sem, gender, dob, address, phone, jointdate, session['stid'])
         iud(qry, val)
-        return '''<script>alert("success");window.location="/viewstudents#about"</script>'''
+        return redirect('/viewstudents')
 
 @web_bp.route('/editsubject')
 @login_required
@@ -543,7 +543,7 @@ def deletesubject():
     id=request.args.get('id')
     qry = "delete from \"subject\" where  subj_id=%s"
     iud(qry,id)
-    return  '''<script>alert("success");window.location="/viewsubject#about"</script>'''
+    return redirect('/viewsubject')
 
 @web_bp.route('/updatesubject',methods=['post'])
 @login_required
@@ -554,7 +554,7 @@ def updatesubject():
     qry = "UPDATE subject SET \"subject name\"=%s,semester=%s,credit=%s where subj_id=%s"
     val=(subjname,sem,crd,session['sid'])
     iud(qry,val)
-    return '''<script>alert("success");window.location="/viewsubject#about"</script>'''
+    return redirect('/viewsubject')
 
 @web_bp.route('/editassignsub')
 @login_required
@@ -576,7 +576,7 @@ def deleteassignsub():
     id=request.args.get('id')
     qry = "delete from \"assignsub\" where  assign_id=%s"
     iud(qry,id)
-    return  '''<script>alert("success");window.location="/viewassignsub#about"</script>'''
+    return redirect('/viewassignsub')
 
 @web_bp.route('/updateassignsub',methods=['post'])
 @login_required
@@ -586,7 +586,7 @@ def updateassignsub():
     qry = "UPDATE assignsub SET t_id=%s,sub_id=%s where assign_id=%s"
     val=(teachername,sub,session['asid'])
     iud(qry,val)
-    return '''<script>alert("success");window.location="/viewassignsub#about"</script>'''
+    return redirect('/viewassignsub')
 
 
 @web_bp.route('/editfee')
@@ -604,7 +604,7 @@ def deletefee():
     id=request.args.get('id')
     qry = "delete from \"fee\" where  f_id=%s"
     iud(qry,id)
-    return  '''<script>alert("success");window.location="/viewfee#about"</script>'''
+    return redirect('/viewfee')
 
 @web_bp.route('/updatefee',methods=['post'])
 @login_required
@@ -617,7 +617,7 @@ def updatefee():
     qry = "UPDATE fee SET semester=%s,amount=%s,lastdate=%s,description=%s,title=%s where f_id=%s"
     val=(sem,amount,ladate,desc,title,session['fid'])
     iud(qry,val)
-    return '''<script>alert("success");window.location="/viewfee#about"</script>'''
+    return redirect('/viewfee')
 
 
 @web_bp.route('/deletefeedetails')
@@ -625,7 +625,7 @@ def deletefeedetails():
     id=request.args.get('id')
     qry = "delete from \"fee\" where  fd_id=%s"
     iud(qry,id)
-    return  '''<script>alert("success");window.location="/viewfeedetails#about"</script>'''
+    return redirect('/viewfeedetails')
 
 
 @web_bp.route('/editfeedetails')
@@ -654,7 +654,7 @@ def updatefeedetails():
     qry = "UPDATE \"fee details\" SET \"f_id\"=%s,\"stud_id\"=%s,\"amount paid\"=%s,\"amount due\"=%s,\"date paid\"=%s,\"status\"=%s Where \"fd_id\"=%s"
     val=(title,stdname,amtp,amtd,datep,status,session['fdid'])
     iud(qry,val)
-    return '''<script>alert("success");window.location="/viewfeedetails#about"</script>'''
+    return redirect('/viewfeedetails')
 
 @web_bp.route('/editanoucement')
 @login_required
@@ -673,7 +673,7 @@ def updatanoucement():
     qry = "UPDATE \"anoucement\" SET \"anouncement\"=%s where \"an_id\"=%s"
     val=(an,session['anid'])
     iud(qry,val)
-    return '''<script>alert("success");window.location="/viewannouncement#about"</script>'''
+    return redirect('/viewannouncement')
 
 @web_bp.route('/deleteanoucement')
 @login_required
@@ -681,7 +681,7 @@ def deleteanoucement():
     id=request.args.get('id')
     qry = "delete from \"anoucement\" where  an_id=%s"
     iud(qry,id)
-    return  '''<script>alert("success");window.location="/viewannouncement#about"</script>'''
+    return redirect('/viewannouncement')
 
 
 
@@ -694,3 +694,59 @@ def view_assessments():
 @login_required
 def view_results():
     return render_template("view_results.html")
+
+
+@web_bp.route('/viewassignments')
+@login_required
+def viewassignments():
+    # Join with teacher table to get staff name
+    qry = '''SELECT a.*, t.name as teacher_name 
+             FROM assignment a 
+             LEFT JOIN teacher t ON a.staf_id = t.login_id'''
+    res = selectall(qry)
+    return render_template('view_assignments.html', val=res)
+
+@web_bp.route('/addassignment', methods=['GET', 'POST'])
+@login_required
+def addassignment():
+    if request.method == 'POST':
+        topic = request.form['topic']
+        desc = request.form['description']
+        ldate = request.form['last_date']
+        staf_id = request.form['staf_id']
+        from datetime import date
+        cdate = str(date.today())
+        
+        qry = "INSERT INTO assignment (staf_id, topic, description, \"last date\", curdate) VALUES (%s, %s, %s, %s, %s)"
+        iud(qry, (staf_id, topic, desc, ldate, cdate))
+        return redirect('/viewassignments')
+    else:
+        teachers = selectall("SELECT * FROM teacher")
+        return render_template('add_assignment.html', teachers=teachers)
+
+@web_bp.route('/editassignment', methods=['GET', 'POST'])
+@login_required
+def editassignment():
+    if request.method == 'POST':
+        topic = request.form['topic']
+        desc = request.form['description']
+        ldate = request.form['last_date']
+        staf_id = request.form['staf_id']
+        ass_id = session['ass_id']
+        
+        qry = "UPDATE assignment SET staf_id=%s, topic=%s, description=%s, \"last date\"=%s WHERE ass_id=%s"
+        iud(qry, (staf_id, topic, desc, ldate, ass_id))
+        return redirect('/viewassignments')
+    else:
+        id = request.args.get('id')
+        session['ass_id'] = id
+        res = selectone("SELECT * FROM assignment WHERE ass_id=%s", (id,))
+        teachers = selectall("SELECT * FROM teacher")
+        return render_template('edit_assignment.html', val=res, teachers=teachers)
+
+@web_bp.route('/deleteassignment')
+@login_required
+def deleteassignment():
+    id = request.args.get('id')
+    iud("DELETE FROM assignment WHERE ass_id=%s", (id,))
+    return redirect('/viewassignments')
