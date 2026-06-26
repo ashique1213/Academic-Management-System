@@ -1,38 +1,62 @@
-<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
-<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
 {% extends 'hodindex.html' %}
+{% block title %}Assign Subjects{% endblock %}
 {% block body %}
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>Untitled Document</title>
-</head>
-<center>
-<body>
-<form id="form1" name="form1" method="post" action="assignsub#about">
-  <table width="376" border="1">
-    <tr>
-      <th width="142"><div align="center">Teacher Name </div></th>
-      <th width="115">Subject Name </th>
-      <th width="97">&nbsp;</th>
-    </tr>
-    {% for i in val %}
-     <tr>
-      <td>{{i['name']}}</td>
-      <td>{{i['subject name']}}</td>
-      <td><p><a href="editassignsub?id={{i['assign_id']}}#about">Edit</a>&nbsp;&nbsp;
-      <a href="deleteassignsub?id={{i['assign_id']}}#about3">Delete</a></p></td>
-     </tr>
-    {% endfor %}
-    <tr>
-      <td colspan="3"align="center"><label>
-        <div >
-          <input type="submit" name="Submit" value="add" />
-          </div>
-      </label></td>
-    </tr>
-  </table>
+
+<!-- Page Header -->
+<div class="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div>
+        <h2 class="text-2xl font-bold text-slate-900">Assigned Subjects</h2>
+        <p class="text-sm text-slate-500 mt-1">Manage which teachers are assigned to which subjects.</p>
+    </div>
+</div>
+
+<!-- Data Table Card -->
+<div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden relative">
+    <div class="overflow-x-auto">
+        <table class="w-full text-left dataTable">
+            <thead>
+                <tr>
+                    <th>Teacher Name</th>
+                    <th>Subject Name</th>
+                    <th class="text-right">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in val %}
+                <tr>
+                    <td>
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 mr-3 shrink-0">
+                                <i class="bi bi-person"></i>
+                            </div>
+                            <span class="font-medium text-slate-900">{{i['name']}}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium bg-amber-100 text-amber-800">
+                            {{i['subject name']}}
+                        </span>
+                    </td>
+                    <td class="text-right space-x-2 whitespace-nowrap">
+                        <a href="editassignsub?id={{i['assign_id']}}" class="inline-flex items-center justify-center px-3 py-1.5 bg-blue-500 hover:bg-blue-600 text-white text-xs font-medium rounded-lg transition duration-150 ease-in-out shadow-sm">
+                            <i class="bi bi-pencil mr-1.5"></i> Edit
+                        </a>
+                        <a href="deleteassignsub?id={{i['assign_id']}}" class="inline-flex items-center justify-center px-3 py-1.5 bg-rose-500 hover:bg-rose-600 text-white text-xs font-medium rounded-lg transition duration-150 ease-in-out shadow-sm" onclick="return confirm('Are you sure you want to unassign this subject?');">
+                            <i class="bi bi-trash mr-1.5"></i> Delete
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Floating Action Button -->
+<form method="post" action="assignsub">
+    <button type="submit" class="fixed bottom-6 right-6 w-14 h-14 bg-violet-600 rounded-full shadow-xl flex items-center justify-center text-white hover:bg-violet-700 hover:scale-105 hover:shadow-2xl transition-all duration-200 z-50 group" title="Assign New Subject">
+        <i class="bi bi-plus text-3xl group-hover:rotate-90 transition-transform duration-300"></i>
+    </button>
 </form>
-</body>
-    </center>
-<!--</html>-->
+
 {% endblock %}

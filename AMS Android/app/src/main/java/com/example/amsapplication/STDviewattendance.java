@@ -54,7 +54,7 @@ public class STDviewattendance extends AppCompatActivity implements AdapterView.
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String url ="http://"+sh.getString("ip", "") + ":5000/viewattendance";
+                String url ="http://"+sh.getString("ip", "") + ":5000/api/viewattendance";
                 RequestQueue queue = Volley.newRequestQueue(STDviewattendance.this);
 
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {
@@ -124,7 +124,7 @@ public class STDviewattendance extends AppCompatActivity implements AdapterView.
             }
         });
 
-        String url1 ="http://"+sh.getString("ip", "") + ":5000/viewstusub";
+        String url1 ="http://"+sh.getString("ip", "") + ":5000/api/viewstusub";
         RequestQueue queue1 = Volley.newRequestQueue(STDviewattendance.this);
 
         StringRequest stringRequest1 = new StringRequest(Request.Method.POST, url1,new Response.Listener<String>() {

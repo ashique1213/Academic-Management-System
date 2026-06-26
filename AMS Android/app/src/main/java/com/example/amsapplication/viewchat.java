@@ -36,7 +36,7 @@ public class viewchat extends AppCompatActivity {
         setContentView(R.layout.activity_viewchat);
         l1=findViewById(R.id.list14);
         sh= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        url ="http://"+sh.getString("ip", "") + ":5000/ttviewchat";
+        url ="http://"+sh.getString("ip", "") + ":5000/api/ttviewchat";
         RequestQueue queue = Volley.newRequestQueue(viewchat.this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {

@@ -52,7 +52,7 @@ public class online_testFEEDBACK extends AppCompatActivity {
         quitbutton=(Button)findViewById(R.id.buttonquit);
 
         sh= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        url ="http://"+sh.getString("ip", "") + ":5000/get_questionfeedback";
+        url ="http://"+sh.getString("ip", "") + ":5000/api/get_questionfeedback";
         RequestQueue queue = Volley.newRequestQueue(online_testFEEDBACK.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {
             @Override
@@ -168,7 +168,7 @@ public class online_testFEEDBACK extends AppCompatActivity {
                     e1.putString("res","1");
                     e1.putString("qid",qid.get(flag));
                     e1.commit();
-                    String url = "http://" + sh.getString("ip", "") + ":5000/answertestfeddback";
+                    String url = "http://" + sh.getString("ip", "") + ":5000/api/answertestfeddback";
 
                     // Request a string response from the provided URL.
                     StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -222,7 +222,7 @@ public class online_testFEEDBACK extends AppCompatActivity {
                     e1.putString("res","0");
                     e1.putString("qid",qid.get(flag));
                     e1.commit();
-                    String url = "http://" + sh.getString("ip", "") + ":5000/answertestfeddback";
+                    String url = "http://" + sh.getString("ip", "") + ":5000/api/answertestfeddback";
 
                     // Request a string response from the provided URL.
                     StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {

@@ -62,7 +62,7 @@ public class addstudymat extends AppCompatActivity implements AdapterView.OnItem
         b2 = findViewById(R.id.button12);
         s1 = findViewById(R.id.spinner7);
         sh = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        String url3 = "http://" + sh.getString("ip", "") + ":5000/viewsubjectonlyforexam";
+        String url3 = "http://" + sh.getString("ip", "") + ":5000/api/viewsubjectonlyforexam";
         RequestQueue queue1 = Volley.newRequestQueue(addstudymat.this);
 
         StringRequest stringRequest1 = new StringRequest(Request.Method.POST, url3, new Response.Listener<String>() {
@@ -114,7 +114,7 @@ params.put("lid",sh.getString("lid",""));
         };
         queue1.add(stringRequest1);
 
-        url = "http://" + sh.getString("ip", "") + ":5000/addstudym";
+        url = "http://" + sh.getString("ip", "") + ":5000/api/addstudym";
 
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();

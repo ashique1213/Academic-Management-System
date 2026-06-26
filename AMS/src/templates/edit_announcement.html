@@ -1,0 +1,65 @@
+<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
+{% extends 'hodindex.html' %}
+{% block body %}
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Untitled Document</title>
+</head>
+<!--<style>-->
+ <!--td {-->
+  <!--border: 1px solid;-->
+<!--}-->
+<!--input {-->
+  <!--width: 100%;-->
+<!--}-->
+<!--table {-->
+  <!--width: 90%;-->
+<!--}-->
+     <!--th{-->
+    <!--background-color:#252B34;-->
+    <!--}-->
+<!--input[type=submit] {-->
+  <!--width: 100px;-->
+  <!--background-color: #ef6445;-->
+  <!--color: white;-->
+  <!--padding: 8px 20px;-->
+  <!--margin: 6px 0;-->
+  <!--border: none;-->
+  <!--border-radius: 4px;-->
+  <!--cursor: pointer;-->
+<!--}-->
+<!--th {-->
+  <!--padding-top: 12px;-->
+  <!--padding-bottom: 12px;-->
+   <!--border: 1px solid #ddd;-->
+  <!--padding: 8px;-->
+  <!--text-align: left;-->
+  <!--background-color: #ef6445;-->
+  <!--color: white;-->
+<!--}-->
+<!--</style>-->
+<body>
+<div class="card shadow-sm border-0 mb-4 mx-auto" style="max-width: 600px;">
+<div class="card-header bg-white"><h5 class="mb-0 text-primary"><i class="bi bi-pencil-square me-2"></i>Form</h5></div>
+<div class="card-body">
+<form id="form1" name="form1" method="post" action="updatanoucement#about" class="p-2">
+  
+    <div class="mb-5">
+  <label class="form-label fw-semibold">Anouncement</label>
+  <input type="text" class="block w-full bg-slate-50 border border-slate-200 rounded-lg py-2.5 px-3 text-[12px] text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" name="textfield" value="{{val['anouncement']}}" required/>
+</div>
+    <tr>
+      <td colspan="2" align="center"><label>
+        <div align="center">
+          <input type="submit" class="inline-flex justify-center w-full px-5 py-2 border border-transparent rounded-lg shadow-sm text-[12px] font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors" name="Submit" value="Add" />
+        </div>
+      </label></td>
+    </tr>
+  
+</form>
+</div>
+</div>
+</body>
+{% endblock %}
+<!--</html>-->

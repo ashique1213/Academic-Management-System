@@ -1,4 +1,4 @@
-{% extends 'indexfor allll.html' %}
+﻿{% extends 'dashboard_base.html' %}
 {% block body %}
 
 <body>
@@ -37,25 +37,25 @@
     </tr>
     {% for i in val1 %}
     <tr>
-      <td>&nbsp;{{loop.index}}</td>
-      <td>{{i['topic']}}</td>
-      <td>&nbsp;{{i['description']}}</td>
-      <td>&nbsp;{{i['date']}}</td>
-      <td>&nbsp;{{i['hour']}}</td>
-      <td>&nbsp;{{i['module']}}</td>
-      <td>&nbsp;{{loop.index}}</td>
+      <td class="px-4 py-3 border-b border-slate-100">&nbsp;{{loop.index}}</td>
+      <td class="px-4 py-3 border-b border-slate-100">{{i['topic']}}</td>
+      <td class="px-4 py-3 border-b border-slate-100">&nbsp;{{i['description']}}</td>
+      <td class="px-4 py-3 border-b border-slate-100">&nbsp;{{i['date']}}</td>
+      <td class="px-4 py-3 border-b border-slate-100">&nbsp;{{i['hour']}}</td>
+      <td class="px-4 py-3 border-b border-slate-100">&nbsp;{{i['module']}}</td>
+      <td class="px-4 py-3 border-b border-slate-100">&nbsp;{{loop.index}}</td>
 
-      <td>{{i['topic']}}</td>
-      <td><label>
+      <td class="px-4 py-3 border-b border-slate-100">{{i['topic']}}</td>
+      <td class="px-4 py-3 border-b border-slate-100"><label>
         <textarea name="textarea2"></textarea>
       </label></td>
 
         <input type="hidden" name="textfield5" value="{{i['p_id']}}" />
 
-      <td><label>
+      <td class="px-4 py-3 border-b border-slate-100"><label>
         <input type="DATE" name="textfield" />
       </label></td>
-      <td><label>
+      <td class="px-4 py-3 border-b border-slate-100"><label>
         <select name="select2">
         <option>1</option>
         <option>2</option>
@@ -66,7 +66,7 @@
         <option>7</option>
         </select>
       </label></td>
-      <td><label>
+      <td class="px-4 py-3 border-b border-slate-100"><label>
         <select name="select3">
         <option>1</option>
         <option>2</option>
@@ -75,7 +75,7 @@
         <option>5</option>
         </select>
       </label></td>
-      <td><label>
+      <td class="px-4 py-3 border-b border-slate-100"><label>
         <select name="select4">
               <option>NOT COVERED</option>
           <option>PARTIALLY CONVERED</option>
@@ -95,3 +95,4 @@
 </form>
 </body>
 {% endblock %}
+

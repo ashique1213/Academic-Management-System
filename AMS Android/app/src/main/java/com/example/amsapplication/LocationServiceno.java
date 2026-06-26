@@ -194,7 +194,7 @@ public class LocationServiceno extends Service {
 
 
 		RequestQueue queue3 = Volley.newRequestQueue(LocationServiceno.this);
-		String url3 = "http://" + sh.getString("ip", "") + ":5000/viewassigmentnotification";
+		String url3 = "http://" + sh.getString("ip", "") + ":5000/api/viewassigmentnotification";
 
 		// Request a string response from the provided URL.
 		StringRequest stringRequest3 = new StringRequest(Request.Method.POST, url3, new Response.Listener<String>() {

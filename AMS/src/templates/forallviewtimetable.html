@@ -1,4 +1,4 @@
-{% extends 'indexfor allll.html' %}
+{% extends 'dashboard_base.html' %}
 {% block body %}
 <center>
  <form method="post" action="/ttedit#about">
@@ -8,11 +8,11 @@
     <tr >
         {% if i[0]=='Day/Hour' %}
         {% for j in i %}
-        <th>{{j}}</th>
+        <th class="px-5 py-4 bg-slate-900 text-slate-100 font-bold border-b border-slate-800 tracking-widest text-[12px] shadow-inner">{{j}}</th>
         {% endfor %}
         {% else %}
         {% for j in i %}
-        <td>{{j}}</td>
+        <td class="px-5 py-4 border-b border-slate-100/60 text-slate-600 font-medium">{{j}}</td>
         {% endfor %}
         {% endif %}
     </tr>

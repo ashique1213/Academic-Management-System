@@ -1,0 +1,100 @@
+{% extends 'hodindex.html' %}
+{% block title %}Edit Teacher{% endblock %}
+{% block body %}
+
+<!-- Backdrop / Modal Container -->
+<div class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+    
+    <!-- Modal Card -->
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl flex flex-col max-h-full overflow-hidden animate-[fadeIn_0.2s_ease-out]">
+        
+        <!-- Header -->
+        <div class="px-6 py-4 border-b border-slate-200 flex items-center justify-between bg-slate-50">
+            <div class="flex items-center">
+                <div class="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center text-amber-600 mr-3">
+                    <i class="bi bi-pencil-fill"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900">Edit Teacher: {{val['name']}}</h3>
+            </div>
+            <a href="/viewteacher" class="text-slate-400 hover:text-slate-600 transition-colors">
+                <i class="bi bi-x-lg text-lg"></i>
+            </a>
+        </div>
+
+        <!-- Body (Scrollable) -->
+        <div class="p-6 overflow-y-auto">
+            <form method="post" enctype="multipart/form-data" action="updateteacher" id="editTeacherForm">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <!-- Name -->
+                    <div class="col-span-1 md:col-span-2">
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Full Name <span class="text-rose-500">*</span></label>
+                        <input type="text" name="textfield" required value="{{val['name']}}" pattern="[A-Z a-z.]{3,25}" class="block w-full border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-shadow">
+                    </div>
+
+                    <!-- Designation -->
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Designation <span class="text-rose-500">*</span></label>
+                        <input type="text" name="textfield3" required value="{{val['designation']}}" class="block w-full border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-shadow">
+                    </div>
+
+                    <!-- Qualification -->
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Qualification <span class="text-rose-500">*</span></label>
+                        <input type="text" name="textfield2" required value="{{val['qualification']}}" class="block w-full border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-shadow">
+                    </div>
+
+                    <!-- Gender -->
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Gender <span class="text-rose-500">*</span></label>
+                        <div class="flex items-center space-x-4">
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="radiobutton" value="male" class="w-4 h-4 text-blue-600 border-slate-300 focus:ring-blue-500" {% if val['gender'] == 'male' %}checked{% endif %}>
+                                <span class="ml-2 text-sm text-slate-700">Male</span>
+                            </label>
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="radiobutton" value="female" class="w-4 h-4 text-blue-600 border-slate-300 focus:ring-blue-500" {% if val['gender'] == 'female' %}checked{% endif %}>
+                                <span class="ml-2 text-sm text-slate-700">Female</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Age -->
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Age <span class="text-rose-500">*</span></label>
+                        <input type="number" name="textfield32" required value="{{val['age']}}" min="18" max="100" class="block w-full border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-shadow">
+                    </div>
+
+                    <!-- Phone -->
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Phone Number <span class="text-rose-500">*</span></label>
+                        <input type="tel" name="textfield33" required value="{{val['phone']}}" pattern="[0-9]{10}" class="block w-full border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-shadow">
+                    </div>
+
+                    <!-- Photo -->
+                    <div class="col-span-1 md:col-span-2">
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Update Profile Photo (Optional)</label>
+                        <div class="flex items-center space-x-4">
+                            <img src="static/photos/{{val['photo']}}" class="w-12 h-12 rounded-full object-cover border border-slate-200">
+                            <input type="file" name="file" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 focus:outline-none">
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+
+        <!-- Footer -->
+        <div class="px-6 py-4 border-t border-slate-200 bg-slate-50 flex items-center justify-end space-x-3">
+            <a href="/viewteacher" class="px-4 py-2 border border-slate-300 rounded-lg text-sm font-medium text-slate-700 bg-white hover:bg-slate-50 transition-colors">
+                Cancel
+            </a>
+            <button type="submit" form="editTeacherForm" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg shadow-sm transition-colors">
+                Update Teacher
+            </button>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

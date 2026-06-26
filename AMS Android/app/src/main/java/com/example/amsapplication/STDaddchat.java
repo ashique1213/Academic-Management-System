@@ -44,7 +44,7 @@ public class STDaddchat extends AppCompatActivity implements AdapterView.OnItemC
         e1=findViewById(R.id.list1);
 
         sh= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        String url ="http://"+sh.getString("ip", "") + ":5000/viewstafftochat";
+        String url ="http://"+sh.getString("ip", "") + ":5000/api/viewstafftochat";
         RequestQueue queue = Volley.newRequestQueue(STDaddchat.this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {

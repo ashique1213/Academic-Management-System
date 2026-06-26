@@ -44,7 +44,7 @@ public class addchat extends AppCompatActivity implements AdapterView.OnItemClic
         e1=findViewById(R.id.list1);
 
         sh= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        String url ="http://"+sh.getString("ip", "") + ":5000/viewstudentss";
+        String url ="http://"+sh.getString("ip", "") + ":5000/api/viewstudentss";
         RequestQueue queue = Volley.newRequestQueue(addchat.this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {

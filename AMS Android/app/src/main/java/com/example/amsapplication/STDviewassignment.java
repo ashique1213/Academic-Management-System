@@ -39,7 +39,7 @@ public class STDviewassignment extends AppCompatActivity implements AdapterView.
         setContentView(R.layout.activity_stdviewassignment);
         l1 = findViewById(R.id.list16);
         sh = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        url = "http://" + sh.getString("ip", "") + ":5000/ttviewtassignment1";
+        url = "http://" + sh.getString("ip", "") + ":5000/api/ttviewtassignment1";
         RequestQueue queue = Volley.newRequestQueue(STDviewassignment.this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {

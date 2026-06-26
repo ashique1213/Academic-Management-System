@@ -1,0 +1,183 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Admin Dashboard | AMS</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Bootstrap Icons for iconography -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Simple DataTables CSS for tables (basic styles without bootstrap) -->
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" type="text/css">
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .scrollbar-hide::-webkit-scrollbar {
+                display: none;
+            }
+            .scrollbar-hide {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+        }
+    
+            .dataTable-table thead th {
+                background-color: #1e293b !important;
+                color: #f8fafc !important;
+                font-weight: 600;
+                padding: 1rem !important;
+                border-bottom: none !important;
+            }
+            .dataTable-table tbody tr {
+                transition: all 0.2s ease;
+            }
+            .dataTable-table tbody tr:hover {
+                background-color: #f0fdfa !important;
+                transform: scale(1.001);
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            }
+            .dataTable-wrapper {
+                background: white;
+                border-radius: 1rem;
+                box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+                overflow: hidden;
+                border: 1px solid #f1f5f9;
+            }
+            .dataTable-top {
+                padding: 1.5rem !important;
+                background-color: white;
+                border-bottom: 1px solid #f1f5f9;
+            }
+            .dataTable-bottom {
+                padding: 1.5rem !important;
+                background-color: white;
+                border-top: 1px solid #f1f5f9;
+            }
+
+    </style>
+</head>
+<body class="bg-slate-50 font-sans antialiased text-slate-800">
+    <div class="flex h-screen overflow-hidden">
+        
+        <!-- Sidebar -->
+        <nav class="w-64 bg-slate-900 border-r border-slate-800 flex flex-col hidden md:flex shrink-0 shadow-2xl z-20">
+            <div class="h-16 flex items-center px-6 border-b border-slate-800 bg-slate-950/50">
+                <i class="bi bi-mortarboard-fill text-2xl text-blue-600 mr-3"></i>
+                <h3 class="text-xl font-bold text-white tracking-tight">AMS</h3>
+            </div>
+            
+            <div class="flex-1 overflow-y-auto scrollbar-hide py-4 px-3 space-y-1">
+                <a href="/hod" class="flex items-center px-3 py-2.5 text-xs font-medium rounded-xl text-slate-300 hover:bg-indigo-600/20 hover:text-indigo-400 hover:translate-x-1 hover:shadow-[0_0_15px_rgba(79,70,229,0.3)] transition-all duration-300">
+                    <i class="bi bi-grid-1x2-fill mr-3 text-lg"></i> Dashboard
+                </a>
+                
+                <div class="px-3 pt-4 pb-2 text-[11px] font-bold text-slate-400 tracking-wide">Management</div>
+                
+                <a href="viewteacher" class="flex items-center px-3 py-2.5 text-xs font-medium rounded-xl text-slate-300 hover:bg-indigo-600/20 hover:text-indigo-400 hover:translate-x-1 hover:shadow-[0_0_15px_rgba(79,70,229,0.3)] transition-all duration-300">
+                    <i class="bi bi-person-workspace mr-3 text-lg"></i> Teachers
+                </a>
+                <a href="viewstudents" class="flex items-center px-3 py-2.5 text-xs font-medium rounded-xl text-slate-300 hover:bg-indigo-600/20 hover:text-indigo-400 hover:translate-x-1 hover:shadow-[0_0_15px_rgba(79,70,229,0.3)] transition-all duration-300">
+                    <i class="bi bi-mortarboard mr-3 text-lg"></i> Students
+                </a>
+                <a href="viewsubject" class="flex items-center px-3 py-2.5 text-xs font-medium rounded-xl text-slate-300 hover:bg-indigo-600/20 hover:text-indigo-400 hover:translate-x-1 hover:shadow-[0_0_15px_rgba(79,70,229,0.3)] transition-all duration-300">
+                    <i class="bi bi-journal-bookmark mr-3 text-lg"></i> Subjects
+                </a>
+                <a href="viewassignsub" class="flex items-center px-3 py-2.5 text-xs font-medium rounded-xl text-slate-300 hover:bg-indigo-600/20 hover:text-indigo-400 hover:translate-x-1 hover:shadow-[0_0_15px_rgba(79,70,229,0.3)] transition-all duration-300">
+                    <i class="bi bi-diagram-2 mr-3 text-lg"></i> Assign Subjects
+                </a>
+                
+                <div class="px-3 pt-4 pb-2 text-[11px] font-bold text-slate-400 tracking-wide">Academics</div>
+                
+                <a href="timetable" class="flex items-center px-3 py-2.5 text-xs font-medium rounded-xl text-slate-300 hover:bg-indigo-600/20 hover:text-indigo-400 hover:translate-x-1 hover:shadow-[0_0_15px_rgba(79,70,229,0.3)] transition-all duration-300">
+                    <i class="bi bi-calendar3 mr-3 text-lg"></i> Timetable
+                </a>
+                <a href="viewattendance" class="flex items-center px-3 py-2.5 text-xs font-medium rounded-xl text-slate-300 hover:bg-indigo-600/20 hover:text-indigo-400 hover:translate-x-1 hover:shadow-[0_0_15px_rgba(79,70,229,0.3)] transition-all duration-300">
+                    <i class="bi bi-person-check mr-3 text-lg"></i> Attendance
+                </a>
+                <a href="viewannouncement" class="flex items-center px-3 py-2.5 text-xs font-medium rounded-xl text-slate-300 hover:bg-indigo-600/20 hover:text-indigo-400 hover:translate-x-1 hover:shadow-[0_0_15px_rgba(79,70,229,0.3)] transition-all duration-300">
+                    <i class="bi bi-megaphone mr-3 text-lg"></i> Announcements
+                </a>
+                
+                <div class="px-3 pt-4 pb-2 text-[11px] font-bold text-slate-400 tracking-wide">Finance & Comms</div>
+                
+                <a href="viewfee" class="flex items-center px-3 py-2.5 text-xs font-medium rounded-xl text-slate-300 hover:bg-indigo-600/20 hover:text-indigo-400 hover:translate-x-1 hover:shadow-[0_0_15px_rgba(79,70,229,0.3)] transition-all duration-300">
+                    <i class="bi bi-cash-stack mr-3 text-lg"></i> Fees
+                </a>
+                <a href="viewfeedetails" class="flex items-center px-3 py-2.5 text-xs font-medium rounded-xl text-slate-300 hover:bg-indigo-600/20 hover:text-indigo-400 hover:translate-x-1 hover:shadow-[0_0_15px_rgba(79,70,229,0.3)] transition-all duration-300">
+                    <i class="bi bi-receipt mr-3 text-lg"></i> Fee Details
+                </a>
+                <a href="viewfeedback" class="flex items-center px-3 py-2.5 text-xs font-medium rounded-xl text-slate-300 hover:bg-indigo-600/20 hover:text-indigo-400 hover:translate-x-1 hover:shadow-[0_0_15px_rgba(79,70,229,0.3)] transition-all duration-300">
+                    <i class="bi bi-chat-left-text mr-3 text-lg"></i> Feedback
+                </a>
+                <a href="viewsurvey" class="flex items-center px-3 py-2.5 text-xs font-medium rounded-xl text-slate-300 hover:bg-indigo-600/20 hover:text-indigo-400 hover:translate-x-1 hover:shadow-[0_0_15px_rgba(79,70,229,0.3)] transition-all duration-300">
+                    <i class="bi bi-clipboard-data mr-3 text-lg"></i> Surveys
+                </a>
+            </div>
+        </nav>
+
+        
+        <!-- Main Content Wrapper -->
+        <div class="flex-1 flex flex-col min-w-0 bg-slate-50/80 overflow-hidden relative">
+            <div class="absolute top-0 left-0 w-full h-96 bg-gradient-to-b from-indigo-100/50 to-transparent pointer-events-none z-0"></div>
+
+            
+            <!-- Topbar -->
+            <header class="h-16 bg-white/70 backdrop-blur-xl border-b border-slate-200 flex items-center justify-between px-6 shrink-0 z-10 shadow-sm sticky top-0">
+                <button class="md:hidden text-slate-500 hover:text-slate-700">
+                    <i class="bi bi-list text-2xl"></i>
+                </button>
+                
+                <div class="ml-auto flex items-center gap-4">
+                    <div class="relative group cursor-pointer">
+                        <div class="flex items-center gap-2">
+                            <img src="https://ui-avatars.com/api/?name=Admin&background=2563eb&color=fff" class="w-8 h-8 rounded-full border border-slate-200" alt="Admin">
+                            <span class="hidden md:block text-xs font-medium text-slate-700">Administrator</span>
+                            <i class="bi bi-chevron-down text-[11px] text-slate-400"></i>
+                        </div>
+                        <div class="absolute right-0 top-full pt-2 w-48 bg-white rounded-lg shadow-lg border border-slate-100 py-1 hidden group-hover:block z-50">
+                            <a href="/logout" class="block px-4 py-2 text-xs text-red-600 hover:bg-slate-50 flex items-center">
+                                <i class="bi bi-box-arrow-right mr-2"></i> Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Page Content -->
+            <main class="flex-1 overflow-y-auto p-6 scrollbar-hide">
+                <div class="max-w-7xl mx-auto">
+                    {% block body %}
+                    {% endblock %}
+                </div>
+            </main>
+            
+            <footer class="py-4 text-center text-[11px] text-slate-500 border-t border-slate-200 bg-white shrink-0">
+                &copy; 2026 Academic Management System. All rights reserved.
+            </footer>
+        </div>
+    </div>
+
+    <!-- Simple DataTables JS -->
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" type="text/javascript"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const tables = document.querySelectorAll(".dataTable");
+            tables.forEach(table => {
+                new simpleDatatables.DataTable(table, {
+                    searchable: true,
+                    fixedHeight: true,
+                    classes: {
+                        active: "bg-blue-50 text-blue-600",
+                        disabled: "opacity-50 cursor-not-allowed",
+                        selector: "bg-white border border-slate-300 text-slate-900 text-xs rounded-lg focus-ring-blue-500 block p-2",
+                        paginationList: "flex items-center space-x-1 mt-4 justify-end",
+                        paginationListItem: "list-none",
+                        paginationListItemLink: "px-3 py-1 bg-white border border-slate-300 text-slate-600 rounded-md hover:bg-slate-50 text-xs",
+                        input: "bg-white border border-slate-300 text-slate-900 text-xs rounded-lg focus-ring-blue-500 block p-2 w-full"
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -50,7 +50,7 @@ public class addinternalmarks extends AppCompatActivity implements AdapterView.O
         b1=findViewById(R.id.button6);
         sh= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-        url1 ="http://"+sh.getString("ip", "") + ":5000/viewsubjectonlyforexam";
+        url1 ="http://"+sh.getString("ip", "") + ":5000/api/viewsubjectonlyforexam";
         RequestQueue queue1 = Volley.newRequestQueue(addinternalmarks.this);
 
         StringRequest stringRequest1 = new StringRequest(Request.Method.POST, url1,new Response.Listener<String>() {
@@ -117,7 +117,7 @@ public class addinternalmarks extends AppCompatActivity implements AdapterView.O
                 }
                 {
                     RequestQueue queue = Volley.newRequestQueue(addinternalmarks.this);
-                    url = "http://" + sh.getString("ip", "") + ":5000/addinternal";
+                    url = "http://" + sh.getString("ip", "") + ":5000/api/addinternal";
 
                     // Request a string response from the provided URL.
                     StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -187,7 +187,7 @@ public class addinternalmarks extends AppCompatActivity implements AdapterView.O
 
 
 
-            url = "http://" + sh.getString("ip", "") + ":5000/viewstudents1";
+            url = "http://" + sh.getString("ip", "") + ":5000/api/viewstudents1";
             RequestQueue queue = Volley.newRequestQueue(addinternalmarks.this);
 
             StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {

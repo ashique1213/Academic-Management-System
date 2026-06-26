@@ -62,7 +62,7 @@ public class viewstudents extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        url ="http://"+sh.getString("ip", "") + ":5000/viewstudents";
+        url ="http://"+sh.getString("ip", "") + ":5000/api/viewstudents";
         RequestQueue queue = Volley.newRequestQueue(viewstudents.this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {

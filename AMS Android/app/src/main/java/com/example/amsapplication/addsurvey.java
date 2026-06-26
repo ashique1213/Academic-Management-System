@@ -72,7 +72,7 @@ public class addsurvey extends AppCompatActivity implements AdapterView.OnItemSe
                 new DatePickerDialog(addsurvey.this,date,myCalendar.get(Calendar.YEAR),myCalendar.get(Calendar.MONTH),myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
-        String url3 = "http://" + sh.getString("ip", "") + ":5000/viewsubjectonlyforexam";
+        String url3 = "http://" + sh.getString("ip", "") + ":5000/api/viewsubjectonlyforexam";
         RequestQueue queue1 = Volley.newRequestQueue(addsurvey.this);
 
         StringRequest stringRequest1 = new StringRequest(Request.Method.POST, url3, new Response.Listener<String>() {
@@ -163,7 +163,7 @@ public class addsurvey extends AppCompatActivity implements AdapterView.OnItemSe
                 else {
 
                     RequestQueue queue = Volley.newRequestQueue(addsurvey.this);
-                    String url = "http://" + sh.getString("ip", "") + ":5000/addsurvey";
+                    String url = "http://" + sh.getString("ip", "") + ":5000/api/addsurvey";
 
                     // Request a string response from the provided URL.
                     StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {

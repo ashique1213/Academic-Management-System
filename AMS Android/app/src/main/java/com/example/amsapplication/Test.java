@@ -100,7 +100,7 @@ public class Test extends Activity {
 		final String sid1=sh.getString("user", "");
 
 
-					String url = "http://" + ip + ":5000/in_message2";
+					String url = "http://" + ip + ":5000/api/in_message2";
 			
 			RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
 
@@ -172,7 +172,7 @@ public class Test extends Activity {
 				SharedPreferences sh=PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 				String ip=sh.getString("ip", "");
 				final String use=sh.getString("user","");
-				String url = "http://" + ip + ":5000/view_message2";
+				String url = "http://" + ip + ":5000/api/view_message2";
 //				Toast.makeText(getApplicationContext(), lastid, Toast.LENGTH_LONG).show();
 				RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
 			    //    Toast.makeText(getApplicationContext(),"hai",Toast.LENGTH_SHORT).show();

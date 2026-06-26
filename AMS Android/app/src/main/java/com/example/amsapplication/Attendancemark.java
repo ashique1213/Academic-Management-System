@@ -87,7 +87,7 @@ public class Attendancemark extends AppCompatActivity implements AdapterView.OnI
         s2.setAdapter(ad);
 //        s1.setOnItemSelectedListener(Attendancemark.this);
 
-        String url1 ="http://"+sh.getString("ip", "") + ":5000/viewsubjectonlyforexam";
+        String url1 ="http://"+sh.getString("ip", "") + ":5000/api/viewsubjectonlyforexam";
         RequestQueue queue1 = Volley.newRequestQueue(Attendancemark.this);
 
         StringRequest stringRequest1 = new StringRequest(Request.Method.POST, url1,new Response.Listener<String>() {
@@ -159,7 +159,7 @@ params.put("lid",sh.getString("lid",""));
                 else {
 
                     RequestQueue queue = Volley.newRequestQueue(Attendancemark.this);
-                    String url = "http://" + sh.getString("ip", "") + ":5000/addatten";
+                    String url = "http://" + sh.getString("ip", "") + ":5000/api/addatten";
 
                     // Request a string response from the provided URL.
                     StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -238,7 +238,7 @@ params.put("lid",sh.getString("lid",""));
 
         if (parent==s1) {
             subject = eid.get(position);
-            String url5 ="http://"+sh.getString("ip", "") + ":5000/viewstudents1";
+            String url5 ="http://"+sh.getString("ip", "") + ":5000/api/viewstudents1";
             RequestQueue queue5 = Volley.newRequestQueue(Attendancemark.this);
 
             StringRequest stringRequest5 = new StringRequest(Request.Method.POST, url5,new Response.Listener<String>() {

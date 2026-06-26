@@ -44,7 +44,7 @@ public class viewfeedback extends AppCompatActivity implements AdapterView.OnIte
         l1=findViewById(R.id.list17);
         b1=findViewById(R.id.button9);
         sh= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        String url ="http://"+sh.getString("ip", "") + ":5000/viewfeedback";
+        String url ="http://"+sh.getString("ip", "") + ":5000/api/viewfeedback";
         RequestQueue queue = Volley.newRequestQueue(viewfeedback.this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {
@@ -132,7 +132,7 @@ public class viewfeedback extends AppCompatActivity implements AdapterView.OnIte
                         {
 
                             RequestQueue queue = Volley.newRequestQueue(viewfeedback.this);
-                            String url = "http://" + sh.getString("ip","") + ":5000/delectfeed";
+                            String url = "http://" + sh.getString("ip","") + ":5000/api/delectfeed";
 
                             // Request a string response from the provided URL.
                             StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {

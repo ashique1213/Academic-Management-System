@@ -47,7 +47,7 @@ public class Home_student extends AppCompatActivity {
         b15.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String url3="http://"+sh.getString("ip","")+":5000/viewproposedplan";
+                String url3="http://"+sh.getString("ip","")+":5000/api/viewproposedplan";
                 Intent dwnl1=new Intent(Intent.ACTION_VIEW,
                         Uri.parse(url3));
                 startActivity(dwnl1);
@@ -68,7 +68,7 @@ public class Home_student extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                String url2="http://"+sh.getString("ip","")+":5000/timetable";
+                String url2="http://"+sh.getString("ip","")+":5000/api/timetable";
                 Intent dwnl=new Intent(Intent.ACTION_VIEW,
                         Uri.parse(url2));
                 startActivity(dwnl);

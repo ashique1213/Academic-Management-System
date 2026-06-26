@@ -43,7 +43,7 @@ public class viewstudymat extends AppCompatActivity implements AdapterView.OnIte
         b1=findViewById(R.id.button13);
         sh= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-        url ="http://"+sh.getString("ip", "") + ":5000/ttviewstudymat";
+        url ="http://"+sh.getString("ip", "") + ":5000/api/ttviewstudymat";
         RequestQueue queue = Volley.newRequestQueue(viewstudymat.this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {
@@ -111,7 +111,7 @@ public class viewstudymat extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        String url2="http://"+sh.getString("ip","")+":5000/static/photos/"+material.get(i);
+        String url2="http://"+sh.getString("ip","")+":5000/api/static/photos/"+material.get(i);
         Intent dwnl=new Intent(Intent.ACTION_VIEW,
                 Uri.parse(url2));
         startActivity(dwnl);

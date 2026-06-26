@@ -1,65 +1,69 @@
-<!--<!doctype html>-->
+﻿<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="../static/logintemplates/fonts/icomoon/style.css">
-
-    <link rel="stylesheet" href="../static/logintemplates/css/owl.carousel.min.css">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="../static/logintemplates/css/bootstrap.min.css">
-    
-    <!-- Style -->
-    <link rel="stylesheet" href="../static/logintemplates/css/style.css">
-
-    <title>Login</title>
-  </head>
-  <body>
-  
-
-  <div class="d-lg-flex half">
-    <div class="bg order-1 order-md-2" style="background-image: url('../static/logintemplates/images/01.jpg');"></div>
-    <div class="contents order-2 order-md-1">
-
-      <div class="container">
-        <div class="row align-items-center justify-content-center">
-          <div class="col-md-7">
-            <h3>Login to <strong>AMS</strong></h3>
-            <!--<p class="mb-4">Lorem ipsum dolor sit amet elit. Sapiente sit aut eos consectetur adipisicing.</p>-->
-            <form action="login_code" method="post">
-              <div class="form-group first">
-                <label for="username">Username</label>
-                <input type="text" class="form-control"placeholder="Your username" name="textfield" id="username" required>
-              </div>
-              <div class="form-group last mb-3">
-                <label for="password">Password</label>
-                <input type="password" class="form-control"  name="textfield2"placeholder="Your Password" id="password" required>
-              </div>
-              
-              <!--<div class="d-flex mb-5 align-items-center">-->
-                <!--<label class="control control&#45;&#45;checkbox mb-0"><span class="caption">Remember me</span>-->
-                  <!--<input type="checkbox" checked="checked"/>-->
-                  <!--<div class="control__indicator"></div>-->
-                <!--</label>-->
-                <!--<span class="ml-auto"><a href="#" class="forgot-pass">Forgot Password</a></span> -->
-              <!--</div>-->
-
-              <input type="submit" value="Log In" class="btn btn-block btn-primary">
-
-            </form>
-          </div>
+    <title>Login | Academic Management System</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</head>
+<body class="bg-slate-50 font-sans antialiased text-slate-800 h-screen overflow-hidden">
+    <div class="grid grid-cols-1 lg:grid-cols-2 h-full">
+        <!-- Left Side: Branding/Hero -->
+        <div class="hidden lg:flex flex-col justify-center px-16 lg:px-24 xl:px-32 relative bg-gradient-to-br from-blue-600 to-indigo-900 text-white overflow-hidden">
+            <!-- Decorative circle -->
+            <div class="absolute -bottom-32 -left-32 w-96 h-96 rounded-full bg-white/10 blur-3xl"></div>
+            <div class="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-indigo-500/20 blur-3xl"></div>
+            
+            <div class="relative z-10">
+                <i class="bi bi-mortarboard-fill text-6xl mb-8 opacity-90 inline-block"></i>
+                <h1 class="text-5xl xl:text-6xl font-bold tracking-tight mb-6 leading-tight">
+                    Academic<br>Management<br>System
+                </h1>
+                <p class="text-xl text-blue-100 font-light max-w-md leading-relaxed">
+                    Welcome to the next generation of academic management. Secure, fast, and beautifully designed.
+                </p>
+            </div>
+            
+            <div class="absolute bottom-12 left-16 lg:left-24 xl:left-32 z-10 flex items-center text-blue-200 text-[12px] font-medium tracking-wider uppercase">
+                <i class="bi bi-shield-check text-xl mr-2"></i> Enterprise Grade Security
+            </div>
         </div>
-      </div>
-    </div>
 
-  </div>
-    <script src="../static/logintemplates/js/jquery-3.3.1.min.js"></script>
-    <script src="../static/logintemplates/js/popper.min.js"></script>
-    <script src="../static/logintemplates/js/bootstrap.min.js"></script>
-    <script src="../static/logintemplates/js/main.js"></script>
-  </body>
+        <!-- Right Side: Login Form -->
+        <div class="flex flex-col justify-center items-center px-6 sm:px-12 relative">
+            <div class="w-full max-w-md">
+                <div class="text-center lg:text-left mb-10">
+                    <h2 class="text-3xl font-bold text-slate-900 mb-3 tracking-tight">Welcome back</h2>
+                    <p class="text-slate-500 text-[12px]">Please enter your credentials to continue.</p>
+                </div>
+
+                <form id="form1" name="form1" method="post" action="login_code" class="space-y-6">
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <i class="bi bi-person text-slate-400"></i>
+                        </div>
+                        <input type="text" name="textfield" required class="block w-full pl-11 pr-4 py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-[12px] placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" placeholder="Username" />
+                    </div>
+
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <i class="bi bi-lock text-slate-400"></i>
+                        </div>
+                        <input type="password" name="textfield2" required class="block w-full pl-11 pr-4 py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-[12px] placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" placeholder="Password" />
+                    </div>
+
+                    <button type="submit" name="Submit" class="w-full flex justify-center items-center py-3.5 px-4 border border-transparent rounded-xl shadow-sm text-[12px] font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+                        Sign In <i class="bi bi-arrow-right ml-2"></i>
+                    </button>
+                </form>
+
+                <div class="mt-12 text-center text-[11px] text-slate-400 font-medium">
+                    &copy; 2026 AMS Enterprise Edition
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
 </html>

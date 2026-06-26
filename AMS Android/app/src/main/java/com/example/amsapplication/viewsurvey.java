@@ -48,7 +48,7 @@ public class viewsurvey extends AppCompatActivity implements AdapterView.OnItemC
         b1=findViewById(R.id.button9);
         s1=findViewById(R.id.spinner78);
         sh=PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        String url1 ="http://"+sh.getString("ip", "") + ":5000/viewsubjectonlyforexam";
+        String url1 ="http://"+sh.getString("ip", "") + ":5000/api/viewsubjectonlyforexam";
         RequestQueue queue1 = Volley.newRequestQueue(viewsurvey.this);
 
         StringRequest stringRequest1 = new StringRequest(Request.Method.POST, url1,new Response.Listener<String>() {
@@ -126,7 +126,7 @@ public class viewsurvey extends AppCompatActivity implements AdapterView.OnItemC
                         {
 
                             RequestQueue queue = Volley.newRequestQueue(viewsurvey.this);
-                            String url = "http://" + sh.getString("ip","") + ":5000/delectsurvey";
+                            String url = "http://" + sh.getString("ip","") + ":5000/api/delectsurvey";
 
                             // Request a string response from the provided URL.
                             StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -211,7 +211,7 @@ public class viewsurvey extends AppCompatActivity implements AdapterView.OnItemC
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         suid=sid.get(i);
 //        sh= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        String url ="http://"+sh.getString("ip", "") + ":5000/viewsuuu";
+        String url ="http://"+sh.getString("ip", "") + ":5000/api/viewsuuu";
 
         RequestQueue queue = Volley.newRequestQueue(viewsurvey.this);
 

@@ -52,7 +52,7 @@ public class online_testSURVEY extends AppCompatActivity {
         quitbutton=(Button)findViewById(R.id.buttonquit);
 
         sh= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        url ="http://"+sh.getString("ip", "") + ":5000/get_questionsurvey";
+        url ="http://"+sh.getString("ip", "") + ":5000/api/get_questionsurvey";
         RequestQueue queue = Volley.newRequestQueue(online_testSURVEY.this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {
             @Override
@@ -168,7 +168,7 @@ public class online_testSURVEY extends AppCompatActivity {
                     e1.putString("res","5");
                     e1.putString("qid",qid.get(flag));
                     e1.commit();
-                    String url = "http://" + sh.getString("ip", "") + ":5000/answertestsurvey";
+                    String url = "http://" + sh.getString("ip", "") + ":5000/api/answertestsurvey";
 
                     // Request a string response from the provided URL.
                     StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -222,7 +222,7 @@ public class online_testSURVEY extends AppCompatActivity {
                     e1.putString("res","0");
                     e1.putString("qid",qid.get(flag));
                     e1.commit();
-                    String url = "http://" + sh.getString("ip", "") + ":5000/answertestsurvey";
+                    String url = "http://" + sh.getString("ip", "") + ":5000/api/answertestsurvey";
 
                     // Request a string response from the provided URL.
                     StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {

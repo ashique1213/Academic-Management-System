@@ -1,4 +1,4 @@
-{% extends 'indexfor allll.html' %}
+﻿{% extends 'dashboard_base.html' %}
 {% block body %}
 
 <body>
@@ -33,16 +33,17 @@
     </tr>
     {% for i in  val1 %}
     <tr>
-      <td><label>{{loop.index}}</label></td>
-      <td><label>{{i['topic']}}</label></td>
-      <td><label>{{i['description']}}</label></td>
-      <td><label>{{i['date']}}</label></td>
-      <td><label>{{i['hour']}}</label></td>
-      <td><label>{{i['module']}}</label></td>
+      <td class="px-4 py-3 border-b border-slate-100"><label>{{loop.index}}</label></td>
+      <td class="px-4 py-3 border-b border-slate-100"><label>{{i['topic']}}</label></td>
+      <td class="px-4 py-3 border-b border-slate-100"><label>{{i['description']}}</label></td>
+      <td class="px-4 py-3 border-b border-slate-100"><label>{{i['date']}}</label></td>
+      <td class="px-4 py-3 border-b border-slate-100"><label>{{i['hour']}}</label></td>
+      <td class="px-4 py-3 border-b border-slate-100"><label>{{i['module']}}</label></td>
     </tr>
     {% endfor %}
   </table>
 </form>
 </body>
 {% endblock %}
+
 

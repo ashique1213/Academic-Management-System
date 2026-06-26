@@ -1,46 +1,66 @@
-<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
-<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
 {% extends 'hodindex.html' %}
+{% block title %}Edit Assignment{% endblock %}
 {% block body %}
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>Untitled Document</title>
-</head>
-<center>
-<body>
-<form id="form1" name="form1" method="post" action="updateassignsub#about">
-  <table width="200" border="1">
-    <tr>
-      <th width="350">Teacher name </th>
-      <td><label>
-        <select name="select">
-          {% for i in val %}
-          <option value="{{i['login_id']}}">{{i['name']}}</option>
-          {% endfor %}
-        </select>
-      </label></td>
-    </tr>
-    <tr>
-      <th>Subject</th>
-      <td><label>
-        <select name="select2">
-            {% for i in data %}
-          <option value="{{i['subj_id']}}">{{i['subject name']}}</option>
-          {% endfor %}
-        </select>
-      </label></td>
-    </tr>
-    <tr>
-      <td colspan="2" align="center"><label>
+
+<!-- Backdrop / Modal Container -->
+<div class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+    
+    <!-- Modal Card -->
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg flex flex-col max-h-full overflow-hidden animate-[fadeIn_0.2s_ease-out]">
         
-        <div >
-          <input type="submit" name="Submit" value="Assign" />
+        <!-- Header -->
+        <div class="px-6 py-4 border-b border-slate-200 flex items-center justify-between bg-slate-50 shrink-0">
+            <div class="flex items-center">
+                <div class="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center text-amber-600 mr-3">
+                    <i class="bi bi-pencil-fill"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900">Edit Subject Assignment</h3>
+            </div>
+            <a href="/viewassignsub" class="text-slate-400 hover:text-slate-600 transition-colors">
+                <i class="bi bi-x-lg text-lg"></i>
+            </a>
         </div>
-      </label></td>
-    </tr>
-  </table>
-</form>
-</body>
-  </center>
-<!--</html>-->
+
+        <!-- Body -->
+        <div class="p-6 overflow-y-auto">
+            <form method="post" action="updateassignsub" id="editAssignSubForm">
+                <div class="space-y-6">
+                    
+                    <!-- Teacher Selection -->
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Teacher <span class="text-rose-500">*</span></label>
+                        <select name="select" required class="block w-full border border-slate-300 rounded-lg px-3 py-2.5 text-sm text-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-shadow bg-slate-50">
+                            {% for i in val %}
+                                <option value="{{i['login_id']}}" {% if dt['t_id'] == i['login_id'] %}selected{% endif %}>{{i['name']}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <!-- Subject Selection -->
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Subject <span class="text-rose-500">*</span></label>
+                        <select name="select2" required class="block w-full border border-slate-300 rounded-lg px-3 py-2.5 text-sm text-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-shadow bg-slate-50">
+                            {% for i in data %}
+                                <option value="{{i['subj_id']}}" {% if dt['s_id'] == i['subj_id'] %}selected{% endif %}>{{i['subject name']}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+
+        <!-- Footer -->
+        <div class="px-6 py-4 border-t border-slate-200 bg-slate-50 flex items-center justify-end space-x-3 shrink-0">
+            <a href="/viewassignsub" class="px-4 py-2 border border-slate-300 rounded-lg text-sm font-medium text-slate-700 bg-white hover:bg-slate-50 transition-colors">
+                Cancel
+            </a>
+            <button type="submit" form="editAssignSubForm" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg shadow-sm transition-colors">
+                Update Assignment
+            </button>
+        </div>
+
+    </div>
+</div>
+
 {% endblock %}

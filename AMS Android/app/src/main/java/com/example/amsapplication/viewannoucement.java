@@ -34,7 +34,7 @@ public class viewannoucement extends AppCompatActivity {
         setContentView(R.layout.activity_viewannoucement);
         l1=findViewById(R.id.list11);
         sh= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        url ="http://"+sh.getString("ip", "") + ":5000/viewannoucement";
+        url ="http://"+sh.getString("ip", "") + ":5000/api/viewannoucement";
         RequestQueue queue = Volley.newRequestQueue(viewannoucement.this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {

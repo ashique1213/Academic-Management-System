@@ -71,7 +71,7 @@ ArrayList<String> exam,eid;
             }
         });
 
-        String url1 ="http://"+sh.getString("ip", "") + ":5000/viewsubjectonlyforexam";
+        String url1 ="http://"+sh.getString("ip", "") + ":5000/api/viewsubjectonlyforexam";
         RequestQueue queue1 = Volley.newRequestQueue(addexam.this);
 
         StringRequest stringRequest1 = new StringRequest(Request.Method.POST, url1,new Response.Listener<String>() {
@@ -147,7 +147,7 @@ params.put("lid",sh.getString("lid",""));
                 }
                 else {
                     RequestQueue queue = Volley.newRequestQueue(addexam.this);
-                    String url = "http://" + sh.getString("ip", "") + ":5000/addexam";
+                    String url = "http://" + sh.getString("ip", "") + ":5000/api/addexam";
 
                     // Request a string response from the provided URL.
                     StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {

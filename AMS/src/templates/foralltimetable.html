@@ -1,6 +1,6 @@
 <!--<!DOCTYPE html>-->
 <html lang="en">
-{% extends 'indexfor allll.html' %}
+{% extends 'dashboard_base.html' %}
 {% block body %}
 <head>
     <meta charset="UTF-8">
@@ -11,8 +11,8 @@
 <form method="post" action="tt1#about">
 <table border="1">
     <tr>
-        <th>Sem</th>
-        <td><select name="s"  >
+        <th class="px-5 py-4 bg-slate-900 text-slate-100 font-bold border-b border-slate-800 tracking-widest text-[12px] shadow-inner">Sem</th>
+        <td class="px-5 py-4 border-b border-slate-100/60 text-slate-600 font-medium"><select name="s"  >
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -20,8 +20,8 @@
         </select> </td>
     </tr>
     <tr>
-        <td></td>
-        <td><input type="submit" value="Next"></td>
+        <td class="px-5 py-4 border-b border-slate-100/60 text-slate-600 font-medium"></td>
+        <td class="px-5 py-4 border-b border-slate-100/60 text-slate-600 font-medium"><input type="submit" value="Next"></td>
     </tr>
 </table>
 </form>

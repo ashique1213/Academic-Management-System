@@ -7,25 +7,28 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<center>
+
 <body>
-<form method="post" action="tt2#about">
-<table border="1">
+<div class="card shadow-sm border-0 mb-4 mx-auto" style="max-width: 600px;">
+<div class="card-header bg-white"><h5 class="mb-0 text-primary"><i class="bi bi-pencil-square me-2"></i>Form</h5></div>
+<div class="card-body">
+<form method="post" action="tt2#about" class="p-2">
+
 <tr>
-        <th>Day/Hour</th>
-        <th>1</th>
-        <th>2</th>
-        <th>3</th>
-        <th>4</th>
-        <th>5</th>
-        <th>6</th>
+        <th class="px-5 py-4 bg-slate-900 text-slate-100 font-bold border-b border-slate-800 tracking-widest text-[12px] shadow-inner">Day/Hour</th>
+        <th class="px-5 py-4 bg-slate-900 text-slate-100 font-bold border-b border-slate-800 tracking-widest text-[12px] shadow-inner">1</th>
+        <th class="px-5 py-4 bg-slate-900 text-slate-100 font-bold border-b border-slate-800 tracking-widest text-[12px] shadow-inner">2</th>
+        <th class="px-5 py-4 bg-slate-900 text-slate-100 font-bold border-b border-slate-800 tracking-widest text-[12px] shadow-inner">3</th>
+        <th class="px-5 py-4 bg-slate-900 text-slate-100 font-bold border-b border-slate-800 tracking-widest text-[12px] shadow-inner">4</th>
+        <th class="px-5 py-4 bg-slate-900 text-slate-100 font-bold border-b border-slate-800 tracking-widest text-[12px] shadow-inner">5</th>
+        <th class="px-5 py-4 bg-slate-900 text-slate-100 font-bold border-b border-slate-800 tracking-widest text-[12px] shadow-inner">6</th>
     </tr>
     {% for i in day %}
    <tr>
-       <td>{{i}}</td>
+       <td class="px-5 py-4 border-b border-slate-100/60 text-slate-600 font-medium">{{i}}</td>
        {% for j in range(0,6) %}
-       <td>
-            <select name="{{i}}{{j}}">
+       <td class="px-5 py-4 border-b border-slate-100/60 text-slate-600 font-medium">
+            <select class="block w-full bg-slate-50 border border-slate-200 rounded-lg py-2.5 px-3 text-[12px] text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" name="{{i}}{{j}}">
            {% for ii in val%}
          <option value="{{ii['subj_id']}}">{{ii['subject name']}}</option>
            {% endfor %}  </select>
@@ -35,11 +38,13 @@
     {% endfor %}
     <tr>
         <td colspan="7" align="center">
-        <input type="submit" value="Add">
+        <input type="submit" class="inline-flex justify-center w-full px-5 py-2 border border-transparent rounded-lg shadow-sm text-[12px] font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors" value="Add">
     </tr>
-</table>
+
 </form>
+</div>
+</div>
 </body>
-    </center>
+    
 <!--</html>-->
 {% endblock %}

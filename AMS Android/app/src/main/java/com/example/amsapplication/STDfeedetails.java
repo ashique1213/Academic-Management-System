@@ -41,7 +41,7 @@ public class STDfeedetails extends AppCompatActivity implements AdapterView.OnIt
         setContentView(R.layout.activity_stdfeedetails);
         l1=findViewById(R.id.list1);
         sh= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        url ="http://"+sh.getString("ip", "") + ":5000/viewfeedetails";
+        url ="http://"+sh.getString("ip", "") + ":5000/api/viewfeedetails";
         RequestQueue queue = Volley.newRequestQueue(STDfeedetails.this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {

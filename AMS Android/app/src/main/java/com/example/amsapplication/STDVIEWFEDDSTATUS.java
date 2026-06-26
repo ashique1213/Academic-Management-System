@@ -41,7 +41,7 @@ public class STDVIEWFEDDSTATUS extends AppCompatActivity {
         setContentView(R.layout.activity_stdviewfeddstatus);
         l1=findViewById(R.id.list1);
         sh= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        url ="http://"+sh.getString("ip", "") + ":5000/viewfee1";
+        url ="http://"+sh.getString("ip", "") + ":5000/api/viewfee1";
         RequestQueue queue = Volley.newRequestQueue(STDVIEWFEDDSTATUS.this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {

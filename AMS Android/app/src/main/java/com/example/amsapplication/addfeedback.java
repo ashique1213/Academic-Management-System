@@ -111,7 +111,7 @@ public class addfeedback extends AppCompatActivity {
 
 
                     RequestQueue queue = Volley.newRequestQueue(addfeedback.this);
-                    String url = "http://" + sh.getString("ip", "") + ":5000/addfeedback";
+                    String url = "http://" + sh.getString("ip", "") + ":5000/api/addfeedback";
 
                     // Request a string response from the provided URL.
                     StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {

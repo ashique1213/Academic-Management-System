@@ -50,7 +50,7 @@ ArrayList<String> name,sid;
         e6=findViewById(R.id.editTextTextPersonName17);
         b1=findViewById(R.id.button10);
         sh= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-       String url1 ="http://"+sh.getString("ip", "") + ":5000/ssviewtexam";
+       String url1 ="http://"+sh.getString("ip", "") + ":5000/api/ssviewtexam";
         RequestQueue queue1 = Volley.newRequestQueue(addquestion.this);
 
         StringRequest stringRequest1 = new StringRequest(Request.Method.POST, url1,new Response.Listener<String>() {
@@ -142,7 +142,7 @@ ArrayList<String> name,sid;
 
 
                     RequestQueue queue = Volley.newRequestQueue(addquestion.this);
-                    String url = "http://" + sh.getString("ip", "") + ":5000/addquestion";
+                    String url = "http://" + sh.getString("ip", "") + ":5000/api/addquestion";
 
                     // Request a string response from the provided URL.
                     StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {

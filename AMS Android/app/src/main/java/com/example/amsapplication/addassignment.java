@@ -81,7 +81,7 @@ public class addassignment extends AppCompatActivity {
                 }
                 else {
                     RequestQueue queue = Volley.newRequestQueue(addassignment.this);
-                    url = "http://" + sh.getString("ip", "") + ":5000/addassigment";
+                    url = "http://" + sh.getString("ip", "") + ":5000/api/addassigment";
 
                     // Request a string response from the provided URL.
                     StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {

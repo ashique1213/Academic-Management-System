@@ -66,7 +66,7 @@ public class staffviewattendance extends AppCompatActivity implements AdapterVie
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                url ="http://"+sh.getString("ip", "") + ":5000/staffviewattendance";
+                url ="http://"+sh.getString("ip", "") + ":5000/api/staffviewattendance";
                 RequestQueue queue = Volley.newRequestQueue(staffviewattendance.this);
 
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {
@@ -125,7 +125,7 @@ public class staffviewattendance extends AppCompatActivity implements AdapterVie
             }
         });
 
-        String url1 ="http://"+sh.getString("ip", "") + ":5000/viewsubjectonlyforexam";
+        String url1 ="http://"+sh.getString("ip", "") + ":5000/api/viewsubjectonlyforexam";
         RequestQueue queue1 = Volley.newRequestQueue(staffviewattendance.this);
 
         StringRequest stringRequest1 = new StringRequest(Request.Method.POST, url1,new Response.Listener<String>() {

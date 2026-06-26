@@ -44,7 +44,7 @@ public class viewexam extends AppCompatActivity implements AdapterView.OnItemCli
         l1=findViewById(R.id.list15);
         b1=findViewById(R.id.button8);
         sh= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        url ="http://"+sh.getString("ip", "") + ":5000/ttviewtexam";
+        url ="http://"+sh.getString("ip", "") + ":5000/api/ttviewtexam";
         RequestQueue queue = Volley.newRequestQueue(viewexam.this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {
@@ -125,7 +125,7 @@ public class viewexam extends AppCompatActivity implements AdapterView.OnItemCli
                         {
 
                             RequestQueue queue = Volley.newRequestQueue(viewexam.this);
-                            url = "http://" + sh.getString("ip","") + ":5000/deleeassigment";
+                            url = "http://" + sh.getString("ip","") + ":5000/api/deleeassigment";
 
                             // Request a string response from the provided URL.
                             StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {

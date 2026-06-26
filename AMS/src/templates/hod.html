@@ -1,30 +1,268 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>Untitled Document</title>
-</head>
-<body>
-<form id="form1" name="form1" method="post" action="">
-  <table width="295" border="1">
-    <tr>
-      <td width="285" height="289"><div align="center">
-          <p><a href="viewteacher">Manage teachers</a></p>
-          <p><a href="viewstudents">Manage Students</a></p>
-          <p><a href="#">Manage timetable</a></p>
-          <p><a href="viewsubject">Manage subject</a></p>
-          <p><a href="viewfeedetails">Manage fee details</a></p>
-          <p><a href="viewfee">Manage fee</a></p>
-          <p><a href="viewassignsub">Assign subject</a></p>
-           <p><a href="viewannouncement">Announcement</a></p>
-          <p><a href="viewfeedback">View feedback</a></p>
-          <p><a href="viewsurvey">View Survey</a></p>
-          <p><a href="#">View attendence</a></p>
-          <p><a href="/">logout</a></p>
-          <p>&nbsp;</p>
-      </div></td>
-    </tr>
-    </table>
-</form>
-</body>
-</html>
+{% extends 'hodindex.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block body %}
+
+<!-- Stat Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    
+    <!-- Total Teachers -->
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 flex items-center transition duration-150 ease-in-out hover:shadow-md">
+        <div class="w-14 h-14 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 shrink-0">
+            <i class="bi bi-person-workspace text-2xl"></i>
+        </div>
+        <div class="ml-4">
+            <p class="text-sm font-medium text-slate-500 mb-1">Total Teachers</p>
+            <div class="flex items-baseline">
+                <h4 class="text-2xl font-bold text-slate-900">{{ teach_count }}</h4>
+                <span class="ml-2 text-xs font-semibold text-emerald-600 flex items-center">
+                    <i class="bi bi-arrow-up-short text-base leading-none"></i> 2.5%
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Total Students -->
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 flex items-center transition duration-150 ease-in-out hover:shadow-md">
+        <div class="w-14 h-14 rounded-full bg-violet-100 flex items-center justify-center text-violet-600 shrink-0">
+            <i class="bi bi-mortarboard text-2xl"></i>
+        </div>
+        <div class="ml-4">
+            <p class="text-sm font-medium text-slate-500 mb-1">Total Students</p>
+            <div class="flex items-baseline">
+                <h4 class="text-2xl font-bold text-slate-900">{{ stu_count }}</h4>
+                <span class="ml-2 text-xs font-semibold text-emerald-600 flex items-center">
+                    <i class="bi bi-arrow-up-short text-base leading-none"></i> 4.1%
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Total Subjects -->
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 flex items-center transition duration-150 ease-in-out hover:shadow-md">
+        <div class="w-14 h-14 rounded-full bg-amber-100 flex items-center justify-center text-amber-600 shrink-0">
+            <i class="bi bi-journal-bookmark text-2xl"></i>
+        </div>
+        <div class="ml-4">
+            <p class="text-sm font-medium text-slate-500 mb-1">Total Subjects</p>
+            <div class="flex items-baseline">
+                <h4 class="text-2xl font-bold text-slate-900">{{ sub_count }}</h4>
+                <span class="ml-2 text-xs font-semibold text-emerald-600 flex items-center">
+                    <i class="bi bi-arrow-up-short text-base leading-none"></i> 1.2%
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Attendance Rate -->
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 flex items-center transition duration-150 ease-in-out hover:shadow-md">
+        <div class="w-14 h-14 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 shrink-0">
+            <i class="bi bi-check2-circle text-2xl"></i>
+        </div>
+        <div class="ml-4">
+            <p class="text-sm font-medium text-slate-500 mb-1">Avg Attendance</p>
+            <div class="flex items-baseline">
+                <h4 class="text-2xl font-bold text-slate-900">N/A</h4>
+                <span class="ml-2 text-xs font-semibold text-slate-400 flex items-center">--</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Main Dashboard Grids -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    
+    <!-- Left Column: Chart & Recent Activity -->
+    <div class="lg:col-span-2 space-y-8">
+        
+        <!-- Attendance Chart -->
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-lg font-bold text-slate-900">Attendance Overview</h3>
+                <select class="border border-slate-300 rounded-lg text-sm text-slate-600 px-3 py-1.5 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                    <option>This Week</option>
+                    <option>Last Week</option>
+                    <option>This Month</option>
+                </select>
+            </div>
+            <div class="relative h-72 w-full">
+                <canvas id="attendanceChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Recent Activity Table -->
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="px-6 py-5 border-b border-slate-200 flex items-center justify-between bg-white">
+                <h3 class="text-lg font-bold text-slate-900">Recent Activity</h3>
+                <a href="#" class="text-sm font-medium text-blue-600 hover:text-blue-700">View all</a>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-slate-50">
+                            <th class="px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider border-b border-slate-200">User</th>
+                            <th class="px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider border-b border-slate-200">Action</th>
+                            <th class="px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider border-b border-slate-200">Time</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody class="divide-y divide-slate-100">
+                        <tr>
+                            <td colspan="3" class="px-6 py-8 text-center text-slate-500 text-sm">
+                                <i class="bi bi-inbox text-2xl block mb-2 opacity-50"></i>
+                                No recent activity
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Right Column: Upcoming Timetable -->
+    <div class="space-y-8">
+        
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-lg font-bold text-slate-900">Upcoming Classes</h3>
+                <button class="text-slate-400 hover:text-slate-600"><i class="bi bi-three-dots-vertical"></i></button>
+            </div>
+
+            
+            <div class="space-y-4">
+                <div class="p-6 text-center border border-dashed border-slate-300 rounded-xl bg-slate-50 text-slate-500">
+                    <i class="bi bi-calendar-x text-2xl block mb-2 opacity-50"></i>
+                    <p class="text-sm">No upcoming classes scheduled</p>
+                </div>
+            </div>
+
+                    <div>
+                        <h4 class="text-sm font-bold text-slate-900 mb-1">Advanced Physics</h4>
+                        <p class="text-xs text-slate-600 flex items-center mb-2">
+                            <i class="bi bi-person mr-1"></i> Dr. Robert Davis
+                        </p>
+                        <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-blue-100 text-blue-800">
+                            Class 12A
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Class Item -->
+                <div class="flex items-start p-4 rounded-xl border border-slate-100 bg-slate-50 hover:border-slate-300 transition duration-150">
+                    <div class="flex flex-col items-center justify-center w-12 shrink-0 border-r border-slate-200 pr-4 mr-4">
+                        <span class="text-sm font-bold text-slate-900">10:30</span>
+                        <span class="text-xs text-slate-500 uppercase">AM</span>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-bold text-slate-900 mb-1">Organic Chemistry</h4>
+                        <p class="text-xs text-slate-600 flex items-center mb-2">
+                            <i class="bi bi-person mr-1"></i> Sarah Wilson
+                        </p>
+                        <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-emerald-100 text-emerald-800">
+                            Class 11B
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Class Item -->
+                <div class="flex items-start p-4 rounded-xl border border-slate-100 bg-slate-50 hover:border-slate-300 transition duration-150">
+                    <div class="flex flex-col items-center justify-center w-12 shrink-0 border-r border-slate-200 pr-4 mr-4">
+                        <span class="text-sm font-bold text-slate-900">11:45</span>
+                        <span class="text-xs text-slate-500 uppercase">AM</span>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-bold text-slate-900 mb-1">Mathematics</h4>
+                        <p class="text-xs text-slate-600 flex items-center mb-2">
+                            <i class="bi bi-person mr-1"></i> James Miller
+                        </p>
+                        <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-purple-100 text-purple-800">
+                            Class 10C
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+            
+            <button class="w-full mt-6 py-2 border border-slate-300 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50 transition duration-150">
+                View Full Timetable
+            </button>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const ctx = document.getElementById('attendanceChart').getContext('2d');
+        
+        // Tailwind colors
+        const blue600 = '#2563eb';
+        const blue100 = '#dbeafe';
+        const slate200 = '#e2e8f0';
+        const slate400 = '#94a3b8';
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+                datasets: [{
+                    label: 'Attendance %',
+                    data: [],
+                    backgroundColor: blue600,
+                    borderRadius: 6,
+                    borderSkipped: false,
+                    barPercentage: 0.5,
+                    categoryPercentage: 0.8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: '#1e293b',
+                        padding: 12,
+                        titleFont: { size: 13, family: "'Inter', sans-serif" },
+                        bodyFont: { size: 13, family: "'Inter', sans-serif" },
+                        callbacks: {
+                            label: function(context) {
+                                return ' ' + context.parsed.y + '% Present';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        grid: {
+                            color: slate200,
+                            drawBorder: false,
+                        },
+                        ticks: {
+                            color: slate400,
+                            font: { family: "'Inter', sans-serif", size: 11 },
+                            stepSize: 25,
+                            callback: function(value) { return value + '%' }
+                        }
+                    },
+                    x: {
+                        grid: { display: false, drawBorder: false },
+                        ticks: {
+                            color: slate400,
+                            font: { family: "'Inter', sans-serif", size: 12 }
+                        }
+                    }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index',
+                },
+            }
+        });
+    });
+</script>
+
+{% endblock %}

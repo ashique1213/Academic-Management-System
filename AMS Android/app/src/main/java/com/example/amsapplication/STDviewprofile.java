@@ -56,7 +56,7 @@ public class STDviewprofile extends AppCompatActivity {
         b1=findViewById(R.id.button26);
         b2=findViewById(R.id.button17);
         sh= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        url ="http://"+sh.getString("ip", "") + ":5000/ssviewprofile";
+        url ="http://"+sh.getString("ip", "") + ":5000/api/ssviewprofile";
         RequestQueue queue = Volley.newRequestQueue(STDviewprofile.this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {
@@ -93,9 +93,9 @@ public class STDviewprofile extends AppCompatActivity {
                         java.net.URL thumb_u;
                         try {
 
-                            //thumb_u = new java.net.URL("http://192.168.43.57:5000/static/photo/flyer.jpg");
+                            //thumb_u = new java.net.URL("http://192.168.43.57:5000/api/static/photo/flyer.jpg");
 
-                            thumb_u = new java.net.URL("http://"+sh.getString("ip","")+":5000/static/photos/"+jo.getString("photo"));
+                            thumb_u = new java.net.URL("http://"+sh.getString("ip","")+":5000/api/static/photos/"+jo.getString("photo"));
                             Drawable thumb_d = Drawable.createFromStream(thumb_u.openStream(), "src");
                             e8.setImageDrawable(thumb_d);
 
@@ -187,7 +187,7 @@ public class STDviewprofile extends AppCompatActivity {
 
    else {
                     RequestQueue queue = Volley.newRequestQueue(STDviewprofile.this);
-                    String url = "http://" + sh.getString("ip", "") + ":5000/editstdprofile";
+                    String url = "http://" + sh.getString("ip", "") + ":5000/api/editstdprofile";
 
                     // Request a string response from the provided URL.
                     StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {

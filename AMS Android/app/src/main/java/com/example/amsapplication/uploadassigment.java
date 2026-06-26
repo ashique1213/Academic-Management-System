@@ -50,7 +50,7 @@ public class uploadassigment extends AppCompatActivity {
         b2=findViewById(R.id.button30);
         pid=getIntent().getStringExtra("a+++++id");
         sh= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        url ="http://"+sh.getString("ip", "") + ":5000/uploadassigment";
+        url ="http://"+sh.getString("ip", "") + ":5000/api/uploadassigment";
 
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();

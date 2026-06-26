@@ -1,31 +1,44 @@
-<!--<!DOCTYPE html>-->
-<html lang="en">
 {% extends 'hodindex.html' %}
+{% block title %}Timetable{% endblock %}
 {% block body %}
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<center>
-<body>
-<form method="post" action="tt1#about">
-<table border="1">
-    <tr>
-        <th>Sem</th>
-        <td><select name="s"  >
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-        </select> </td>
-    </tr>
-    <tr>
-        <td></td>
-        <td><input type="submit" value="Next"></td>
-    </tr>
-</table>
-</form>
-</body>
-    </center>
-<!--</html>-->
+
+<!-- Page Header -->
+<div class="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div>
+        <h2 class="text-2xl font-bold text-slate-900">Class Timetable</h2>
+        <p class="text-sm text-slate-500 mt-1">Select a semester to view or manage the weekly class schedule.</p>
+    </div>
+</div>
+
+<!-- Filters -->
+<div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 mb-6">
+    <form method="post" action="tt1" class="flex flex-col sm:flex-row gap-4 items-end">
+        <div class="flex-1">
+            <label class="block text-sm font-medium text-slate-700 mb-1">Select Semester</label>
+            <select name="s" class="block w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                <option value="1">Semester 1</option>
+                <option value="2">Semester 2</option>
+                <option value="3">Semester 3</option>
+                <option value="4">Semester 4</option>
+                <option value="5">Semester 5</option>
+                <option value="6">Semester 6</option>
+            </select>
+        </div>
+        <div>
+            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-6 py-2 text-sm font-medium transition duration-150 shadow-sm flex items-center">
+                <i class="bi bi-search mr-2"></i> Load Timetable
+            </button>
+        </div>
+    </form>
+</div>
+
+<!-- Empty State -->
+<div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-12 flex flex-col items-center justify-center text-center">
+    <div class="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mb-4">
+        <i class="bi bi-calendar3 text-4xl text-slate-300"></i>
+    </div>
+    <h3 class="text-lg font-bold text-slate-900 mb-2">No Timetable Selected</h3>
+    <p class="text-sm text-slate-500 max-w-sm">Please select a semester from the dropdown above and click "Load Timetable" to view or edit the schedule.</p>
+</div>
+
 {% endblock %}

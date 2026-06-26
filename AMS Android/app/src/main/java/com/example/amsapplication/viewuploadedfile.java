@@ -43,7 +43,7 @@ public class viewuploadedfile extends AppCompatActivity implements AdapterView.O
 
         sh= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-        url ="http://"+sh.getString("ip", "") + ":5000/viewuploadedfiles";
+        url ="http://"+sh.getString("ip", "") + ":5000/api/viewuploadedfiles";
         RequestQueue queue = Volley.newRequestQueue(viewuploadedfile.this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {
@@ -106,7 +106,7 @@ public class viewuploadedfile extends AppCompatActivity implements AdapterView.O
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        String url2="http://"+sh.getString("ip","")+":5000/static/photos/"+file.get(i);
+        String url2="http://"+sh.getString("ip","")+":5000/api/static/photos/"+file.get(i);
         Intent dwnl=new Intent(Intent.ACTION_VIEW,
                 Uri.parse(url2));
         startActivity(dwnl);

@@ -35,7 +35,7 @@ public class STDviewinternalmark extends AppCompatActivity {
         setContentView(R.layout.activity_stdviewinternalmark);
         l1=findViewById(R.id.list8);
         sh= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        url ="http://"+sh.getString("ip", "") + ":5000/ssviewtinternal";
+        url ="http://"+sh.getString("ip", "") + ":5000/api/ssviewtinternal";
         RequestQueue queue = Volley.newRequestQueue(STDviewinternalmark.this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {

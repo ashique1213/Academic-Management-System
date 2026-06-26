@@ -35,7 +35,7 @@ public class STDviewannoucement extends AppCompatActivity {
         setContentView(R.layout.activity_stdviewannoucement);
         l1=findViewById(R.id.list4);
         sh= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        url ="http://"+sh.getString("ip", "") + ":5000/viewannoucement";
+        url ="http://"+sh.getString("ip", "") + ":5000/api/viewannoucement";
         RequestQueue queue = Volley.newRequestQueue(STDviewannoucement.this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {

@@ -56,7 +56,7 @@ public class viewprofile extends AppCompatActivity {
         b1=findViewById(R.id.button26);
         b2=findViewById(R.id.button17);
         sh= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        url ="http://"+sh.getString("ip", "") + ":5000/ttviewprofile";
+        url ="http://"+sh.getString("ip", "") + ":5000/api/ttviewprofile";
         RequestQueue queue = Volley.newRequestQueue(viewprofile.this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {
@@ -92,9 +92,9 @@ public class viewprofile extends AppCompatActivity {
                         java.net.URL thumb_u;
                         try {
 
-                            //thumb_u = new java.net.URL("http://192.168.43.57:5000/static/photo/flyer.jpg");
+                            //thumb_u = new java.net.URL("http://192.168.43.57:5000/api/static/photo/flyer.jpg");
 
-                            thumb_u = new java.net.URL("http://"+sh.getString("ip","")+":5000/static/photos/"+jo.getString("photo"));
+                            thumb_u = new java.net.URL("http://"+sh.getString("ip","")+":5000/api/static/photos/"+jo.getString("photo"));
                             Drawable thumb_d = Drawable.createFromStream(thumb_u.openStream(), "src");
                             e8.setImageDrawable(thumb_d);
 
@@ -154,7 +154,7 @@ public class viewprofile extends AppCompatActivity {
 //                dateofadd=e9.getText().toString();
 
                 RequestQueue queue = Volley.newRequestQueue(viewprofile.this);
-                String url = "http://" + sh.getString("ip","") + ":5000/editteacherprofile";
+                String url = "http://" + sh.getString("ip","") + ":5000/api/editteacherprofile";
 
                 // Request a string response from the provided URL.
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {

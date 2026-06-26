@@ -39,7 +39,7 @@ public class stdviewstaff extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_stdviewstaff);
         l1=findViewById(R.id.list3);
         sh= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        url ="http://"+sh.getString("ip", "") + ":5000/viewstaff";
+        url ="http://"+sh.getString("ip", "") + ":5000/api/viewstaff";
         RequestQueue queue = Volley.newRequestQueue(stdviewstaff.this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {

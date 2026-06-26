@@ -44,7 +44,7 @@ public class viewassignment extends AppCompatActivity implements AdapterView.OnI
         l1=findViewById(R.id.list16);
         b1=findViewById(R.id.button4);
         sh= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        url ="http://"+sh.getString("ip", "") + ":5000/ttviewtassignment";
+        url ="http://"+sh.getString("ip", "") + ":5000/api/ttviewtassignment";
         RequestQueue queue = Volley.newRequestQueue(viewassignment.this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {
@@ -127,7 +127,7 @@ public class viewassignment extends AppCompatActivity implements AdapterView.OnI
                         {
 
                             RequestQueue queue = Volley.newRequestQueue(viewassignment.this);
-                            url = "http://" + sh.getString("ip","") + ":5000/deleeassigment";
+                            url = "http://" + sh.getString("ip","") + ":5000/api/deleeassigment";
 
                             // Request a string response from the provided URL.
                             StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {

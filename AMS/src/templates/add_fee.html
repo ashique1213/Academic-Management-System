@@ -1,0 +1,59 @@
+<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
+{% extends 'hodindex.html' %}
+{% block body %}
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Untitled Document</title>
+</head>
+
+<body>
+<!--<div class="card shadow-sm border-0 mb-4 mx-auto" style="max-width: 600px;">
+<div class="card-header bg-white"><h5 class="mb-0 text-primary"><i class="bi bi-pencil-square me-2"></i>Form</h5></div>
+<div class="card-body">
+<form id="form1" name="form1" method="post" action="addfees1#about" class="p-2">-->
+  <!---->
+<div class="card shadow-sm border-0 mb-4 mx-auto" style="max-width: 600px;">
+<div class="card-header bg-white"><h5 class="mb-0 text-primary"><i class="bi bi-pencil-square me-2"></i>Form</h5></div>
+<div class="card-body">
+<form method="post" name="form1" id="form1" action="addfees1#about" class="p-2">
+  
+    <div class="mb-5">
+  <label class="form-label fw-semibold">Title</label>
+  <input type="text" class="block w-full bg-slate-50 border border-slate-200 rounded-lg py-2.5 px-3 text-[12px] text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" name="textfield22" required/>
+</div>
+    <div class="mb-5">
+  <label class="form-label fw-semibold">semester</label>
+  <select class="block w-full bg-slate-50 border border-slate-200 rounded-lg py-2.5 px-3 text-[12px] text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" name="select">
+          <option value="1">s1</option><option value="2">s2</option>
+          <option value="3">s3</option><option value="4">s4</option>
+        </select>
+</div>
+    <div class="mb-5">
+  <label class="form-label fw-semibold">Amount</label>
+  <input type="text" class="block w-full bg-slate-50 border border-slate-200 rounded-lg py-2.5 px-3 text-[12px] text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" name="textfield" required/>
+</div>
+    <div class="mb-5">
+  <label class="form-label fw-semibold">last date</label>
+  <input type="date" class="block w-full bg-slate-50 border border-slate-200 rounded-lg py-2.5 px-3 text-[12px] text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" name="textfield2" required />
+</div>
+    <div class="mb-5">
+  <label class="form-label fw-semibold">description</label>
+  <input type="text" class="block w-full bg-slate-50 border border-slate-200 rounded-lg py-2.5 px-3 text-[12px] text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all" name="textfield3" required/>
+</div>
+    <tr>
+      <td colspan="2" align="center"><label>
+        <div >
+          <input type="submit" class="inline-flex justify-center w-full px-5 py-2 border border-transparent rounded-lg shadow-sm text-[12px] font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors" name="Submit" value="Add" />
+          </div>
+      </label></td>
+    </tr>
+  
+</form>
+</div>
+</div>
+</body>
+  
+<!--</html>-->
+{% endblock %}

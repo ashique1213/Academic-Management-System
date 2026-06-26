@@ -50,7 +50,7 @@ public class STDviewsubject extends AppCompatActivity implements AdapterView.OnI
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        String url ="http://"+sh.getString("ip", "") + ":5000/ciewsubject1";
+        String url ="http://"+sh.getString("ip", "") + ":5000/api/ciewsubject1";
         RequestQueue queue = Volley.newRequestQueue(STDviewsubject.this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {

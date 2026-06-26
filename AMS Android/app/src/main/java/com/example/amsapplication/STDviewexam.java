@@ -39,7 +39,7 @@ public class STDviewexam extends AppCompatActivity implements AdapterView.OnItem
         setContentView(R.layout.activity_stdviewexam);
         l1=findViewById(R.id.list7);
         sh= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        url ="http://"+sh.getString("ip", "") + ":5000/ssviewtexam";
+        url ="http://"+sh.getString("ip", "") + ":5000/api/ssviewtexam";
         RequestQueue queue = Volley.newRequestQueue(STDviewexam.this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {

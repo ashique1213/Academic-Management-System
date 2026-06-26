@@ -54,7 +54,7 @@ public class Login extends AppCompatActivity {
                 }
                 else {
                     RequestQueue queue = Volley.newRequestQueue(Login.this);
-                    url = "http://" + sh.getString("ip", "") + ":5000/login_code";
+                    url = "http://" + sh.getString("ip", "") + ":5000/api/login_code";
 
                     // Request a string response from the provided URL.
                     StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {

@@ -1,0 +1,71 @@
+{% extends 'hodindex.html' %}
+{% block title %}Add Subject{% endblock %}
+{% block body %}
+
+<!-- Backdrop / Modal Container -->
+<div class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+    
+    <!-- Modal Card -->
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg flex flex-col max-h-full overflow-hidden animate-[fadeIn_0.2s_ease-out]">
+        
+        <!-- Header -->
+        <div class="px-6 py-4 border-b border-slate-200 flex items-center justify-between bg-slate-50 shrink-0">
+            <div class="flex items-center">
+                <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 mr-3">
+                    <i class="bi bi-book"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900">Add New Subject</h3>
+            </div>
+            <a href="/viewsubject" class="text-slate-400 hover:text-slate-600 transition-colors">
+                <i class="bi bi-x-lg text-lg"></i>
+            </a>
+        </div>
+
+        <!-- Body -->
+        <div class="p-6 overflow-y-auto">
+            <form method="post" action="addsubject1" id="addSubjectForm">
+                <div class="space-y-5">
+                    
+                    <!-- Subject Name -->
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Subject Name <span class="text-rose-500">*</span></label>
+                        <input type="text" name="textfield" required class="block w-full border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-shadow" placeholder="e.g. Data Structures">
+                    </div>
+
+                    <!-- Semester -->
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Semester <span class="text-rose-500">*</span></label>
+                        <select name="select" required class="block w-full border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-shadow">
+                            <option value="1">Semester 1</option>
+                            <option value="2">Semester 2</option>
+                            <option value="3">Semester 3</option>
+                            <option value="4">Semester 4</option>
+                            <option value="5">Semester 5</option>
+                            <option value="6">Semester 6</option>
+                        </select>
+                    </div>
+
+                    <!-- Credits -->
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">Credits <span class="text-rose-500">*</span></label>
+                        <input type="number" name="textfield3" required min="1" max="10" class="block w-full border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-shadow" placeholder="e.g. 4">
+                    </div>
+
+                </div>
+            </form>
+        </div>
+
+        <!-- Footer -->
+        <div class="px-6 py-4 border-t border-slate-200 bg-slate-50 flex items-center justify-end space-x-3 shrink-0">
+            <a href="/viewsubject" class="px-4 py-2 border border-slate-300 rounded-lg text-sm font-medium text-slate-700 bg-white hover:bg-slate-50 transition-colors">
+                Cancel
+            </a>
+            <button type="submit" form="addSubjectForm" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg shadow-sm transition-colors">
+                Save Subject
+            </button>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

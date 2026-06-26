@@ -56,7 +56,7 @@ public class viewinternalmarks extends AppCompatActivity implements AdapterView.
         startActivity(ii);
     }
     });
-         String url1 ="http://"+sh.getString("ip", "") + ":5000/viewsubjectonlyforexam";
+         String url1 ="http://"+sh.getString("ip", "") + ":5000/api/viewsubjectonlyforexam";
         RequestQueue queue1 = Volley.newRequestQueue(viewinternalmarks.this);
 
         StringRequest stringRequest1 = new StringRequest(Request.Method.POST, url1,new Response.Listener<String>() {
@@ -121,7 +121,7 @@ public class viewinternalmarks extends AppCompatActivity implements AdapterView.
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 eeid=eid.get(position);
 
-        url ="http://"+sh.getString("ip", "") + ":5000/ttviewtinternal";
+        url ="http://"+sh.getString("ip", "") + ":5000/api/ttviewtinternal";
         RequestQueue queue = Volley.newRequestQueue(viewinternalmarks.this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {
@@ -204,7 +204,7 @@ eeid=eid.get(position);
                         {
 
                             RequestQueue queue = Volley.newRequestQueue(viewinternalmarks.this);
-                            url = "http://" + sh.getString("ip","") + ":5000/deleinnn";
+                            url = "http://" + sh.getString("ip","") + ":5000/api/deleinnn";
 
                             // Request a string response from the provided URL.
                             StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {

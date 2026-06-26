@@ -51,7 +51,7 @@ public class viewquestion extends AppCompatActivity implements AdapterView.OnIte
         sh= PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
 
-        String url1 ="http://"+sh.getString("ip", "") + ":5000/ssviewtexam";
+        String url1 ="http://"+sh.getString("ip", "") + ":5000/api/ssviewtexam";
         RequestQueue queue1 = Volley.newRequestQueue(viewquestion.this);
 
         StringRequest stringRequest1 = new StringRequest(Request.Method.POST, url1,new Response.Listener<String>() {
@@ -130,7 +130,7 @@ public class viewquestion extends AppCompatActivity implements AdapterView.OnIte
                         {
 
                             RequestQueue queue = Volley.newRequestQueue(viewquestion.this);
-                            String url = "http://" + sh.getString("ip","") + ":5000/selectqn";
+                            String url = "http://" + sh.getString("ip","") + ":5000/api/selectqn";
 
                             // Request a string response from the provided URL.
                             StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -213,7 +213,7 @@ public class viewquestion extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        String url ="http://"+sh.getString("ip", "") + ":5000/viewqn";
+        String url ="http://"+sh.getString("ip", "") + ":5000/api/viewqn";
         RequestQueue queue = Volley.newRequestQueue(viewquestion.this);
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,new Response.Listener<String>() {
