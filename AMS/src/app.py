@@ -1,9 +1,13 @@
 import os
 from flask import Flask
+from dotenv import load_dotenv
 from routes.web_routes import web_bp
 from routes.api_routes import api_bp
 
+load_dotenv()
+
 app = Flask(__name__)
+
 # In a real production application, this should be an environment variable
 app.secret_key = os.environ.get('SECRET_KEY', 'default_secure_secret_key_change_me')
 
@@ -22,4 +26,4 @@ def add_header(response):
 if __name__ == '__main__':
 
     # Do not use debug=True in production
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=int(os.getenv('PORT', 5000)), debug=True)

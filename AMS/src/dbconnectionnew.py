@@ -1,9 +1,19 @@
+import os
 import psycopg2
 import psycopg2.extras
+from dotenv import load_dotenv
+
+load_dotenv()
 
 def get_connection():
-    # Provide a placeholder password here for now; the user will need to adjust if their local setup differs
-    return psycopg2.connect(host='localhost', port=5432, user='postgres', password='12345', dbname='ams')
+    return psycopg2.connect(
+        host=os.getenv('DB_HOST', 'localhost'),
+        port=os.getenv('DB_PORT', 5432),
+        user=os.getenv('DB_USER', 'postgres'),
+        password=os.getenv('DB_PASSWORD', '12345'),
+        dbname=os.getenv('DB_NAME', 'ams')
+    )
+
 
 def iud(qry, val=None):
     id = None
