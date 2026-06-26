@@ -1,109 +1,231 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:orientation="vertical"
+    android:background="@color/slate_50">
 
-
+    <!-- Header Section -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        tools:context=".Home_student">
+        android:padding="24dp"
+        android:background="@color/secondary"
+        android:elevation="4dp">
 
-
-        <Button
-            android:id="@+id/button15"
-            android:layout_width="250dp"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="view subjectplan" />
+            android:text="Student Dashboard"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
-        <Button
-        android:id="@+id/button39"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:text="View Timetable" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome back, ready to learn?"
+            android:textColor="@color/slate_200"
+            android:textSize="16sp"
+            android:layout_marginTop="4dp" />
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/button38"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:text="View Subject" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:padding="16dp">
 
-    <Button
-        android:id="@+id/button40"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:text="Assignment" />
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:rowCount="8"
+            android:alignmentMode="alignMargins"
+            android:columnOrderPreserved="false"
+            android:useDefaultMargins="true">
 
-    <Button
-        android:id="@+id/button41"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:text="Internal mark" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button15"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:padding="16dp"
+                android:text="Subject Plan"
+                android:textColor="@color/secondary_dark"
+                app:strokeColor="@color/slate_300" />
 
-    <Button
-        android:id="@+id/button42"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:text="Exams" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button38"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:padding="16dp"
+                android:text="Subjects"
+                android:textColor="@color/secondary_dark"
+                app:strokeColor="@color/slate_300" />
 
-    <Button
-        android:id="@+id/button43"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:text="Study Matrerials" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button39"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:padding="16dp"
+                android:text="Timetable"
+                android:textColor="@color/secondary_dark"
+                app:strokeColor="@color/slate_300" />
 
-    <Button
-        android:id="@+id/button44"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:text="Feedback" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button40"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:padding="16dp"
+                android:text="Assignments"
+                android:textColor="@color/secondary_dark"
+                app:strokeColor="@color/slate_300" />
 
-    <Button
-        android:id="@+id/button19"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:text="Survey" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button42"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:padding="16dp"
+                android:text="Exams"
+                android:textColor="@color/secondary_dark"
+                app:strokeColor="@color/slate_300" />
 
-    <Button
-        android:id="@+id/button45"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:text="Attendance" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button41"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:padding="16dp"
+                android:text="Internal Marks"
+                android:textColor="@color/secondary_dark"
+                app:strokeColor="@color/slate_300" />
 
-    <Button
-        android:id="@+id/button46"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:text="Annoucement" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button45"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:padding="16dp"
+                android:text="Attendance"
+                android:textColor="@color/secondary_dark"
+                app:strokeColor="@color/slate_300" />
 
-    <Button
-        android:id="@+id/button47"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:text="fee details" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button43"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:padding="16dp"
+                android:text="Materials"
+                android:textColor="@color/secondary_dark"
+                app:strokeColor="@color/slate_300" />
 
-    <Button
-        android:id="@+id/button48"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:text="chat" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button46"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:padding="16dp"
+                android:text="Announcements"
+                android:textColor="@color/secondary_dark"
+                app:strokeColor="@color/slate_300" />
 
-    <Button
-        android:id="@+id/button49"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:text="profile" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button47"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:padding="16dp"
+                android:text="Fee Details"
+                android:textColor="@color/secondary_dark"
+                app:strokeColor="@color/slate_300" />
 
-    <Button
-        android:id="@+id/button20"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:text="logout" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button48"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:padding="16dp"
+                android:text="Chat"
+                android:textColor="@color/secondary_dark"
+                app:strokeColor="@color/slate_300" />
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button44"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:padding="16dp"
+                android:text="Feedback"
+                android:textColor="@color/secondary_dark"
+                app:strokeColor="@color/slate_300" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button19"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:padding="16dp"
+                android:text="Survey"
+                android:textColor="@color/secondary_dark"
+                app:strokeColor="@color/slate_300" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button49"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:padding="16dp"
+                android:text="Profile"
+                android:textColor="@color/secondary_dark"
+                app:strokeColor="@color/slate_300" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button20"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="2"
+                android:layout_margin="8dp"
+                android:padding="16dp"
+                android:text="Logout"
+                android:backgroundTint="@color/danger"
+                android:textColor="@color/white" />
+
+        </GridLayout>
+    </ScrollView>
 </LinearLayout>
-</ScrollView>

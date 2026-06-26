@@ -1,10 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Primary Brand Colors -->
+    <color name="primary">#2563EB</color> <!-- Blue 600 -->
+    <color name="primary_dark">#1D4ED8</color> <!-- Blue 700 -->
+    <color name="primary_light">#DBEAFE</color> <!-- Blue 100 -->
+    
+    <!-- Secondary Brand Colors -->
+    <color name="secondary">#7C3AED</color> <!-- Violet 600 -->
+    <color name="secondary_dark">#6D28D9</color> <!-- Violet 700 -->
+    
+    <!-- Slate Scale (Grays) -->
+    <color name="slate_50">#F8FAFC</color>
+    <color name="slate_100">#F1F5F9</color>
+    <color name="slate_200">#E2E8F0</color>
+    <color name="slate_300">#CBD5E1</color>
+    <color name="slate_400">#94A3B8</color>
+    <color name="slate_500">#64748B</color>
+    <color name="slate_600">#475569</color>
+    <color name="slate_700">#334155</color>
+    <color name="slate_800">#1E293B</color>
+    <color name="slate_900">#0F172A</color>
+    
+    <!-- Functional Colors -->
+    <color name="success">#10B981</color> <!-- Emerald 500 -->
+    <color name="danger">#F43F5E</color> <!-- Rose 500 -->
+    <color name="warning">#F59E0B</color> <!-- Amber 500 -->
+    
+    <!-- Base Colors -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+
+    <!-- Legacy mapped (do not delete for compatibility yet) -->
     <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#00D2EE</color>
-    <color name="purple_700">#71ABC5</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="purple_500">#2563EB</color>
+    <color name="purple_700">#1D4ED8</color>
+    <color name="teal_200">#7C3AED</color>
+    <color name="teal_700">#6D28D9</color>
 </resources>
