@@ -5,54 +5,63 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from dbconnectionnew import *
 import functools
 
-web_bp = Blueprint('web', __name__)
+web_bp = Blueprint("web", __name__)
+
 
 def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in {'png', 'jpg', 'jpeg', 'gif'}
+    return "." in filename and filename.rsplit(".", 1)[1].lower() in {
+        "png",
+        "jpg",
+        "jpeg",
+        "gif",
+    }
 
 
 def login_required(func):
     @functools.wraps(func)
     def secure_function():
         if "lid" not in session:
-            return render_template('loginindex.html')
+            return render_template("loginindex.html")
         return func()
 
     return secure_function
 
 
-@web_bp.route('/logout')
+@web_bp.route("/logout")
 def logout():
     session.clear()
-    return redirect('/')
+    return redirect("/")
 
-@web_bp.route('/')
+
+@web_bp.route("/")
 def login():
     return render_template("loginindex.html")
 
 
-@web_bp.route('/login_code', methods = ['get','post'] )
+@web_bp.route("/login_code", methods=["get", "post"])
 def login_code():
-    username =request.form['textfield']
-    password =request.form['textfield2']
+    username = request.form["textfield"]
+    password = request.form["textfield2"]
 
-    ary="select * from login where username =%s"
-    val =(username,)
-    res = selectone(ary,val)
+    ary = "select * from login where username =%s"
+    val = (username,)
+    res = selectone(ary, val)
 
-    if res is None or (res['password'] != password and not check_password_hash(res['password'], password)):
-        return '''<script> alert ("username");window.location ="/" </script>'''
+    if res is None or (
+        res["password"] != password
+        and not check_password_hash(res["password"], password)
+    ):
+        return """<script> alert ("username");window.location ="/" </script>"""
 
-    elif res ['type']== 'admin':
-        session['lid']=res['login id']
-        return redirect('/hod')
+    elif res["type"] == "admin":
+        session["lid"] = res["login id"]
+        return redirect("/hod")
 
     else:
-        return '''<script> alert ("password");window.location ="/" </script>'''
+        return """<script> alert ("password");window.location ="/" </script>"""
 
 
-
-@web_bp.route('/hod')
+@web_bp.route("/hod")
 @login_required
 def hod():
     # Fetch real counts for dashboard
@@ -64,689 +73,739 @@ def hod():
         stu_count = 0
         teach_count = 0
         sub_count = 0
-    return render_template("hod.html", stu_count=stu_count, teach_count=teach_count, sub_count=sub_count)
+    return render_template(
+        "hod.html", stu_count=stu_count, teach_count=teach_count, sub_count=sub_count
+    )
 
 
-@web_bp.route('/timetable')
+@web_bp.route("/timetable")
 @login_required
 def timetable():
     return render_template("/timetable.html")
 
 
-@web_bp.route('/tt1',methods=['post'])
+@web_bp.route("/tt1", methods=["post"])
 @login_required
 def tt1():
-    sem=request.form['s']
-    qry="SELECT \"time_table\".*,\"subject\".\"subject name\"  FROM \"subject\" JOIN \"time_table\" ON \"time_table\".\"sub_id\"=\"subject\".\"subj_id\" WHERE \"time_table\".\"semester\"=%s"
-    res=selectall2(qry,sem)
-    session['sem']=sem
-    if len(res)==0:
-        qry="SELECT * FROM \"subject\" WHERE \"semester\"=%s"
-        r=selectall2(qry,sem)
-        session['sem']=sem
-        day=['Monday','Tuesday','Wednesday','Thursday','Friday']
+    sem = request.form["s"]
+    qry = 'SELECT "time_table".*,"subject"."subject name"  FROM "subject" JOIN "time_table" ON "time_table"."sub_id"="subject"."subj_id" WHERE "time_table"."semester"=%s'
+    res = selectall2(qry, sem)
+    session["sem"] = sem
+    if len(res) == 0:
+        qry = 'SELECT * FROM "subject" WHERE "semester"=%s'
+        r = selectall2(qry, sem)
+        session["sem"] = sem
+        day = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
 
-        return render_template("/addtimetable.html",val=r,day=day)
+        return render_template("/addtimetable.html", val=r, day=day)
     else:
-        day = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
-        result=[["Day/Hour",1,2,3,4,5,6]]
+        day = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+        result = [["Day/Hour", 1, 2, 3, 4, 5, 6]]
         for i in day:
-            row=[i]
-            qry="SELECT \"subject\".\"subject name\",\"time_table\".* FROM \"time_table\" JOIN \"subject\" ON \"subject\".\"subj_id\"=\"time_table\".\"sub_id\"  WHERE \"time_table\".\"day\"=%s AND \"time_table\".\"semester\"=%s  ORDER by \"hours\""
-            rr=selectall2(qry,(i,sem))
+            row = [i]
+            qry = 'SELECT "subject"."subject name","time_table".* FROM "time_table" JOIN "subject" ON "subject"."subj_id"="time_table"."sub_id"  WHERE "time_table"."day"=%s AND "time_table"."semester"=%s  ORDER by "hours"'
+            rr = selectall2(qry, (i, sem))
             for iii in rr:
-                row.append(iii['subject name'])
+                row.append(iii["subject name"])
             result.append(row)
-        return render_template("/viewtimetable.html",rr=result)
+        return render_template("/viewtimetable.html", rr=result)
 
 
-@web_bp.route('/ttedit',methods=['post'])
-
+@web_bp.route("/ttedit", methods=["post"])
 @login_required
 def ttedit():
-    sem=session['sem']
-    qry="SELECT \"time_table\".*,\"subject\".\"subject name\"  FROM \"subject\" JOIN \"time_table\" ON \"time_table\".\"sub_id\"=\"subject\".\"subj_id\" WHERE \"time_table\".\"semester\"=%s"
-    res=selectall2(qry,sem)
-    session['sem']=sem
+    sem = session["sem"]
+    qry = 'SELECT "time_table".*,"subject"."subject name"  FROM "subject" JOIN "time_table" ON "time_table"."sub_id"="subject"."subj_id" WHERE "time_table"."semester"=%s'
+    res = selectall2(qry, sem)
+    session["sem"] = sem
 
-    day = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
-    result=[["Day/Hour",1,2,3,4,5,6]]
+    day = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+    result = [["Day/Hour", 1, 2, 3, 4, 5, 6]]
     for i in day:
-        row=[i]
-        qry="SELECT \"subject\".subj_id,\"subject\".\"subject name\",\"time_table\".* FROM \"time_table\" JOIN \"subject\" ON \"subject\".\"subj_id\"=\"time_table\".\"sub_id\"  WHERE \"time_table\".\"day\"=%s AND \"time_table\".\"semester\"=%s  ORDER by \"hours\""
-        rr=selectall2(qry,(i,sem))
+        row = [i]
+        qry = 'SELECT "subject".subj_id,"subject"."subject name","time_table".* FROM "time_table" JOIN "subject" ON "subject"."subj_id"="time_table"."sub_id"  WHERE "time_table"."day"=%s AND "time_table"."semester"=%s  ORDER by "hours"'
+        rr = selectall2(qry, (i, sem))
         for iii in rr:
-            row.append(iii['subj_id'])
+            row.append(iii["subj_id"])
         result.append(row)
         print(result)
-    qry = "SELECT *  FROM \"subject\" where \"semester\"=%s"
+    qry = 'SELECT *  FROM "subject" where "semester"=%s'
     res = selectall2(qry, sem)
-    return render_template("/updatetimetable.html",rr=result,r=res)
+    return render_template("/updatetimetable.html", rr=result, r=res)
 
 
-
-@web_bp.route('/tt2',methods=['post'])
+@web_bp.route("/tt2", methods=["post"])
 @login_required
 def tt2():
-        day=['Monday','Tuesday','Wednesday','Thursday','Friday']
-        for i in day:
-            for j in range(0,6):
-                sub=request.form[i+str(j)]
-                qry="INSERT INTO \"time_table\" VALUES(DEFAULT,%s,%s,%s,%s)"
-                val=(sub,session['sem'],i,j+1)
-                iud(qry,val)
-        return '''<script>alert("added")</script>'''
+    day = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+    for i in day:
+        for j in range(0, 6):
+            sub = request.form[i + str(j)]
+            qry = 'INSERT INTO "time_table" VALUES(DEFAULT,%s,%s,%s,%s)'
+            val = (sub, session["sem"], i, j + 1)
+            iud(qry, val)
+    return """<script>alert("added")</script>"""
 
 
-
-@web_bp.route('/tt_update',methods=['post'])
+@web_bp.route("/tt_update", methods=["post"])
 @login_required
 def tt_update():
-        day=['Monday','Tuesday','Wednesday','Thursday','Friday']
-        for i in day:
-            for j in range(0,6):
-                sub=request.form[i+str(j)]
-                qry="UPDATE \"time_table\" SET \"sub_id\"=%s WHERE \"semester\"=%s AND \"day\"=%s AND \"hours\"=%s"
-                val=(sub,session['sem'],i,j+1)
-                iud(qry,val)
-        return '''<script>alert("Updated");window.location='timetable'</script>'''
+    day = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+    for i in day:
+        for j in range(0, 6):
+            sub = request.form[i + str(j)]
+            qry = 'UPDATE "time_table" SET "sub_id"=%s WHERE "semester"=%s AND "day"=%s AND "hours"=%s'
+            val = (sub, session["sem"], i, j + 1)
+            iud(qry, val)
+    return """<script>alert("Updated");window.location='timetable'</script>"""
 
 
-@web_bp.route('/addfees',methods=['post'])
+@web_bp.route("/addfees", methods=["post"])
 @login_required
 def addfees():
     return render_template("add_fee.html")
 
-@web_bp.route('/indexfor',methods=['post'])
+
+@web_bp.route("/indexfor", methods=["post"])
 @login_required
 def indexfor():
     return render_template("dashboard_base.html")
 
-@web_bp.route('/addfees1',methods=['post'])
+
+@web_bp.route("/addfees1", methods=["post"])
 @login_required
 def addfees1():
-    title = request.form['textfield22']
-    sem = request.form['select']
-    amount = request.form['textfield']
-    ladate = request.form['textfield2']
-    desc = request.form['textfield3']
-    qr = "INSERT INTO \"fee\" VALUES(DEFAULT,%s,%s,%s,%s,%s)"
-    va = (sem, amount, ladate, desc,title)
+    title = request.form["textfield22"]
+    sem = request.form["select"]
+    amount = request.form["textfield"]
+    ladate = request.form["textfield2"]
+    desc = request.form["textfield3"]
+    qr = 'INSERT INTO "fee" VALUES(DEFAULT,%s,%s,%s,%s,%s)'
+    va = (sem, amount, ladate, desc, title)
     iud(qr, va)
-    return redirect('/viewfee')
+    return redirect("/viewfee")
 
 
-@web_bp.route('/addfeedettails',methods=['post'])
+@web_bp.route("/addfeedettails", methods=["post"])
 @login_required
 def addfeedetails():
-    qry="SELECT * FROM \"fee\""
-    res=selectall(qry)
-    qr="SELECT * FROM \"student\""
-    re=selectall(qr)
-    return render_template("add_fee_details.html",val=res,v=re)
+    qry = 'SELECT * FROM "fee"'
+    res = selectall(qry)
+    qr = 'SELECT * FROM "student"'
+    re = selectall(qr)
+    return render_template("add_fee_details.html", val=res, v=re)
 
-@web_bp.route('/addfeedettails1',methods=['post'])
+
+@web_bp.route("/addfeedettails1", methods=["post"])
 @login_required
 def addfeedetails1():
-    title = request.form['select2']
-    stdname = request.form['select3']
+    title = request.form["select2"]
+    stdname = request.form["select3"]
     # sem = request.form['select']
-    amtp = request.form['textfield2']
-    amtd = request.form['textfield3']
-    datep = request.form['textfield4']
-    status =request.form['textfield5']
-    qr = "INSERT INTO \"fee details\" VALUES(DEFAULT,%s,%s,%s,%s,%s,%s)"
-    va = (title,stdname, amtp, amtd,datep,status)
+    amtp = request.form["textfield2"]
+    amtd = request.form["textfield3"]
+    datep = request.form["textfield4"]
+    status = request.form["textfield5"]
+    qr = 'INSERT INTO "fee details" VALUES(DEFAULT,%s,%s,%s,%s,%s,%s)'
+    va = (title, stdname, amtp, amtd, datep, status)
     iud(qr, va)
-    return redirect('/viewfeedetails')
+    return redirect("/viewfeedetails")
 
 
-@web_bp.route('/addstudent',methods=['post'])
+@web_bp.route("/addstudent", methods=["post"])
 @login_required
 def addstudent():
-    name = request.form['textfield']
-    addno = request.form['textfield2']
-    sem = request.form['select']
-    gender = request.form['radiobutton']
-    dob = request.form['textfield33']
-    address = request.form['textfield34']
-    phone = request.form['textfield35']
-    photo=request.files['file']
+    name = request.form["textfield"]
+    addno = request.form["textfield2"]
+    sem = request.form["select"]
+    gender = request.form["radiobutton"]
+    dob = request.form["textfield33"]
+    address = request.form["textfield34"]
+    phone = request.form["textfield35"]
+    photo = request.files["file"]
     img = secure_filename(photo.filename)
-    photo.save(os.path.join('static/photos', img))
-    jointdate = request.form['textfield36']
-    username = request.form['textfield4']
-    password = request.form['textfield5']
-    qry = "insert into login VALUES(DEFAULT,%s,%s,\'student\') RETURNING \"login id\""
+    photo.save(os.path.join("static/photos", img))
+    jointdate = request.form["textfield36"]
+    username = request.form["textfield4"]
+    password = request.form["textfield5"]
+    qry = "insert into login VALUES(DEFAULT,%s,%s,'student') RETURNING \"login id\""
     val = (username, password)
     id = iud(qry, val)
-    qr = "INSERT INTO \"student\" VALUES(DEFAULT,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
-    va = (str(id), name, addno, sem, gender,dob,address, phone, jointdate,img)
+    qr = 'INSERT INTO "student" VALUES(DEFAULT,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'
+    va = (str(id), name, addno, sem, gender, dob, address, phone, jointdate, img)
     iud(qr, va)
-    return redirect('/viewstudents')
+    return redirect("/viewstudents")
 
 
-@web_bp.route('/addst',methods=['get','post'])
+@web_bp.route("/addst", methods=["get", "post"])
 @login_required
 def addst():
     return render_template("add_student.html")
 
-@web_bp.route('/addteacher',methods=['post'])
+
+@web_bp.route("/addteacher", methods=["post"])
 @login_required
 def addteacher():
     return render_template("add_teacher.html")
 
 
-@web_bp.route('/addteacher1',methods=['post'])
+@web_bp.route("/addteacher1", methods=["post"])
 @login_required
 def addteacher1():
-   name=request.form['textfield']
-   quali=request.form['textfield2']
-   desig=request.form['textfield3']
-   gender = request.form['radiobutton']
-   age = request.form['textfield32']
-   phone = request.form['textfield33']
-   photo = request.files['file']
-   img= secure_filename(photo.filename)
-   photo.save(os.path.join('static/photos',img))
-   username = request.form['textfield4']
-   password = request.form['textfield5']
-   qry="insert into login VALUES(DEFAULT,%s,%s,'teacher') RETURNING \"login id\""
-   val=(username,password)
-   id=iud(qry,val)
-   qr="INSERT INTO \"teacher\" VALUES(DEFAULT,%s,%s,%s,%s,%s,%s,%s,%s)"
-   va=(str(id),name,quali,desig,gender,age,phone,img)
-   iud(qr,va)
-   return redirect('/viewteacher')
+    name = request.form["textfield"]
+    quali = request.form["textfield2"]
+    desig = request.form["textfield3"]
+    gender = request.form["radiobutton"]
+    age = request.form["textfield32"]
+    phone = request.form["textfield33"]
+    photo = request.files["file"]
+    img = secure_filename(photo.filename)
+    photo.save(os.path.join("static/photos", img))
+    username = request.form["textfield4"]
+    password = request.form["textfield5"]
+    qry = "insert into login VALUES(DEFAULT,%s,%s,'teacher') RETURNING \"login id\""
+    val = (username, password)
+    id = iud(qry, val)
+    qr = 'INSERT INTO "teacher" VALUES(DEFAULT,%s,%s,%s,%s,%s,%s,%s,%s)'
+    va = (str(id), name, quali, desig, gender, age, phone, img)
+    iud(qr, va)
+    return redirect("/viewteacher")
 
 
-@web_bp.route('/addsubject',methods=['post'])
+@web_bp.route("/addsubject", methods=["post"])
 @login_required
 def addsubject():
     return render_template("add_subject.html")
 
-@web_bp.route('/addsubject1',methods=['post'])
+
+@web_bp.route("/addsubject1", methods=["post"])
 @login_required
 def addsubject1():
-    subjname = request.form['textfield']
-    sem = request.form['select']
-    crd = request.form['textfield3']
-    qr = "INSERT INTO \"subject\" VALUES(DEFAULT,%s,%s,%s)"
+    subjname = request.form["textfield"]
+    sem = request.form["select"]
+    crd = request.form["textfield3"]
+    qr = 'INSERT INTO "subject" VALUES(DEFAULT,%s,%s,%s)'
     va = (subjname, sem, crd)
     iud(qr, va)
-    return redirect('/viewsubject')
+    return redirect("/viewsubject")
 
-@web_bp.route('/addanoucement',methods=['post'])
+
+@web_bp.route("/addanoucement", methods=["post"])
 @login_required
 def addanoucement():
     return render_template("add_announcement.html")
 
-@web_bp.route('/addanoucement1',methods=['post'])
+
+@web_bp.route("/addanoucement1", methods=["post"])
 @login_required
 def addanoucement1():
-    an = request.form['textfield']
-    qr = "INSERT INTO \"anoucement\" VALUES(DEFAULT,%s,curdate())"
-    va = (an)
+    an = request.form["textfield"]
+    qr = 'INSERT INTO "anoucement" VALUES(DEFAULT,%s,curdate())'
+    va = an
     iud(qr, va)
-    return redirect('/viewannouncement')
+    return redirect("/viewannouncement")
 
-@web_bp.route('/viewannouncement')
+
+@web_bp.route("/viewannouncement")
 @login_required
 def viewannouncement():
     qry = "SELECT * FROM anoucement "
     res = selectall(qry)
-    return render_template("viewannouncement.html",val=res)
+    return render_template("viewannouncement.html", val=res)
 
-@web_bp.route('/viewsubject')
+
+@web_bp.route("/viewsubject")
 @login_required
 def viewsubject():
     qry = "SELECT * FROM subject "
     res = selectall(qry)
-    return render_template("view_subject.html",val=res)
+    return render_template("view_subject.html", val=res)
 
-@web_bp.route('/viewfee')
+
+@web_bp.route("/viewfee")
 @login_required
 def viewfee():
     qry = "SELECT * FROM fee"
     res = selectall(qry)
-    return render_template("view_fee.html",val=res)
+    return render_template("view_fee.html", val=res)
 
-@web_bp.route('/viewfeedetails')
+
+@web_bp.route("/viewfeedetails")
 @login_required
 def viewfeedetails():
-     qry = "SELECT * FROM \"fee details\" JOIN \"fee\" ON \"fee details\".f_id=\"fee\".f_id JOIN \"student\" ON \"fee details\".stud_id=\"student\".login_id"
-     res=selectall(qry)
-     return render_template("view_fee_details.html",val=res)
+    qry = 'SELECT * FROM "fee details" JOIN "fee" ON "fee details".f_id="fee".f_id JOIN "student" ON "fee details".stud_id="student".login_id'
+    res = selectall(qry)
+    return render_template("view_fee_details.html", val=res)
 
-@web_bp.route('/viewteacher')
+
+@web_bp.route("/viewteacher")
 @login_required
 def viewteacher():
-    qry="SELECT * FROM teacher "
-    res=selectall(qry)
-    return render_template("view_teacher.html",val=res)
+    qry = "SELECT * FROM teacher "
+    res = selectall(qry)
+    return render_template("view_teacher.html", val=res)
 
-@web_bp.route('/viewstudents')
+
+@web_bp.route("/viewstudents")
 @login_required
 def viewstudents():
     qry = "SELECT * FROM student"
     res = selectall(qry)
-    return render_template("view_students.html",val=res)
+    return render_template("view_students.html", val=res)
 
-@web_bp.route('/viewfeedback')
+
+@web_bp.route("/viewfeedback")
 @login_required
 def viewfeedback():
-    qry = "SELECT * FROM \"teacher\""
+    qry = 'SELECT * FROM "teacher"'
     res = selectall(qry)
-    return render_template("view_feedback.html",val=res)
+    return render_template("view_feedback.html", val=res)
 
 
-@web_bp.route('/viewfeedback1',methods=['post'])
+@web_bp.route("/viewfeedback1", methods=["post"])
 @login_required
 def viewfeedback1():
-    sid=request.form['select']
-    qry ="SELECT * FROM \"feedback\" WHERE\"staff_id\"=%s "
-    res = selectall2(qry,sid)
-    q = "SELECT * FROM \"teacher\""
+    sid = request.form["select"]
+    qry = 'SELECT * FROM "feedback" WHERE"staff_id"=%s '
+    res = selectall2(qry, sid)
+    q = 'SELECT * FROM "teacher"'
     r = selectall(q)
-    return render_template("view_feedback.html",v=res,val=r)
+    return render_template("view_feedback.html", v=res, val=r)
 
 
-@web_bp.route('/viewresponsesurvey')
+@web_bp.route("/viewresponsesurvey")
 @login_required
 def viewresponsesurvey():
-    feedid=request.args.get('id')
+    feedid = request.args.get("id")
     print(feedid)
 
-    qry = "SELECT COUNT(*) as e,\"response\" FROM \"survey_response\" WHERE \"sur_id\"=%s GROUP BY \"response\""
-    res = selectall2(qry,feedid)
+    qry = 'SELECT COUNT(*) as e,"response" FROM "survey_response" WHERE "sur_id"=%s GROUP BY "response"'
+    res = selectall2(qry, feedid)
     print(res)
-    return render_template("viewresponsesurvey.html",val=res)
+    return render_template("viewresponsesurvey.html", val=res)
 
 
-@web_bp.route('/viewattendance')
+@web_bp.route("/viewattendance")
 @login_required
 def viewattendance():
     return render_template("viewattendance.html")
 
 
-@web_bp.route('/viewattendance1',methods=['post'])
+@web_bp.route("/viewattendance1", methods=["post"])
 @login_required
 def viewattendance1():
-    sem=request.form['select']
-    q="select SUM(\"attendence\") AS tpd,count(*) AS twd,(sum(\"attendence\")/count(*))*100 as per,\"student\".\"name\" from \"attendence\" join \"student\" on \"student\".\"login_id\"=\"attendence\".\"stud_id\" where \"student\".\"smester\"=%s group by \"attendence\".\"stud_id\", \"student\".\"name\""
-    v=(sem)
-    res=selectall2(q,v)
+    sem = request.form["select"]
+    q = 'select SUM("attendence") AS tpd,count(*) AS twd,(sum("attendence")/count(*))*100 as per,"student"."name" from "attendence" join "student" on "student"."login_id"="attendence"."stud_id" where "student"."smester"=%s group by "attendence"."stud_id", "student"."name"'
+    v = sem
+    res = selectall2(q, v)
     print(res)
-    return render_template("viewattendance.html",val=res)
+    return render_template("viewattendance.html", val=res)
 
 
-
-
-@web_bp.route('/viewresponsefeed')
+@web_bp.route("/viewresponsefeed")
 @login_required
 def viewresponsefeed():
-    feedid=request.args.get('id')
+    feedid = request.args.get("id")
     print(feedid)
 
-    qry = "SELECT COUNT(*) as e,\"response\" FROM \"feed_response\" WHERE \"feed_id\"=%s GROUP BY \"response\""
-    res = selectall2(qry,feedid)
+    qry = 'SELECT COUNT(*) as e,"response" FROM "feed_response" WHERE "feed_id"=%s GROUP BY "response"'
+    res = selectall2(qry, feedid)
     print(res)
-    return render_template("viewresponsefeedback.html",val=res)
+    return render_template("viewresponsefeedback.html", val=res)
 
 
-
-@web_bp.route('/viewsurvey')
+@web_bp.route("/viewsurvey")
 @login_required
 def viewsurvey():
-    qry = "SELECT * FROM \"survey\""
+    qry = 'SELECT * FROM "survey"'
     res = selectall(qry)
-    return render_template("view_survey.html",val=res)
+    return render_template("view_survey.html", val=res)
 
-@web_bp.route('/viewassignsub')
+
+@web_bp.route("/viewassignsub")
 @login_required
 def viewassignsub():
-    qry ="SELECT  \"assignsub\".*,\"teacher\".\"name\",\"subject\".\"subject name\" FROM \"assignsub\" JOIN \"subject\"ON \"subject\".\"subj_id\"=\"assignsub\".\"sub_id\" JOIN \"teacher\"ON \"teacher\".\"login_id\"=\"assignsub\".\"t_id\""
+    qry = 'SELECT  "assignsub".*,"teacher"."name","subject"."subject name" FROM "assignsub" JOIN "subject"ON "subject"."subj_id"="assignsub"."sub_id" JOIN "teacher"ON "teacher"."login_id"="assignsub"."t_id"'
     res = selectall(qry)
-    return render_template("viewassignsub.html",val=res)
+    return render_template("viewassignsub.html", val=res)
 
-@web_bp.route('/assignsub',methods=['post'])
+
+@web_bp.route("/assignsub", methods=["post"])
 @login_required
 def assignsub():
-    qry = "SELECT * FROM \"teacher\""
+    qry = 'SELECT * FROM "teacher"'
     res = selectall(qry)
-    qry = "SELECT * FROM \"subject\" WHERE \"subj_id\" NOT IN(SELECT \"sub_id\" FROM \"assignsub\")"
+    qry = 'SELECT * FROM "subject" WHERE "subj_id" NOT IN(SELECT "sub_id" FROM "assignsub")'
     res1 = selectall(qry)
-    return render_template("assignsub.html",data=res1,val=res)
+    return render_template("assignsub.html", data=res1, val=res)
 
-@web_bp.route('/assignsub1',methods=['post'])
+
+@web_bp.route("/assignsub1", methods=["post"])
 @login_required
 def assignsub1():
-    teachername = request.form['select']
-    sub = request.form['select2']
-    qr = "INSERT INTO \"assignsub\" VALUES(DEFAULT,%s,%s)"
-    va = ( teachername,sub)
+    teachername = request.form["select"]
+    sub = request.form["select2"]
+    qr = 'INSERT INTO "assignsub" VALUES(DEFAULT,%s,%s)'
+    va = (teachername, sub)
     iud(qr, va)
-    return redirect('/viewassignsub')
+    return redirect("/viewassignsub")
 
 
-@web_bp.route('/editteacher')
+@web_bp.route("/editteacher")
 @login_required
 def editteacher():
-    id=request.args.get('id')
-    session['tid']=id
-    qry = "select * from \"teacher\" where  login_id=%s"
-    res= selectone(qry,id)
-    return render_template("edit_teacher.html",val=res)
+    id = request.args.get("id")
+    session["tid"] = id
+    qry = 'select * from "teacher" where  login_id=%s'
+    res = selectone(qry, id)
+    return render_template("edit_teacher.html", val=res)
 
 
-@web_bp.route('/deleteteacher')
+@web_bp.route("/deleteteacher")
 @login_required
 def deleteteacher():
-    id=request.args.get('id')
-    qry = "delete from \"teacher\" where  login_id=%s"
-    iud(qry,id)
-    return redirect('/viewteacher')
+    id = request.args.get("id")
+    qry = 'delete from "teacher" where  login_id=%s'
+    iud(qry, id)
+    return redirect("/viewteacher")
 
 
-@web_bp.route('/updateteacher',methods=['post'])
+@web_bp.route("/updateteacher", methods=["post"])
 @login_required
 def updateteacher():
     try:
-       name=request.form['textfield']
-       quali=request.form['textfield2']
-       desig=request.form['textfield3']
-       gender = request.form['radiobutton']
-       age = request.form['textfield32']
-       phone = request.form['textfield33']
-       photo = request.files['file']
-       img= secure_filename(photo.filename)
-       photo.save(os.path.join('static/photos',img))
-       qry = "UPDATE teacher SET name=%s,qualification=%s,designation=%s,gender=%s,age=%s,phone=%s,photo=%s where login_id=%s"
-       val=(name,quali,desig,gender,age,phone,img,session['tid'])
-       iud(qry,val)
-       return redirect('/viewteacher')
-    except Exception as e:
-        name = request.form['textfield']
-        quali = request.form['textfield2']
-        desig = request.form['textfield3']
-        gender = request.form['radiobutton']
-        age = request.form['textfield32']
-        phone = request.form['textfield33']
-        qry = "UPDATE teacher SET name=%s,qualification=%s,designation=%s,gender=%s,age=%s,phone=%s where login_id=%s"
-        val = (name, quali, desig, gender, age, phone, session['tid'])
+        name = request.form["textfield"]
+        quali = request.form["textfield2"]
+        desig = request.form["textfield3"]
+        gender = request.form["radiobutton"]
+        age = request.form["textfield32"]
+        phone = request.form["textfield33"]
+        photo = request.files["file"]
+        img = secure_filename(photo.filename)
+        photo.save(os.path.join("static/photos", img))
+        qry = "UPDATE teacher SET name=%s,qualification=%s,designation=%s,gender=%s,age=%s,phone=%s,photo=%s where login_id=%s"
+        val = (name, quali, desig, gender, age, phone, img, session["tid"])
         iud(qry, val)
-        return redirect('/viewteacher')
+        return redirect("/viewteacher")
+    except Exception as e:
+        name = request.form["textfield"]
+        quali = request.form["textfield2"]
+        desig = request.form["textfield3"]
+        gender = request.form["radiobutton"]
+        age = request.form["textfield32"]
+        phone = request.form["textfield33"]
+        qry = "UPDATE teacher SET name=%s,qualification=%s,designation=%s,gender=%s,age=%s,phone=%s where login_id=%s"
+        val = (name, quali, desig, gender, age, phone, session["tid"])
+        iud(qry, val)
+        return redirect("/viewteacher")
 
 
-@web_bp.route('/editstudent')
+@web_bp.route("/editstudent")
 @login_required
 def editstudent():
-    id=request.args.get('id')
-    session['stid']=id
-    qry = "select * from \"student\" where  login_id=%s"
-    res= selectone(qry,id)
-    return render_template("edit_student.html",val=res)
+    id = request.args.get("id")
+    session["stid"] = id
+    qry = 'select * from "student" where  login_id=%s'
+    res = selectone(qry, id)
+    return render_template("edit_student.html", val=res)
 
-@web_bp.route('/deletestudent')
+
+@web_bp.route("/deletestudent")
 @login_required
 def deletestudent():
-    id=request.args.get('id')
-    qry = "delete from \"student\" where  login_id=%s"
-    iud(qry,id)
-    return redirect('/viewstudents')
+    id = request.args.get("id")
+    qry = 'delete from "student" where  login_id=%s'
+    iud(qry, id)
+    return redirect("/viewstudents")
 
-@web_bp.route('/updatestudent',methods=['post'])
+
+@web_bp.route("/updatestudent", methods=["post"])
 @login_required
 def updatestudent():
     try:
-        name = request.form['textfield']
-        addno = request.form['textfield2']
-        sem = request.form['select']
-        gender = request.form['radiobutton']
-        dob = request.form['textfield33']
-        address = request.form['textfield34']
-        phone = request.form['textfield35']
-        jointdate = request.form['textfield36']
-        photo = request.files['file']
+        name = request.form["textfield"]
+        addno = request.form["textfield2"]
+        sem = request.form["select"]
+        gender = request.form["radiobutton"]
+        dob = request.form["textfield33"]
+        address = request.form["textfield34"]
+        phone = request.form["textfield35"]
+        jointdate = request.form["textfield36"]
+        photo = request.files["file"]
         img = secure_filename(photo.filename)
-        photo.save(os.path.join('static/photos', img))
-        qry = "UPDATE student SET name=%s,\"addmission no\"=%s,smester=%s,gender=%s,dob=%s,address=%s,phone=%s,jointdate=%s,photo=%s where login_id=%s"
-        val=(name,addno,sem,gender,dob,address,phone,jointdate,img,session['stid'])
-        iud(qry,val)
-        return redirect('/viewstudents')
-    except Exception as e:
-        name = request.form['textfield']
-        addno = request.form['textfield2']
-        sem = request.form['select']
-        gender = request.form['radiobutton']
-        dob = request.form['textfield33']
-        address = request.form['textfield34']
-        phone = request.form['textfield35']
-        jointdate = request.form['textfield36']
-        qry = "UPDATE student SET name=%s,\"addmission no\"=%s,smester=%s,gender=%s,dob=%s,address=%s,phone=%s,jointdate=%s where login_id=%s"
-        val = (name, addno, sem, gender, dob, address, phone, jointdate, session['stid'])
+        photo.save(os.path.join("static/photos", img))
+        qry = 'UPDATE student SET name=%s,"addmission no"=%s,smester=%s,gender=%s,dob=%s,address=%s,phone=%s,jointdate=%s,photo=%s where login_id=%s'
+        val = (
+            name,
+            addno,
+            sem,
+            gender,
+            dob,
+            address,
+            phone,
+            jointdate,
+            img,
+            session["stid"],
+        )
         iud(qry, val)
-        return redirect('/viewstudents')
+        return redirect("/viewstudents")
+    except Exception as e:
+        name = request.form["textfield"]
+        addno = request.form["textfield2"]
+        sem = request.form["select"]
+        gender = request.form["radiobutton"]
+        dob = request.form["textfield33"]
+        address = request.form["textfield34"]
+        phone = request.form["textfield35"]
+        jointdate = request.form["textfield36"]
+        qry = 'UPDATE student SET name=%s,"addmission no"=%s,smester=%s,gender=%s,dob=%s,address=%s,phone=%s,jointdate=%s where login_id=%s'
+        val = (
+            name,
+            addno,
+            sem,
+            gender,
+            dob,
+            address,
+            phone,
+            jointdate,
+            session["stid"],
+        )
+        iud(qry, val)
+        return redirect("/viewstudents")
 
-@web_bp.route('/editsubject')
+
+@web_bp.route("/editsubject")
 @login_required
 def editsubject():
-    id=request.args.get('id')
-    session['sid']=id
-    qry = "select * from \"subject\" where  subj_id=%s"
-    res= selectone(qry,id)
-    return render_template("edit_subject.html",val=res)
+    id = request.args.get("id")
+    session["sid"] = id
+    qry = 'select * from "subject" where  subj_id=%s'
+    res = selectone(qry, id)
+    return render_template("edit_subject.html", val=res)
 
-@web_bp.route('/deletesubject')
+
+@web_bp.route("/deletesubject")
 @login_required
 def deletesubject():
-    id=request.args.get('id')
-    qry = "delete from \"subject\" where  subj_id=%s"
-    iud(qry,id)
-    return redirect('/viewsubject')
+    id = request.args.get("id")
+    qry = 'delete from "subject" where  subj_id=%s'
+    iud(qry, id)
+    return redirect("/viewsubject")
 
-@web_bp.route('/updatesubject',methods=['post'])
+
+@web_bp.route("/updatesubject", methods=["post"])
 @login_required
 def updatesubject():
-    subjname = request.form['textfield']
-    sem = request.form['select']
-    crd = request.form['textfield3']
-    qry = "UPDATE subject SET \"subject name\"=%s,semester=%s,credit=%s where subj_id=%s"
-    val=(subjname,sem,crd,session['sid'])
-    iud(qry,val)
-    return redirect('/viewsubject')
+    subjname = request.form["textfield"]
+    sem = request.form["select"]
+    crd = request.form["textfield3"]
+    qry = 'UPDATE subject SET "subject name"=%s,semester=%s,credit=%s where subj_id=%s'
+    val = (subjname, sem, crd, session["sid"])
+    iud(qry, val)
+    return redirect("/viewsubject")
 
-@web_bp.route('/editassignsub')
+
+@web_bp.route("/editassignsub")
 @login_required
 def editassignsub():
-    id=request.args.get('id')
-    session['asid']=id
-    qry = "select * from \"assignsub\" where  assign_id=%s"
-    ress= selectone(qry,id)
-    qry = "SELECT * FROM \"teacher\""
+    id = request.args.get("id")
+    session["asid"] = id
+    qry = 'select * from "assignsub" where  assign_id=%s'
+    ress = selectone(qry, id)
+    qry = 'SELECT * FROM "teacher"'
     res = selectall(qry)
-    qry = "SELECT * FROM \"subject\""
+    qry = 'SELECT * FROM "subject"'
     res1 = selectall(qry)
 
-    return render_template("editassignsub.html",vall=ress,val=res,data=res1)
+    return render_template("editassignsub.html", vall=ress, val=res, data=res1)
 
-@web_bp.route('/deleteassignsub')
+
+@web_bp.route("/deleteassignsub")
 @login_required
 def deleteassignsub():
-    id=request.args.get('id')
-    qry = "delete from \"assignsub\" where  assign_id=%s"
-    iud(qry,id)
-    return redirect('/viewassignsub')
+    id = request.args.get("id")
+    qry = 'delete from "assignsub" where  assign_id=%s'
+    iud(qry, id)
+    return redirect("/viewassignsub")
 
-@web_bp.route('/updateassignsub',methods=['post'])
+
+@web_bp.route("/updateassignsub", methods=["post"])
 @login_required
 def updateassignsub():
-    teachername = request.form['select']
-    sub = request.form['select2']
+    teachername = request.form["select"]
+    sub = request.form["select2"]
     qry = "UPDATE assignsub SET t_id=%s,sub_id=%s where assign_id=%s"
-    val=(teachername,sub,session['asid'])
-    iud(qry,val)
-    return redirect('/viewassignsub')
+    val = (teachername, sub, session["asid"])
+    iud(qry, val)
+    return redirect("/viewassignsub")
 
 
-@web_bp.route('/editfee')
+@web_bp.route("/editfee")
 @login_required
 def editfee():
-    id=request.args.get('id')
-    session['fid']=id
-    qry = "select * from \"fee\" where  f_id=%s"
-    res= selectone(qry,id)
-    return render_template("edit_fee.html",val=res)
+    id = request.args.get("id")
+    session["fid"] = id
+    qry = 'select * from "fee" where  f_id=%s'
+    res = selectone(qry, id)
+    return render_template("edit_fee.html", val=res)
 
-@web_bp.route('/deletefee')
+
+@web_bp.route("/deletefee")
 @login_required
 def deletefee():
-    id=request.args.get('id')
-    qry = "delete from \"fee\" where  f_id=%s"
-    iud(qry,id)
-    return redirect('/viewfee')
+    id = request.args.get("id")
+    qry = 'delete from "fee" where  f_id=%s'
+    iud(qry, id)
+    return redirect("/viewfee")
 
-@web_bp.route('/updatefee',methods=['post'])
+
+@web_bp.route("/updatefee", methods=["post"])
 @login_required
 def updatefee():
-    sem = request.form['select']
-    amount = request.form['textfield']
-    ladate = request.form['textfield2']
-    desc = request.form['textfield3']
-    title = request.form['textfield22']
+    sem = request.form["select"]
+    amount = request.form["textfield"]
+    ladate = request.form["textfield2"]
+    desc = request.form["textfield3"]
+    title = request.form["textfield22"]
     qry = "UPDATE fee SET semester=%s,amount=%s,lastdate=%s,description=%s,title=%s where f_id=%s"
-    val=(sem,amount,ladate,desc,title,session['fid'])
-    iud(qry,val)
-    return redirect('/viewfee')
+    val = (sem, amount, ladate, desc, title, session["fid"])
+    iud(qry, val)
+    return redirect("/viewfee")
 
 
-@web_bp.route('/deletefeedetails')
+@web_bp.route("/deletefeedetails")
 def deletefeedetails():
-    id=request.args.get('id')
-    qry = "delete from \"fee\" where  fd_id=%s"
-    iud(qry,id)
-    return redirect('/viewfeedetails')
+    id = request.args.get("id")
+    qry = 'delete from "fee" where  fd_id=%s'
+    iud(qry, id)
+    return redirect("/viewfeedetails")
 
 
-@web_bp.route('/editfeedetails')
+@web_bp.route("/editfeedetails")
 @login_required
 def editfeedetails():
-    id=request.args.get('id')
-    session['fdid']=id
-    qry = "select * from \"fee details\" where  fd_id=%s"
-    res = selectone(qry,id)
-    qry = "SELECT * FROM \"fee\""
+    id = request.args.get("id")
+    session["fdid"] = id
+    qry = 'select * from "fee details" where  fd_id=%s'
+    res = selectone(qry, id)
+    qry = 'SELECT * FROM "fee"'
     ress = selectall(qry)
-    qr = "SELECT * FROM \"student\""
+    qr = 'SELECT * FROM "student"'
     re = selectall(qr)
-    return render_template("edit_fee_details.html", val1=ress, v=re ,val=res)
+    return render_template("edit_fee_details.html", val1=ress, v=re, val=res)
 
 
-@web_bp.route('/updatefeedetails',methods=['post'])
+@web_bp.route("/updatefeedetails", methods=["post"])
 @login_required
 def updatefeedetails():
-    title = request.form['select2']
-    stdname = request.form['select3']
-    amtp = request.form['textfield2']
-    amtd = request.form['textfield3']
-    datep = request.form['textfield4']
-    status = request.form['textfield5']
-    qry = "UPDATE \"fee details\" SET \"f_id\"=%s,\"stud_id\"=%s,\"amount paid\"=%s,\"amount due\"=%s,\"date paid\"=%s,\"status\"=%s Where \"fd_id\"=%s"
-    val=(title,stdname,amtp,amtd,datep,status,session['fdid'])
-    iud(qry,val)
-    return redirect('/viewfeedetails')
+    title = request.form["select2"]
+    stdname = request.form["select3"]
+    amtp = request.form["textfield2"]
+    amtd = request.form["textfield3"]
+    datep = request.form["textfield4"]
+    status = request.form["textfield5"]
+    qry = 'UPDATE "fee details" SET "f_id"=%s,"stud_id"=%s,"amount paid"=%s,"amount due"=%s,"date paid"=%s,"status"=%s Where "fd_id"=%s'
+    val = (title, stdname, amtp, amtd, datep, status, session["fdid"])
+    iud(qry, val)
+    return redirect("/viewfeedetails")
 
-@web_bp.route('/editanoucement')
+
+@web_bp.route("/editanoucement")
 @login_required
 def editanoucement():
-    id=request.args.get('id')
-    session['anid']=id
-    qry = "select * from \"anoucement\" where  an_id=%s"
-    res = selectone(qry,id)
+    id = request.args.get("id")
+    session["anid"] = id
+    qry = 'select * from "anoucement" where  an_id=%s'
+    res = selectone(qry, id)
     return render_template("edit_announcement.html", val=res)
 
 
-@web_bp.route('/updatanoucement',methods=['post'])
+@web_bp.route("/updatanoucement", methods=["post"])
 @login_required
 def updatanoucement():
-    an = request.form['textfield']
-    qry = "UPDATE \"anoucement\" SET \"anouncement\"=%s where \"an_id\"=%s"
-    val=(an,session['anid'])
-    iud(qry,val)
-    return redirect('/viewannouncement')
+    an = request.form["textfield"]
+    qry = 'UPDATE "anoucement" SET "anouncement"=%s where "an_id"=%s'
+    val = (an, session["anid"])
+    iud(qry, val)
+    return redirect("/viewannouncement")
 
-@web_bp.route('/deleteanoucement')
+
+@web_bp.route("/deleteanoucement")
 @login_required
 def deleteanoucement():
-    id=request.args.get('id')
-    qry = "delete from \"anoucement\" where  an_id=%s"
-    iud(qry,id)
-    return redirect('/viewannouncement')
+    id = request.args.get("id")
+    qry = 'delete from "anoucement" where  an_id=%s'
+    iud(qry, id)
+    return redirect("/viewannouncement")
 
 
-
-@web_bp.route('/view_assessments', methods=['get', 'post'])
+@web_bp.route("/view_assessments", methods=["get", "post"])
 @login_required
 def view_assessments():
     return render_template("view_assessments.html")
 
-@web_bp.route('/view_results', methods=['get', 'post'])
+
+@web_bp.route("/view_results", methods=["get", "post"])
 @login_required
 def view_results():
     return render_template("view_results.html")
 
 
-@web_bp.route('/viewassignments')
+@web_bp.route("/viewassignments")
 @login_required
 def viewassignments():
     # Join with teacher table to get staff name
-    qry = '''SELECT a.*, t.name as teacher_name 
+    qry = """SELECT a.*, t.name as teacher_name 
              FROM assignment a 
-             LEFT JOIN teacher t ON a.staf_id = t.login_id'''
+             LEFT JOIN teacher t ON a.staf_id = t.login_id"""
     res = selectall(qry)
-    return render_template('view_assignments.html', val=res)
+    return render_template("view_assignments.html", val=res)
 
-@web_bp.route('/addassignment', methods=['GET', 'POST'])
+
+@web_bp.route("/addassignment", methods=["GET", "POST"])
 @login_required
 def addassignment():
-    if request.method == 'POST':
-        topic = request.form['topic']
-        desc = request.form['description']
-        ldate = request.form['last_date']
-        staf_id = request.form['staf_id']
+    if request.method == "POST":
+        topic = request.form["topic"]
+        desc = request.form["description"]
+        ldate = request.form["last_date"]
+        staf_id = request.form["staf_id"]
         from datetime import date
+
         cdate = str(date.today())
-        
-        qry = "INSERT INTO assignment (staf_id, topic, description, \"last date\", curdate) VALUES (%s, %s, %s, %s, %s)"
+
+        qry = 'INSERT INTO assignment (staf_id, topic, description, "last date", curdate) VALUES (%s, %s, %s, %s, %s)'
         iud(qry, (staf_id, topic, desc, ldate, cdate))
-        return redirect('/viewassignments')
+        return redirect("/viewassignments")
     else:
         teachers = selectall("SELECT * FROM teacher")
-        return render_template('add_assignment.html', teachers=teachers)
+        return render_template("add_assignment.html", teachers=teachers)
 
-@web_bp.route('/editassignment', methods=['GET', 'POST'])
+
+@web_bp.route("/editassignment", methods=["GET", "POST"])
 @login_required
 def editassignment():
-    if request.method == 'POST':
-        topic = request.form['topic']
-        desc = request.form['description']
-        ldate = request.form['last_date']
-        staf_id = request.form['staf_id']
-        ass_id = session['ass_id']
-        
-        qry = "UPDATE assignment SET staf_id=%s, topic=%s, description=%s, \"last date\"=%s WHERE ass_id=%s"
+    if request.method == "POST":
+        topic = request.form["topic"]
+        desc = request.form["description"]
+        ldate = request.form["last_date"]
+        staf_id = request.form["staf_id"]
+        ass_id = session["ass_id"]
+
+        qry = 'UPDATE assignment SET staf_id=%s, topic=%s, description=%s, "last date"=%s WHERE ass_id=%s'
         iud(qry, (staf_id, topic, desc, ldate, ass_id))
-        return redirect('/viewassignments')
+        return redirect("/viewassignments")
     else:
-        id = request.args.get('id')
-        session['ass_id'] = id
+        id = request.args.get("id")
+        session["ass_id"] = id
         res = selectone("SELECT * FROM assignment WHERE ass_id=%s", (id,))
         teachers = selectall("SELECT * FROM teacher")
-        return render_template('edit_assignment.html', val=res, teachers=teachers)
+        return render_template("edit_assignment.html", val=res, teachers=teachers)
 
-@web_bp.route('/deleteassignment')
+
+@web_bp.route("/deleteassignment")
 @login_required
 def deleteassignment():
-    id = request.args.get('id')
+    id = request.args.get("id")
     iud("DELETE FROM assignment WHERE ass_id=%s", (id,))
-    return redirect('/viewassignments')
+    return redirect("/viewassignments")

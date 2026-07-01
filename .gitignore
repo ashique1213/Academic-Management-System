@@ -1,0 +1,35 @@
+# General IDE and OS files
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+
+# Python Backend
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.env
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Android Application
+*.apk
+*.ap_
+*.aab
+*.dex
+*.class
+bin/
+gen/
+build/
+local.properties
+.gradle/
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Node.js (just in case)
+node_modules/
+npm-debug.log
